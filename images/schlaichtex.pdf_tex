@@ -1,0 +1,73 @@
+%% Creator: Inkscape 0.48.3.1, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'schlaichtex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{463.62001953bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.22453722)%
+    \put(0,0){\includegraphics[width=\unitlength]{schlaichtex.pdf}}%
+    \put(0.18713607,1.19580788){\makebox(0,0)[lb]{\smash{A-Data-LAC-sequence}}}%
+    \put(0.21534976,1.16319519){\makebox(0,0)[lb]{\smash{“zqnlnjlstscbdhif”}}}%
+    \put(0.65420033,1.19580788){\makebox(0,0)[lb]{\smash{Network routes and resulting
+network-LAC-sequence}}}%
+    \put(0.60088001,0.8010877){\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.62922037,0.8010877){\makebox(0,0)[lb]{\smash{“zmqnlnjlscbdhif”}}}%
+    \put(0.80548562,0.8010877){\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.83395726,0.8010877){\makebox(0,0)[lb]{\smash{similarity: 80 %}}}%
+    \put(0.60088001,0.44014556){\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.62922037,0.44014556){\makebox(0,0)[lb]{\smash{“zmqnlnjlscbdhif”}}}%
+    \put(0.80548562,0.44014556){\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.83395726,0.44014556){\makebox(0,0)[lb]{\smash{similarity: 80 %}}}%
+    \put(0.60088001,0.07933284){\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.62922037,0.07933284){\makebox(0,0)[lb]{\smash{“bcs”}}}%
+    \put(0.68629491,0.07933284){\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.71463756,0.07933284){\makebox(0,0)[lb]{\smash{similarity: -105 %}}}%
+    \put(0.60088001,0.03921378){\makebox(0,0)[lb]{\smash{271,000 other network-routes}}}%
+    \put(0.60088001,0.01268372){\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.62922037,0.01268372){\makebox(0,0)[lb]{\smash{similarities < 80 %}}}%
+  \end{picture}%
+\endgroup%

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="460.00262"
+   height="463.45016"
+   id="svg2"
+   inkscape:version="0.48.4 r"
+   sodipodi:docname="antennaangle.pdf">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1842"
+     inkscape:window-height="1057"
+     id="namedview26"
+     showgrid="false"
+     inkscape:zoom="2.0368965"
+     inkscape:cx="95.002313"
+     inkscape:cy="221.33293"
+     inkscape:window-x="70"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path3803"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path3800"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <linearGradient
+       id="linearGradient5224">
+      <stop
+         id="stop5226"
+         style="stop-color:#d81a1a;stop-opacity:1"
+         offset="0" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient7259">
+      <stop
+         id="stop7261"
+         style="stop-color:#ff0400;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop7263"
+         style="stop-color:#ff0400;stop-opacity:0"
+         offset="1" />
+    </linearGradient>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-163.78439,-389.40942)"
+     id="layer1">
+    <path
+       d="m 605.71428,620.93359 a 205.71428,205.71428 0 1 1 -411.42856,0 205.71428,205.71428 0 1 1 411.42856,0 z"
+       transform="matrix(0.97163186,0,0,0.97163185,5.132966,19.543324)"
+       id="path2985"
+       style="opacity:0.41726619;fill:#666666;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       d="m 393.78571,393.36736 0,458.98964"
+       id="path2989"
+       style="fill:none;stroke:#000000;stroke-width:1.00516391px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 164.28308,622.86218 459.00526,0"
+       id="path2991"
+       style="fill:none;stroke:#000000;stroke-width:0.99737066px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       d="m 1162.8572,349.50504 a 235.71428,227.14285 0 0 1 -75.7739,166.85187 L 927.14288,349.50504 z"
+       transform="matrix(0.84586895,0,0,-0.87761007,-389.97294,929.54207)"
+       id="path2999"
+       style="fill:#d81a1a;fill-opacity:0.51953125;stroke:#000000;stroke-width:0.25;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       x="449.18665"
+       y="605.92334"
+       id="text3001"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:CMU Serif;-inkscape-font-specification:CMU Serif"
+       sodipodi:linespacing="125%"><tspan
+         x="449.18665"
+         y="605.92334"
+         id="tspan3003"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:CMU Serif;-inkscape-font-specification:CMU Serif">α</tspan></text>
+    <g
+       transform="matrix(-0.39361131,0.4400635,0.43759179,0.39139077,718.2908,157.38878)"
+       id="g3695">
+      <rect
+         width="34.34874"
+         height="147.69958"
+         rx="0"
+         ry="8.5871849"
+         x="576.19684"
+         y="50.698524"
+         id="rect3679"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:10;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+      <path
+         d="m 419.38421,175.32222 a 23.471638,40.073528 0 0 1 -0.006,-80.142649 l 0.24927,40.071269 z"
+         transform="matrix(0.959404,0,0,1.809584,163.96893,-120.48575)"
+         id="path3681"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    </g>
+    <rect
+       width="4.5798321"
+       height="0"
+       rx="1.144958"
+       ry="0"
+       x="-316.70352"
+       y="666.75397"
+       transform="matrix(0,-1,1,0,0,0)"
+       id="rect3683"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <path
+       d="m 346.59751,127.23613 a 3.7211134,0 0 0 1 -0.001,0 l 0.0395,0 z"
+       transform="matrix(0,-1,1,0,596.76594,716.86657)"
+       id="path3685"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       x="476.28693"
+       y="418.49146"
+       id="text5292"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:CMU Serif;-inkscape-font-specification:CMU Serif;font-stretch:normal;font-variant:normal"><tspan
+         x="476.28693"
+         y="418.49146"
+         id="tspan5294"
+         style="-inkscape-font-specification:CMU Serif;font-family:CMU Serif;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">Antenna</tspan></text>
+    <text
+       x="241.42645"
+       y="587.69202"
+       id="text5296"
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
+         x="241.42645"
+         y="587.69202"
+         id="tspan5298"
+         style="-inkscape-font-specification:CMU Serif;font-family:CMU Serif;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">Mast</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart);marker-mid:none;marker-end:url(#Arrow1Lend)"
+       d="m 285.23787,174.28475 c 19.8377,10.05192 34.71104,22.59463 34.85695,58.42222"
+       id="path3026"
+       inkscape:connector-curvature="0"
+       transform="translate(163.78439,389.40942)"
+       sodipodi:nodetypes="cc" />
+  </g>
+</svg>
