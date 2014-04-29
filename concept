@@ -1,0 +1,309 @@
+
+
+Implementation
+cha:implementation
+The following chapter will present the actually implemented system. The implementation is based on Chapter cha:concepts where the concepts for the system have been presented. Through out this chapter all parts of the system and their responsibilities will be explained.  
+
+System Overview
+The developer system consists of a set of individual systems. This systems can be grouped in three groups. The first is responsible for storing information such as: mobile subscription data, population and land use information, road network and cell coverage areas. The second is a data abstraction layer which is used to aggregate the data and present to interested systems via an API. The last group is responsible for processing and generating trajectories. It is using the other systems via the API provided by the data abstraction layer. A brief overview of the implemented system is illustrated in Figure fig:systemoverview.
+figure
+./images/systemoverview
+System overview of the implemented system
+fig:systemoverview
+figure
+It depicts the data store which consists of two different databases, the first is responsible for storing geographic information and the second for storing subscription information from A1 and OCM.
+
+Data Store
+The data store is responsible for storing data; this data either is either geographic information or subscription data. For geographic data, the system is using PostgreSQL with the PostGIS extension. PostGIS extends PostgreSQL with support for spatial data structures and topological queries Obe2011. Therefore, it allows the system to store the OpenStreetMap road network, population and land use information, the coverage area and the location of each cell site. PostGIS allows the use of advanced spatial queries as intersections and clipping which is later needed by the system.
+
+Subscription data is stored in a separate MySQL database. It is storing events captured by the A1 system and the OpenCoverageMap project. The database consists of two tables, one for A1 and the second one for OpenCoverageMap.
+
+Data Abstraction API
+We first started to develop a system with direct access to the database via the JDBC driver for PostgresSQL(PostgreSQL JDBC driver: http://jdbc.postgresql.org/, last accessed March, 28 2014) and MySQL(MySQL JDBC driver: https://dev.mysql.com/downloads/connector/j/, last accessed March, 28 2014). But this approach was not sufficient as we experienced a slow data access rate with larger queries. Therefore, we decided to build an abstraction layer which encapsulates the access of the database form the system. The abstraction layer is built with Node.js - a JavaScript framework - and it provides a HTTP API. More details will be provided in Section sec:architecture.
+
+Trajectory Generation
+The trajectory generation group consists of two systems. First the trajectory service which is generating trajectories for subscribers and second the routing engine which is responsible for calculating routes between a start and end point. 
+
+Architecture
+sec:architecture
+After a brief overview has been given in the previous section, here the underlying system will be explained in more detail. It will also cover the process of importing the needed data into the database and how this data can be retrieved from the database. Moreover, the used data and the communication between the subsystems will be described.
+
+PostgreSQL Database
+To store geographic information PostgreSQL together with the PostGIS extension is used. PostGIS extends PostgreSQL in a way that it follows the Simple Features for SQL specification from the Open Geospatial Consortium. The Simple Features are defined in ISO 19125 ISO19125,ISO191252. The developed system is using population and land use information stored in the database. This data is needed to estimate a subscribers start and end position within the boundaries of the cell coverage area. In addition to raster data (population and land use) the database also stores the OpenStreetMap road network. Figure fig:pg_structure depicts the internal structure of the PostgreSQL database. The table at_2po_4pgr contains the OpenStreetMap road network, landuse_raster land use information and density_raster population information. 
+figure
+./images/pg_structure
+Structure of the PostgreSQL database
+fig:pg_structure
+figure
+
+
+Import Data
+This section describes the process to import both raster and the a road network into the database. Raster data is simply an image where each pixel corresponds to a coordinate in world space. A raster image defines a grid spacing which defines how far in meters pixel are away. A grid spacing of  meters means that each pixel covers an area of  square meters. Usually environmental and demographic geographic information is stored as a raster image. On the other hand, road networks are described by their geometry because the resolution of a raster image would be too low.
+
+
+Raster
+To import raster data into a PostgreSQL database, the tool raster2pgsql was used. Listing lst:raster2pgsql illustrates how to import the data. The parameter s defines the spatial reference system of the raster image. The grid spacing of the raster image is defined by parameter t and is in this case  by  meters. The tool converts the raster image into an SQL file which can be inserted into the database. To insert the created into the database, the second command is used.
+lstlisting[style=BashInputStyle,caption=Import raster data into PostgreSQL database,label=lst:raster2pgsql]
+    # raster2pgsql -s 4236 -I -C -M *.tif -F -t 100x100 population > pop.sql
+    # psql -U postgres -d gisdb -f pop.sql
+lstlisting
+
+Road Network
+Our system is using the routing engine osm2po which operates on the OpenStreetMap road network. Osm2po can convert the OpenStreetMap road network to a PostgreSQL compatible SQL file. Listing lst:osm2pgsql shows the step to import an OpenStreetMap road network - in this case from Austria - into the PostgreSQL  database.
+lstlisting[style=BashInputStyle,caption=Import OpenStreetmap data into PostgreSQL database,label=lst:osm2pgsql]
+    # java -jar osm2po-4_8_8.jar prefix=at austria.osm.pbf
+    # psql -U postgres -d gisdb -f at/at_2po_4pgr.sql.sql
+lstlisting
+
+MySQL Database
+The developed system is using data from A1 and the OpenCoverageMap project. Because this data is not related with geographic information a second database is used to store this data. This information is stored in two separate tables because the structure of A1 and the OpenCoverageMap are different. Figure fig:mysql_structure depicts the structure of the two tables, the first mfd_events stores the A1 data and the second ocm_all stores information from the OpenCoverageMap project.
+figure
+./images/mysql_structure
+Structure of the MySQL database
+fig:mysql_structure
+figure
+
+
+Import A1
+To import the A1 data set into the MySQL, the binary event stream needs to be converted first. The conversion takes the binary event stream and converts its to CSV file. Each row in the CSV file represents an event. Later the created CSV file will be imported into the database similar to Listing lst:textmysql.
+
+Convert
+The conversion is carried out a by a Java program which takes the binary data stream as input and outputs a CSV file. First a Java InputStream from the input file will be created. This input stream will be passed to a DataInputStream. As illustrated in Listing lst:parsestream a loop iterates over the data input stream and parses the binary information according to the A1 data structure. At last at the end of each iteration the parsed information will be print to the standard output.
+
+
+lstlisting[language=Java,style=JAVA,caption=Example code to parse event data stream,label=lst:parsestream]
+// create file input stream
+InputStream is = new FileInputStream("a1.data");
+// create new data input stream
+DataInputStream dis = new DataInputStream(is);
+while (dis.available() != 0)
+    byte[] anon_id = new byte[32];
+    dis.read(anon_id);
+    timestamp=dis.readInt();
+    timestamp_ms=dis.readInt();
+    lac=dis.readInt();
+    cell_id=dist.readInt();
+    latitude=dis.readDouble();
+    longitude=dis.readDouble();
+    radius= dis.readLong();
+    dis.skipBytes(12); //skip reserved fields
+    event_type = dis.readShort();
+    dis.skipBytes(3); //skip reserved fields
+    angle_x=dis.readInt();
+    angle_y=dis.readInt();
+    speed=dis.readInt();
+    //only print useful fields
+    System.out.println(Hex.encodeHexString(anon_id) +";"+ timestamp +";"+lac +";"+cell_id +";"+latitude +";"+longitude +";"+event_type +";"+angle_x);
+
+lstlisting
+lstlisting[style=htmlcssjs,language=SQL,caption=Load text file into MySQL database,label=lst:textmysql]
+LOAD DATA INFILE 'data.txt' INTO TABLE tbl_name
+  FIELDS TERMINATED BY ',' ENCLOSED BY '"'
+  LINES TERMINATED BY 'lstlisting
+
+
+Import OpenCoverageMap
+The data we got provided by the OpenCoverageMap project was already a CSV file and can be imported into the database with a SQL statement similar to the one in Listing lst:textmysql.
+
+
+
+
+
+
+
+
+
+
+Node.js Data API
+To encapsulate the querying of the database from the trajectory service a Node.js API was implemented. It provides a HTTP API which gives access to the data stored in the PostgreSQL and MySQL database. The data API is using the following modules, which can be installed through the script provided in Listing lst:nodemodules:
+itemize
+express(Project website with more information about express: http://expressjs.com, last accessed March 28, 2014) is a web application for Node.js and provides our system with web request routing in a RESTful manner
+pg(More information about the PostgreSQL driver pg: https://github.com/brianc/node-postgres, last accessed March 28, 2014) is a PostgreSQL driver for Node.js
+mysql(Project website with more information and a tutorial about mysql: https://github.com/felixge/node-mysql, last accessed March 28, 2014) is a MySQL driver for Node.js
+itemize
+lstlisting[style=BashInputStyle,caption=Script to install the used Node.js modules,label=lst:nodemodules]
+    # npm install express
+    # npm install pg
+    # npm install mysql
+lstlisting
+
+lstlisting[style=htmlcssjs,language=JavaScript,caption=Example for a Node.js app which is using the express framework and the PostgreSQL and MySQL module,label=lst:nodeexpress]
+var pg = require('pg');
+
+var conString = "postgres://postgres:1234@localhost/postgres";
+var mysql = require('mysql');
+var connection = mysql.createConnection(
+    host: 'localhost',
+    user: 'mysql',
+    password: '1234'
+);
+
+var express = require('express'),
+    app = express.createServer();
+
+app.get('/mysql', function (req, res) 
+    connection.connect();
+    connection.query('SELECT 1 + 1 AS result', function (err, rows, fields) 
+        res.send(rows[0].solution);
+    );
+    connection.end();
+);
+
+app.get('/postgres', function (req, res) 
+    var client = new pg.Client(conString);
+    client.connect(function (err) 
+        client.query('SELECT NOW() AS time', function (err, result) 
+            res.send(result.rows[0].time);
+        );
+    );
+);
+
+app.listen(3000);
+lstlisting 
+
+
+Features
+The Node.js provides several features  to the trajectory service. It enables the trajectory service to access the two database via an uniform API. This API hides the implementation from the using program. However, to increase performance the API was split into two parts. The first API resides on the same server as the PostgreSQL and handles geographic request whereas the second one handles subscription data and resides on the MySQL server.
+
+
+MySQL API
+provides access to mobile subscription data for both the A1 and OpenCoverageMap data. In addition, the route traveled by a subscriber can be retrieved from the OpenCoverageMap data. This route consists of a timestamp and the latitude and longitude coordinate. All the returned data is encoded as JSON that eases the parsing. Listing lst:mysqlapireq depicts the request that can be made to the database. The first one retrieves events from A1 for the specified user; the second one retrieves events from OpenCoverageMap and the last one get the route traveled by the OpenCoverageMap user.
+lstlisting[style=BashInputStyle,caption=MySQL API requests,label=lst:mysqlapireq]
+GET /mfdevents?id=USER_ID
+GET /ocmraw?id=USER_ID
+GET /ocmroute?id=USER_ID
+lstlisting
+
+
+PostgreSQL API 
+enables the requesting program to access functions of the PostgreSQL database. It provides access to raster data as population and land use information as well as to retrieve a random point withing a specified area based on population and land use information (see Listing pgapireq). The bounds parameter is encoded as a list  of coordinate - separated by a comma - specifying a bounding box (xmin,ymin,xmax,ymax). In comparison the geom parameter is encoded as Well-known text (WKT) which allows defining more advanced areas as polygons and multi polygons (POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))
+). 
+lstlisting[style=BashInputStyle,caption=PostgreSQL API requests,label=lst:pgapireq]
+GET /populationBounds?bounds=BOUNDARIES
+GET /landuseBounds?bounds=BOUNDARIES
+GET /randomgeom?geom=GEOMETRY&num=NUMBER_OF_POINTS
+lstlisting
+
+
+
+Routing Engine
+To calculate routes on the OpenStreetMap road network the system is using the osm2po routing engine. This engine can either be used as a standalone web server with a defined API or be integrated into a Java application. In our case, the engine was integrated into the trajectory service as a library. The benefit of this approach is, that the system has better access to the graph file used by the engine. The graph file is a reduced road network optimized for routing. By accessing the graph file, the trajectory service can retrieve metadata for the calculated route such as speed limits and length of the roads. This information can later be used to validate the calculate route and the timing information. 
+
+Listing lst:osm2po illustrates how a route between Linz and Hagenberg im Mühlkreis is calculated. The result is an array with segment IDs which can then be used to retrieve the geometry and the speed limits of the segment from the graph file.
+lstlisting[language=Java,style=JAVA,caption=Example code to calculate a route between two points,label=lst:osm2po]
+File graphFile = new File("at_2po_4pgr.gph");
+Graph graph = new Graph(graphFile);
+DefaultRouter router = new DefaultRouter();
+
+//Linz, Austria
+int sourceId = graph.findClosestVertexId(48.306f,14.285f);
+//Hagenberg im Mühlkreis, Austria
+int targetId = graph.findClosestVertexId(48.368f,14.513f);
+
+Properties params = new Properties();
+params.setProperty("findShortestPath", "false");
+
+//calculate path between source and target
+int[] path = router.findPath(
+    graph, sourceId, targetId, Float.MAX_VALUE, params);
+lstlisting
+
+Trajectory Service
+The trajectory service is using the above mentioned data and APIs to generate trajectories for each subscriber. By using different data sources it can estimate trajectories for different data providers in our case mobile network operators. In the current state trajectories can be generated for A1 subscriber and OpenCoverageMap participants. To fulfill its task the trajectory service needs besides the events from the network operator a coverage prediction for each cell site. The trajectory service is using the following data:
+itemize
+Mobile subscription data
+Population and land use information
+Cell site coverage prediction
+OpenStreetMap road network
+osm2po route engine
+itemize
+
+
+Convert Events
+The structure of events used in the trajectory generator was inspired by the structure used in the A1 event stream. To integrate other data sources such as the OpenCoverageMap a converted needs to be implemented. The objective of the converter is to transform the event structure to the one used by A1 events.
+
+The OpenCoverageMap does not use the same event structure as A1. Rather than issuing events like call establish / termination or hand over it periodically stores the state of the mobile station. Therefore, this information needs to be transformed to an event structure. The steps to convert the OpenCoverageMap data to the A1 structure are the following: First remove all data where no call is active. Second iterate over this data and check for gaps between succeeding timestamps. Gaps greater than 10 seconds indicate that a call was either established or terminated. Afterwards iterate over the data between two gaps. Create a call establish and termination event at the beginning and end of the list. If there is a difference between the cell-id and location area of two succeeding entries add a hand over event to the current call. The result will be a  list of events with the same structure as the ones captured by A1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Trajectory Service
+The generation of subscriber trajectories involves a number of steps which have to be carried. In this section an overview of all processes involved in the generation will be explained. In general the processes can be divided into 4 categories: data retrieval,processing,validation,presentation.
+
+Start and End Position
+
+Route Validation
+
+Geometry
+
+Timing
+
+Timing Information
+
+Handover Prediction
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

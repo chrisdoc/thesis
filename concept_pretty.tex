@@ -1,0 +1,286 @@
+\chapter{Trajectory Generation Pipeline}
+In this chapter, the pipeline to generate trajectories for mobile subscribers is introduced. The developed pipeline consists of a five-steps model, which is shown in Figure~\ref{fig:pipeline}. The concept to generate trajectories is the following: The input data is iteratively used to generate trajectories for each subscriber. The output is a trajectory which consists of the route, traveled by the subscriber as well as timestamps, which defines the point in time when the subscriber was located at this location. Given below each step of the pipeline is described in more detail to better understand how the system operates. 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{./images/pipeline}
+	\caption{Developed trajectory generation pipeline. The trapezoids represent the single steps in the pipeline, the rounded rectangles illustrate the
+	outputs of the particular steps}
+	\label{fig:pipeline}
+\end{figure}
+\section{Input Data}
+This section focuses on input data which is consumed by the system. The gathering of input data is the first step in the developed pipeline. Generally input data can be distinguished between four data types, which are used by the system: geographical data, socio-statistical data, mobile subscription data (A1 and OCM), road network data. The different data types are described in the succeeding sections.
+\subsection{Geographical Input Data}
+As mentioned before GSM doesn't expose an accurate location of the subscriber. In GSM only the Cell-ID of the current connected cell is known. However, to calculate a route between the start and end of a call a more accurate location is needed. Because the coverage area of cell can be from as little as  $500m^2$ up to $50km^2$. Therefore we need to set boundaries in which subscribers can be located. An assumption is that the majority of subscribers will start or end their journey in an urban fabric whereas only a small fraction of subscribers will start or end their journey in open land.
+In course of this project the geographic information is derived from data from the \emph{CORINE}\footnote{CORINE: "Coordination of Information on the Environment"; \url{http://www.eea.europa.
+eu/publications/COR0-landcover}, last accessed on March 11,2014} project which was initiated by the European Commission in 1985. The main purpose of this project was to generate a geographic information system for the member states of the European Union.
+The \emph{CORINE} land cover (CLC) project is one essential part of the \emph{CORINE} projects which aim to develop a land cover information system for twelve member states of the European Union (Effective 2006). The \emph{CORINE} land cover project distinguishes between five main categories and in total 44 land cover classes. Out of the five only two categories are applicable for the purpose of defining boundaries where a subscriber can be located: \emph{artificial surfaces} and \emph{agricultural areas}. The three remaining categories --\emph{forest
+	and semi-natural areas}, \emph{wetlands} and \emph{water bodies}-- can be considered as areas where subscribers are not starting or ending their calls. 
+The \emph{CORINE} land cover data for Austria can be obtained from the following service\footnote{\url{http://www.data.gv.at/datensatz/?id=9246f37d-da69-4442-9504-ebd006a059bb},
+	last accessed on March 11,2014}. The land cover data is provided in two different data types, first as a raster image with a grid size of 100 meters and second as a Shapefile..Figure~\ref{fig:clc_austria} illustrates the land cover map\footnote{Image source: \url{http://www.eea.europa.eu/data-and-maps/figures/corine-land-cover-2000-by-country/clc00_at_national.eps/image_original}l, last accessed on March 11,2014.} of Austria. The red spots within the image represents urban fabric areas whereas green denotes to forest and semi-natural areas.
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{./images/clc_austria}
+	\caption{Corine land cover map of Austria}
+	\label{fig:clc_austria}
+\end{figure}
+
+\subsection{Socio-statistical Input Data}
+The second kind of input data used in the generation pipeline are population density maps. Population density maps belong to the class of socio-statistical and provide information about the distribution of population in a geographical area. Gallego et al.\ \cite{Gallego2010,Gallego2011} describe several disaggregation methods which can be used to generate a population density map of the European Union.
+Their approach uses information from the \emph{CORINE} land cover project to derive a population density grid with 100 meters grid spacing. The population density grid is used in the developed system to narrow the location of a user within the current connected cell. This works in conjunction with \emph{CORINE} land cover. A more detailed description of the described process will be presented later.
+The population density grid can be obtained freely from the European Environment Agency (EEA) \footnote{\url{http://www.eea.europa.eu/data-and-maps/data/population-density-disaggregated-with-
+	corine-land-cover-2000-2}, last accessed on March 11,2014}. Similar to the \emph{CORINE} land cover data the population density grid is available in two data types.
+
+\subsection{A1 Dataset}
+The mobile subscription data which is provided by A1, is used to generate trajectories for subscribers. To generate trajectories the developed system is fed with an event stream for a special user. This event stream contains all events which have been captured during one day. As we mentioned before in Section~\ref{sec:anonymous} the anonymous user id changes at least every 24 hours. Therefore it is only possible to extract trajectories for one day per subscriber. Each event stream can contain zero, one or $n$ calls. Every call in the event stream represents a trajectory.
+\subsection{OCM Dataset}
+In order to validate our approach we need not only an event stream but also the path traveled by the subscriber. Therefore, the developed system uses an event stream provided by the OpenCoverageMap project. After a conversion to the A1 event format this event stream can be provided to the developed system. In addition to the A1 event stream it contains the traveled path which was recorded via GPS on the mobile phone. The GPS tracks allows the system to validate the route finding process as well as the timing estimation. The comparison between the estimated trajectory and the actual traveled route helps to validate the routing. By calculating the speed from the GPS the system can validate how well the timing estimation has been done. More details to the validation process will be provided in Section~\ref{sec:routevalidation},\ref{sec:timing-estimation}.
+\subsection{Road Network}
+The last input data for the developed system is a representation of the road network. Individuals walk or drive on predefined paths: streets, paths, etc. To generate trajectories the system needs to have a representation of the road network to assign the path of subscribers on the road network. A freely available and open-source road network is provided by the OpenStreetMap\footnote{\url{http://www.openstreetmap.org/about}, last accessed on March 12, 2014} project. The aim of OpenStreetMap is to provide a world wide map which can be used without any royalties. Contributers all over the world are feeding OpenStreetMap with new data and therefore OpenStreetMap is very accurate for locations where the number of contributers is high. Figure~\ref{fig:map_linz} illustrates a map\footnote{Image source: \url{http://render.openstreetmap.org/cgi-bin/export?bbox=14.278879165649414,48.31028478774528,14.302825927734377,48.320590159843626&scale=5754&format=pdf}, last accessed on March 12, 2014} of Linz, Austria generated by OpenStreetMap. It can be seen that OpenStreetMap provides a large variety of data (e.g.\ streets, paths, buildings, POI, etc.).
+
+The developed system utilizes the road network from OpenStreetMap to estimate a start and end position of the trajectory as well for route generation. Additionally OpenStreetMap is used to validate the timing estimation for subscribers where no GPS path is available which is the case for A1 subscribers. 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{./images/map_linz}
+	\caption{OpenStreetMap map of Linz, Austria}
+	\label{fig:map_linz}
+\end{figure}
+
+\subsection{Voronoi Coverage}
+The developed system needs a representation of the coverage area for each cell site. As described before in Section~\ref{sec:voronoites} Voronoi tessellation can be used to calculate an approximate coverage area. However, as Voronoi tessellation only takes the location of the cell site and not the physical characteristics (shadowing, antenna gain, reflections, path loss,etc.\ ) the approximation is not very accurate. To calculate the coverage area and therefore the Voronoi polygon for each cell site the system is using the location and the angle of the antenna. The angle is needed to separate sector antennas which are mounted on the same cell tower. 
+\subsection{Coverage Planning}
+Because the developed system is based on handover point estimation an accurate approximation of the coverage area is needed. Besides Voronoi tessellation a network planning tool is used. The network planning tool not only takes the location of the cell cite but also the physical characteristics into account. The physical characteristics are the following:
+\begin{itemize}
+	\item Digital Elevation Model
+	\item Transmit Power
+	\item Path Loss
+	\item Shadowing
+	\item Line Of Sight
+	\item Multipath propagation
+\end{itemize} 
+By using the physical characteristics the calculated coverage is more accurate than the simple approximation done with Voronoi tessellation. Since our system has no access to the physical properties of the operator it is using freely available information. This information consists of the Digital Elevation Model and the transmit power. 
+\subsubsection{Digital Elevation Model}
+The network planning tool is using a Digital Elevation Model to calculate properties such as path loss, shadowing and line of sight. This properties are important for the coverage prediction. The European Environment Agency\footnote{Data source: \url{http://www.eea.europa.eu/data-and-maps/data/ds_resolveuid/ca503256de1b4231b029e4145d0a8b7b} last accessed March 19, 2014} provides a Digital Elevation Model of Europe. A Digital Elevation Model is aligned in a grid and for each cell of the grid the altitude above sea level is known. The EEA Digital Elevation Model consists of a raster with 25 meters grid spacing. The coverage prediction is limited by the resolution of the underlaying Digital Elevation Model, therefore by using a better model the accuracy of the prediction can be increased. 
+\subsubsection{Transmit Power}
+The transmit power defines the power level of the transmitter in the antenna. An increase in transmit power means an increase in coverage as the path loss effect will be minimized. Due to the fact that the network operator has not provided any information about the transmit power of its BTS the system is using an alternative data source. In Austria the Forum Mobilkommunikation provides a service called \emph{Senderkataster}\footnote{Project description: \url{http://www.senderkataster.at/} last accessed March 19, 2014}. The Senderkataster allows to view all broadcast and mobile communication transmitters on a map. In addition to the location it also depicts the transmitting power. The Senderkataster defines the following four categories for transmit power:
+\begin{itemize}
+	\item Category 1: < 15 Watt
+	\item Category 2: 15 - 50 Watt
+	\item Category 3: 50 - 100 Watt
+	\item Category 4: > 100 Watt 
+\end{itemize}
+By querying the Senderkataster with the research area the system can get the transmitting power. However, the Senderkataster voluntary project and therefore relies on the data provided mobile network operators. During the research for the system we have seen that not every cell site is listed in the Senderkataster.
+\paragraph{Data Extraction}
+The Senderkataster service can be queried with simple HTTP requests (see Listing~\ref{lst:senderbbox}). The services takes a bounding box of the research area and returns all transmitters withing the bounding box. The bounding box is defined by the four parameters --left, right, bottom, top -- \emph{EXL}, \emph{EXR}, \emph{EXB} and \emph{EXT}. The coordinates are projected in the WIGeoEU projection (EPSG 7397) \footnote{Projection string: \url{http://spatialreference.org/ref/sr-org/7397/html/} last accessed March 19, 2014}. After the request was sent to the service, the service delivers all the transmitters in the following format \lstinline+301377|314876|2057165+. The first parameter is the internal ID of the transmitter, second the X coordinate,and lastly the Y coordinate. The ID can then be used to retrieve additional informations such as the transmitting power, the transmitter type and if it is mounted on a house or a tower.
+
+To retrieve more information about the transmitter a request (see Listing~\ref{lst:transmitterinfo}) to the service with the ID is made. The response to the request is the following: \lstinline+mobilfunk|301377|GSM/UMTS|d|41,48|1+ . The first parameter describes the type of the transmitter, the second is the ID, the third one depicts the used technology (GSM, GPRS, UMTL, LTE), the fourth indicates if the transmitter is mounted on a roof (d) or a tower (e), followed by the transmit power in Watt and the last parameter shows if the tower is used by other transmitters to.
+\begin{lstlisting}[caption=Request to retrieve station within the boudning box,label=lst:senderbbox]
+http://www.senderkataster.at/functions/getPoints.php5
+?EXL=312790.83396198
+&EXR=315119.16603802
+&EXB=2056054.8754715
+&EXT=2057801.1245285
+\end{lstlisting}
+
+\begin{lstlisting}[caption=Request to retrieve transmitter information,label=lst:transmitterinfo]
+http://www.senderkataster.at/functions/getInfos.php5
+?TYPE=mobilfunk
+&ID=301377
+\end{lstlisting}
+
+
+
+\section{Call Detection}
+This section describes the process of filtering calls within each event stream. The two used event streams -- A1 and OCM -- are using different events to signalize call establishment and termination. After this process the system can generate a trajectory for each call found in the event stream.
+\subsection{A1 Calls}
+To signalize the establishment of a call in the A1 event stream either a \emph{Mobile Originated Call} or a \emph{Mobile Terminated Call} event is issued. The first event is used when a mobile station initiates a call with another subscriber. The mobile station of the other subscriber will issue the second event once the call has been established with the first subscriber.
+
+When either of the involved subscribers terminates the call a \emph{A Disconnect} event shall be issued by both subscribers. However, during investigation of the event stream we haven't found any occurrence of this event. Therefore the developed system is using an approach by which it investigates events which have been issued after a call establishment. If the system recognizes either one of the following events: \emph{SMS},\emph{Mobile Originated Call},\emph{Mobile Terminated Call},\emph{Location Area Update} or \emph{IMSI detach} it generates a call termination event before. 
+
+\subsection{OCM Calls}
+Rather than capturing events in the network the OpenCoverageMap project periodically stores the state of the mobile phone. The state can either be \emph{idle} or \emph{connected}. In order to detect a call the system has to find changes in the state. If a state change is detected the corresponding event is issued. A call establishment is detected when the state changes from \emph{idle} to \emph{connected}. In contrast to the call establishment the call termination is detected when the state changes from \emph{connected} to \emph{idle}. 
+
+The detection of call terminations is more accurate for OpenCoverageMap than for A1. This due to the fact that OpenCoverageMap periodically stores the state of the mobile phone whereas in order to detect a call termination for A1 events the system has to recognize a follow-up event.
+
+\section{Route calculation}
+The following section presents the process of calculation a route for a mobile subscriber. In general each call is used to calculate one route which is later transfered to a trajectory. The process consists of several steps which will be described in the succeeding sections.  
+\subsection{Start and End Position Estimation}
+The first step in the route calculation process is to estimate the subscribers start and end position. As mentioned before GSM only exposes the Cell-ID which only defines a boundary in which the subscriber is located. To narrow this boundaries the system is using geographical input (\emph{CORNINE} land cover) and socio-statistical maps (population density maps). 
+
+By using \emph{CORNINE} land cover data the system can define areas where it is unlikely that a subscriber will start or end his journey. This step can be parameterized by giving each of the CLC classes a percentage factor. The percentage defines how likely it is that a subscriber starts or ends a call in this class.
+
+Our second second assumption is that subscribers will more likely start or end their call in a higher populated area within the cell boundaries. More subscribers are located in higher populated areas than in less populated ones. Therefore the system is using population density maps in order to better estimate the start or end position. Figure~\ref{fig:pop_vienna} shows an example for a population density map for Vienna, Austria. In this example it can be seen that the density is higher in the inner districts than in the outer ones.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{./images/pop_vienna}
+	\caption{Population density map of Vienna, Austria. The population density is higher in darker (purple) than in brigher areas}
+	\label{fig:pop_vienna}
+\end{figure}
+\subsubsection{Corine Land Cover Clipping}
+By clipping and therefore removing unwanted areas the system can narrows the boundaries in which the subscriber is located. To clip the coverage area of a cell the system loads the \emph{Corine} land cover map for the particular area. The next step is to clip the cell coverage area with useful \emph{CORINE} land cover categories such as \emph{artificial surfaces} and \emph{agricultural areas}. This technique known as polygon clipping removes unwanted area --\emph{forest and semi-natural areas}, \emph{wetlands} and \emph{water bodies} -- from the cell. 
+%Afterwards a \emph{Corine} land cover class is picked by the system based on the percentage given to each. By creating a probability density function for a random number generator \emph{Corine} land cover classes can 
+\subsubsection{Population Density Estimation}
+After removing unwanted areas within the cell coverage area the next step is to estimate the subscribers position. This step is the same for start and end positions. By using the population density information of the coverage area the system dices a position based on the population density. Therefore more subscribers will be located in higher populated areas.
+
+\paragraph{Population Density Clipping}
+The first step is to load the population density map for the coverage area. A random number generator with a defined probability density function will created. The probability density function is derived from the population density map. When the system loads the population density map for the coverage area it will get $n$ polygons with $n$ different population densities. More generally speaking each area with a unique population density is represented by a polygon. Afterwards the random number generator is used to dice a area of interest. By using the population density as function for the random number generator areas with a hight population density will be picked more often than less populated areas. Once the system picked a polygon based on the random number generator it clips this polygon with the coverage area. This process narrows the boundaries of the subscribers location. Following the subscribers location will be set by dicing a location within the remaining coverage area. Figure \ref{fig:population} illustrates an example for different population densities within the boundaries of one cell. We can see that total population is $315$. We calculate a \emph{pdf} for all three population cells based on the ratio of the population and the total population. The calculated \emph{pdf} will be used to estimate the user's start and end position. As an example the probability that the starting point is within the polygon with Population 240 is given by 240/315. Within the polygon ``Population 240'' the starting point is selected based on a uniform distribution. 
+\begin{figure}
+	
+	\centering
+	%\includegraphics[width=\columnwidth]{population_export.pdf}
+	\begin{tikzpicture}[scale=0.70]
+		\begin{axis}[
+				xlabel=$x$ in meter,
+				ylabel=$y$ in meter,
+			legend pos=outer north east]
+			   
+			\addplot+[mark=none,draw=black, very thick,dashed] coordinates 
+			{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
+			\addlegendentry{Cell boundary} 
+			    
+			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates 
+			{(0,0) (300,0) (300,300) (0,300)} -- cycle;
+			\addlegendentry{Population 240}
+			    	
+			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates 
+			{(0,300) (300,300) (300,500) (0,300) } -- cycle;
+			\addlegendentry{Population 45}
+			    	
+			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates 
+			{(300,0) (300,500) (400,300) }-- cycle;
+			\addlegendentry{Population 30}
+			    
+				     
+			
+		\end{axis}
+	\end{tikzpicture}
+	
+	\caption{A Demonstration of a Population Grid for a Cell Area}
+	\label{fig:population}
+\end{figure}
+
+\paragraph{Random Point in Coverage Area}
+Dicing a random location into a rectangular shape is an easy task, however the shape of the remaining coverage area will unlikely be a rectangular. A simple approach is using the bounding box of the coverage area polygon and dicing coordinate pairs for the bounding box as long as one coordinate pair lays within the coverage polygon. This simple approach has one major disadvantage because it is unpredictable. There is no estimation for how long it would take that one coordinate pair is contained in the coverage polygon.
+
+A more sophisticated approach is to triangulate the coverage polygon into triangles. Triangulation of convex monotype polygons can be done with algorithms by  A. Fournier and D.Y. Montuno~\cite{Fournier1984} or Godfried Toussaint~\cite{Toussaint1984}. The developed system uses the GDAL project~\cite{GDAL} which provides an implementation of polygon triangulation for many platforms and programming languages.
+Figure~\ref{fig:triangulation} depicts the triangulation of a polygon into triangles. The polygon is split into 3 triangles by applying Fourniers algorithm.
+
+\begin{figure}
+	
+	\centering
+	%\includegraphics[width=\columnwidth]{population_export.pdf}
+	\begin{tikzpicture}[scale=0.70]
+		\begin{axis}[
+				xlabel=$x$ in meter,
+				ylabel=$y$ in meter,
+			legend pos=outer north east]
+			   
+			%    \addplot+[mark=none,draw=black, very thick,dashed] coordinates 
+			%		{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
+			%    \addlegendentry{Cell boundary} 
+			    
+			\addplot+[mark=none,draw=black, very thick,dashed] coordinates 
+			{(0,200) (200,450) (600,350)(700,0)(200,0) } -- cycle;
+			\addlegendentry{Polygon}
+			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates 
+			{(0,200) (200,450) (600,350) } -- cycle;
+			\addlegendentry{Triangle 1}
+			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates 
+			{(0,200)  (600,350)(200,0) } -- cycle;
+			\addlegendentry{Triangle 2}
+			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates 
+			{(200,0)  (600,350)(700,0) } -- cycle;
+			\addlegendentry{Triangle 3}
+			%	\addlegendentry{Polygon}
+			    	
+			    	
+			%   	\addlegendentry{Population 240}
+			    
+				     
+			
+		\end{axis}
+	\end{tikzpicture}
+	
+	\caption{Triangulation of a Polygon into 3 Triangles}
+	\label{fig:triangulation}
+\end{figure}
+As already discussed before the developed system needs to uniformly distribute subscribers location with the polygon. A \emph{pdf} will be created by using the area of each triangle as input. A random number generator will use this \emph{pdf} and randomly assign the triangle in which the subscribers location shall be diced.
+
+In Figure~\ref{fig:comprandom} two different approaches for random triangle point picking. The first one is picking a point within the boundaries of the triangle whereas the second one is picking a  point in a  quadrilateral which consist of the triangle and its mirroring. To pick a point in a triangle the first approach is using Equation~\ref{eq:randtriangle} where $a_1$ and $a_2$ are uniform random numbers in the interval $ \left[0,1 \right] $, $v_1$ and $v_2$ are two vertices's of the triangle. As depicted in Figure~\ref{fig:randtriangle} this approach does not create uniform distributed points within the triangle. The second approach is different from the first one as it does not pick points within the triangle but rather in a quadrilateral made of the original triangle and its mirroring. Figure~\ref{fig:quadrilateral} shows that this approach creates uniform distributed points. However the points are created in a quadrilateral instead of a triangle this can be overcome by removing points outside of the triangle.
+\begin{equation}
+	p=a_1*v_1+(1-a_1)*a_2*v_2
+	\label{eq:randtriangle}
+\end{equation}
+
+\begin{equation}
+	p=a_1*v_1+a_2*v_2
+	\label{eq:randquad}
+\end{equation}
+
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{randompointpolygon}
+		\caption{Random Point in Triangle}
+		\label{fig:randtriangle}
+	\end{subfigure}%
+	~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+	%(or a blank line to force the subfigure onto a new line)
+	\begin{subfigure}[b]{0.45\textwidth}
+		\includegraphics[width=\textwidth]{randompointquadliteral}
+		\caption{Random Point in  Quadrilateral}
+		\label{fig:quadrilateral}
+	\end{subfigure}
+	   
+	\caption{Comparison between two different random point picking methods}
+	\label{fig:comprandom}
+\end{figure}
+
+\subsection{Routing}
+The developed system is using the OpenStreetMap road network and the OSM2PO\footnote{Project description: \url{http://osm2po.de/}, last accessed on March 18,2014} route engine. After estimating a random start and end position of the subscriber a route between these two points will be calculated with OSM2PO.
+
+\subsubsection{OSM2PO}
+OSM2PO is a project developer by Carsten Moeller which allows routing on the freely available OpenStreetMap road network. On the first start OSM2PO is generating a graph network out of the road network. The graph network is used internally of OSM2PO and allows a faster route calculation. OSM2PO can calculate the fastest route by using speed limit information or the shortest route with minimum distance.
+\subsubsection{Route Generation}
+The system first estimates a start and position for the subscriber and calculates the fastest route between these two points. The calculated route contains the geometry of the route, the used roads and the speed limit of each road segment. This information will later be used by the system to validate the route.
+\section{Route Validation}
+\label{sec:routevalidation}
+Route validation is necessary to use the best estimation of the traveled route. For each subscriber there will be more than one route generated based on a configuration parameter. The developed system uses two different types of route validation, the first evaluates the route geometry and the second the timing. Each of the validations can be treated separately or in conjunction. By combining the results a better validation can be achieved.
+\subsection{Geometry Validation}
+Geometry validation is used to evaluate the estimated route with the subscribers handover sequence. In addition when using events from the OpenCoverageMap the system can validate the estimated route with the actual route based on the GPS information.
+\subsubsection{Squared Sum}
+The first validation the system is doing for each route is to calculate the squared sum between the cell sites of the handover sequence and the calculated route. To compare different routes Equation~\ref{eq:sumsquaremine} was used. This is the same metric Tettamanti et al.\cite{Tettamanti2010} used for their system. For each calculated route $j$ the squared sum of all minimum distances $d_{i,j}$  between the route and the cell site was calculated. Figure~\ref{fig:rms} illustrates the minimum distance between the centroid of a cell site and a calculated route.
+
+\begin{equation}
+	\label{eq:sumsquaremine}
+	D_j=\sum_{i=1}^{m} d_{i,j}^{2}
+\end{equation}
+%\begin{equation}
+%\label{eq:minsummine}
+%min(D_j), j = 1,2,\ldots,n
+%\end{equation}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{./images/rms}
+	\caption{Minimum distance between centroid of cell site and route}
+	\label{fig:rms}
+\end{figure}
+
+
+\subsubsection{Hausdorff Distance}
+If the system is using events from the OpenCoverageMap project the actual route traveled by the subscriber is known by storing GPS information. This allows the system to validate the calculated routes with the actual route. The developed system is using the Hausdorff distance named after Felix Hausdorff~\cite{Rockafellar1998}. The Hausdorff distance measures how far two subsets of a metric space are from each other, it is the maximum of all the distances from a point in one set to the closest point in the other set. In our system the two sets consists of the calculated and the actual route. Figure~\ref{fig:Hausdorff_distance_sample} depicts the Hausdorff\footnote{Image source: \url{http://en.wikipedia.org/wiki/File:Hausdorff_distance_sample.svg} last accessed on March 16, 2014 } distance between to paths $X$ and $Y$. Therefore the system is using the Hausdorff distance to measure the similarity between the calculated and the actual route.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{./images/Hausdorff_distance_sample}
+	\caption{Hausdorff distance between two sets}
+	\label{fig:Hausdorff_distance_sample}
+\end{figure}
+
+\subsection{Timing Validation}
+Besides geometry validation the system is taking the time it needs to actually drive the route into account. When the system generates a trajectory for a subscriber it knows the time when the subscriber initiated and terminated the call. This information is used to extract the journey time. A ratio $r_t$ between the actual journey time $t_{actual}$ and the time it takes to travel the estimated route $t_{route}$ is calculated (see Equation~\ref{eq:timeratio}). The ratio gives information if the estimated router is either to fast or to slow. A to fast route can indicate that the route is either too long or that the subscriber was stuck in traffic congestions. On the other hand a slower estimated route can indicate that either the wrong route was chosen or that the subscriber was going faster than the speed limit. Therefore a conjunction of all validations is needed to choose the best approximated route.
+\begin{equation}
+	r_{t}=\frac{t{actual}}{t{route}}
+	\label{eq:timeratio}
+\end{equation} 
+\section{Timing estimation}
+\label{sec:timing-estimation}

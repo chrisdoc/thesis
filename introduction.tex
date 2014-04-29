@@ -1,0 +1,24 @@
+\chapter{Introduction}
+%The main goal of this master thesis is to generate driving trajectories for mobile subscribers. 
+%The following chapter guides through the present thesis. It gives an overview of the thesis as well it depicts the main challenges and goals of the thesis. At last the structure will be shown.
+\section{Problem Description}
+Traffic analysis is an import part in road network and mobile network simulations. These simulators require moving subscribers in order to investigate interesting effects in their networks. Moving subscribers can be generated from mobility models which try to describe the mobility of individuals.
+
+This work focuses on estimating trajectories for mobility simulations by using mobile subscription data. A trajectory describes the path of a moving object through space as a function of time. Network operators need moving subscribers to evaluate and analyze an existing or a virtual network. Replay scenarios can be created to investigate the current or a new network  with a scenario where errors accrued. The trajectory generation process involves several tasks. First useful events have to be filtered in the network. The users path has to be estimated, which involves the start and end position as well as the handover position. 
+
+Another part of this thesis is to estimate the coverage area for each cell sites. The coverage area is a crucial aspect in trajectory estimation. Trajectories need the location of a subscriber as a function of time. However GSM doesn't expose an accurate position of the subscriber. Therefore a good representation of the coverage area allows to narrow the users position in the network. The problem is to find an approach which creates a good estimation of the coverage area for each cell site.
+\section{Motivation}
+In the last years mobile network simulations have to adopt to the mobility of the subscribers. Subscribers are not stationary and therefore behavior models have to be defined. These models shall represent the entire subscriber database. 
+
+Since the beginning of mobile network simulations random walk and manhattan grid approaches were used to enable mobility. The problem is that random walk and manhattan grid rely on statistical data. The statistical input used is derived from household surveys. This surveys however only depict a special moment in time. To evaluate or gather more moments numerous surveys have to be done. 
+
+Our approach is different, instead of surveys we are using mobile subscriber data. More precise call data records. The motivation behind using mobile subscriber data is that this data represents all users of the mobile network operator. We want to use this data to generate anonymous driving trajectories. The use of call data records allows the generation of trajectories for each day and time of the year. The generated trajectories adopt to daily as well seasonal changes.
+\section{Challenges}
+The first challenge we have to face is that we don't have a model of the coverage area for all cell sites. Therefor we need a good representation to estimate a coarse position for each subscriber.
+In order to generate a trajectory the users start and end position are crucial. At first we only have the serving cell and a representation of its serving area. Therefore the position of the user within the cell has to be estimated. For this purpose we are using a combination of population and land use information data.
+
+\section{Goals}
+The main goal is to generate trajectories for each mobile subscriber. However due to the design of GSM we can only generate trajectories for mobile users which are in an active call. Additionally we are investigating approaches to annotate the driving trajectories with timing information.
+In the end we are also examining methods to improve the representation of the serving area with public available data (digital elevation model, land use clutter information,...).
+\section{Structure}
+At first we are discussing state of the art approaches to estimate driving trajectories and mobility in mobile network simulations. Followed by an overview of fundamental concepts and techniques used in this thesis. The third part explains our concept and approach which will be implemented in the succeeding chapter. At last we will present and discuss our results and give a summary of the work.
