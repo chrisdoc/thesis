@@ -87,7 +87,7 @@ Time-ratio & Mean distance $\overline{d_i}$ & Variance $\mathrm{Var}[d_i]$& $\su
 \subsection{Handover}
 After an approximation of the subscriber has been chosen handover points were estimated. The estimation was done for both the network coverage prediction and the Voronoi diagram coverage. Figure~\ref{fig:563distcomp} shows a comparison of distances between the observed handover position and the estimated handover position for both coverage predictions. It can be seen that the handover estimation done with Voronoi diagram coverage performed better than the network coverage prediction for the first half of the route. On the other hand the network coverage prediction performed better in the second half of the route. 
 \subsection{Velocity}
-The velocity for each segment has been calculated with the approach introduced in Section~\ref{sec:velocity}.
+The velocity for each segment has been calculated with the approach introduced in Section~\ref{sec:velocity}. Due to deviation between the observed handover position and the estimated handover position a velocity over-run and under-run has happened at the beginning and the end of the trajectory. The velocity over-run was eliminated with the adaption algorithm presented in Section~\ref{sec:adaption}. The effect of the adaption can be seen in Figure~\ref{fig:563velocity}. The first figure shows a comparison of the observed velocity with the estimated velocity when no adaption has been done. On the other hand, the second figure depicts the effect of the adaption algorithm. The velocity overrun that is visible in the first figure between second 310 and 330 has been eliminated.
 \begin{figure}
 	\centering
 	\begin{subfigure}[b]{\textwidth}
