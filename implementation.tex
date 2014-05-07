@@ -251,7 +251,7 @@ The OpenCoverageMap doesn't use the same event structure as A1. Rather than issu
 %\end{algorithm}
 
 \section{Trajectory Service}
-The generation of subscriber trajectories involves a number of steps which have to be carried. In this section, an overview of all processes involved in the generation will be explained. In general, the processes can be divided into 4 categories: \emph{data retrieval},\emph{processing},\emph{validation},\emph{presentation}.
+The first two system layers were responsible for storing and providing access to various data sources, this layer however, is utilizing the data. The trajectory service implements the trajectory generation pipeline that has been introduced in Chapter ~\ref{cha:concepts}. The application provides a rich user interface which offers functionalities that allows investigating the used coverage prediction and generating subscriber trajectories. In this section, the most important aspects of the generation pipeline are explained.
 \subsection{Start and End Position}
 \subsection{Route Validation}
 \subsubsection{Geometry}

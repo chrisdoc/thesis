@@ -193,11 +193,12 @@ The detection of call terminations is more accurate for OpenCoverageMap than for
 \section{Route calculation}
 The following section presents the process of calculation a route for a mobile subscriber. In genera,l each call is used to calculate one route which is later transfered to a trajectory. The process consists of several steps which will be described in the succeeding sections.  
 \subsection{Start and End Position Estimation}
+\label{sec:startandend}
 The first step in the route calculation process is to estimate the subscribers start and end position. As mentioned before GSM only exposes the Cell-ID which only defines a boundary in which the subscriber is located. To narrow this boundaries the system is using geographical input (\emph{CORNINE} land cover) and socio-statistical maps (population density maps). 
 
 By using \emph{CORNINE} land cover data the system can define areas where it is unlikely that a subscriber will start or end his journey. This step can be parameterized by giving each of the CLC classes a percentage factor. The percentage defines how likely it is that a subscriber starts or ends a call in this class.
 
-Our second second assumption is that subscribers will more likely start or end their call in a higher populated area within the cell boundaries. More subscribers are located in higher populated areas than in less populated ones. Therefore the system is using population density maps in order to better estimate the start or end position. Figure~\ref{fig:pop_vienna} shows an example for a population density map for Vienna, Austria. In this example it can be seen that the density is higher in the inner districts than in the outer ones.
+Our second assumption is that subscribers will more likely start or end their call in a higher populated area within the cell boundaries. More subscribers are located in higher populated areas than in less populated ones. Therefore the system is using population density maps in order to better estimate the start or end position. Figure~\ref{fig:pop_vienna} shows an example for a population density map for Vienna, Austria. In this example it can be seen that the density is higher in the inner districts than in the outer ones.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{./images/pop_vienna}
@@ -396,4 +397,6 @@ To estimate handover points the system is using two successive handover events. 
 \end{figure}
 The difference of the two handover types is illustrated in Figure~\ref{fig:handovertypes}. For connected handover it is obvious where the handover happened. For this purpose the system is taking the touching or overlapping parts of the coverage areas and the intersection with the estimated route. In contrast for apart handover it is not clear where the handover happened. It could either happen at the boundaries of the first cell or the second cell or in between those. A simplification is to use the middle point between the two cells.
 \subsection{Velocity}
+\label{sec:velocity}
 After the handover points have been estimated the next step is to enrich this information with the timestamps when the handover occurred. As mentioned before in Section~\ref{subsec:events} each event contains a precise timestamp when the event was captured by the underlying system. This information together with an estimated route and handover point allows to derive the velocity of the driver. The system knows the time difference between two handover events as well as the distance traveled. The traveled distance is the distance between two successive handover points. By cutting the whole route with the two handover points the system can obtain the route between the two handover points and therefore the actual distance between those. The velocity can then be calculated  by dividing the distance $s$ between the handover over the time difference $t$ between the handover $v=\frac{s}{t}$. The calculated velocity represents the average distance between the handover.
+\subsection{Velocity Adaption}
