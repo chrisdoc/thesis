@@ -9,12 +9,9 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage[super]{nth}
-\usepackage{pgfplots}
- \usepackage{tikz}
- \usetikzlibrary{intersections,positioning,calc,patterns}
  \usepackage{listings}
 \usepackage{breqn}
-
+\usepackage[utf8]{inputenc}
 \usepackage{hyperref}
 
 \DeclareGraphicsExtensions{%
@@ -617,12 +614,13 @@ The mobility of entities in nature is unpredictable, therefore a variety of mode
 %\end{figure}
 \begin{figure}
 	\centering
-%	\tikzsetnextfilename{randomwalk}
-	\begin{tikzpicture}
-		\begin{axis}[ymin=0,xmajorgrids,ymajorgrids,xlabel={meter},ylabel={meter},title={Random Walk}]
-			\addplot table[mark=none]{random.csv};
-		\end{axis}
-	\end{tikzpicture}
+	%\tikzsetnextfilename{randomwalk}
+	\includegraphics[width=0.7\textwidth]{./images/randomwalk}
+	%	\begin{tikzpicture}
+	%		\begin{axis}[ymin=0,xmajorgrids,ymajorgrids,xlabel={meter},ylabel={meter},title={Random Walk}]
+	%			\addplot table[mark=none]{random.csv};
+	%		\end{axis}
+	%	\end{tikzpicture}
 	\caption{Example for a random walk}
 	\label{fig:randomwalk}
 \end{figure}
@@ -643,7 +641,8 @@ Figure~\ref{fig:disthandover} shows the distribution of handover events for Mond
 \begin{figure}
 \centering
 %\tikzsetnextfilename{hauf_event_32_time_mat}
-\input{hauf_event_32_time_mat.tex}
+\includegraphics{./images/hauf_event_32_time_mat}
+%\input{hauf_event_32_time_mat.tex}
 \caption{Normalized Distribution of Handover Events on Monday, \nth{22} November 2010}
 \label{fig:disthandover}
 \end{figure}
@@ -1142,26 +1141,34 @@ After removing unwanted areas within the cell coverage area the next step is to 
 The first step is to load the population density map for the coverage area. A random number generator with a defined probability density function will created. The probability density function is derived from the population density map. When the system loads the population density map for the coverage area it will get $n$ polygons with $n$ different population densities. More generally speaking each area with a unique population density is represented by a polygon. Afterwards the random number generator is used to dice a area of interest. By using the population density as function for the random number generator areas with a hight population density will be picked more often than less populated areas. Once the system picked a polygon based on the random number generator it clips this polygon with the coverage area. This process narrows the boundaries of the subscribers location. Following the subscribers location will be set by dicing a location within the remaining coverage area. Figure \ref{fig:population} illustrates an example for different population densities within the boundaries of one cell. We can see that total population is $315$. We calculate a \emph{pdf} for all three population cells based on the ratio of the population and the total population. The calculated \emph{pdf} will be used to estimate the user's start and end position. As an example the probability that the starting point is within the polygon with Population 240 is given by 240/315. Within the polygon ``Population 240'' the starting point is selected based on a uniform distribution.
 \begin{figure}
 	\centering
-	%\includegraphics[width=\columnwidth]{population_export.pdf}
-	\begin{tikzpicture}[scale=0.70]
-		\begin{axis}[
-				xlabel=$x$ in meter,
-				ylabel=$y$ in meter,
-			legend pos=outer north east]
-			\addplot+[mark=none,draw=black, very thick,dashed] coordinates
-			{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
-			\addlegendentry{Cell boundary}
-			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates
-			{(0,0) (300,0) (300,300) (0,300)} -- cycle;
-			\addlegendentry{Population 240}
-			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates
-			{(0,300) (300,300) (300,500) (0,300) } -- cycle;
-			\addlegendentry{Population 45}
-			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates
-			{(300,0) (300,500) (400,300) }-- cycle;
-			\addlegendentry{Population 30}
-		\end{axis}
-	\end{tikzpicture}
+	\includegraphics[width=\columnwidth]{./images/population_cell}
+%	\tikzsetnextfilename{population}
+%	\begin{tikzpicture}[scale=0.70]
+%		\begin{axis}[
+%				xlabel=$x$ in meter,
+%				ylabel=$y$ in meter,
+%			legend pos=outer north east]
+%
+%			\addplot+[mark=none,draw=black, very thick,dashed] coordinates
+%			{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
+%			\addlegendentry{Cell boundary}
+%
+%			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates
+%			{(0,0) (300,0) (300,300) (0,300)} -- cycle;
+%			\addlegendentry{Population 240}
+%
+%			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates
+%			{(0,300) (300,300) (300,500) (0,300) } -- cycle;
+%			\addlegendentry{Population 45}
+%
+%			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates
+%			{(300,0) (300,500) (400,300) }-- cycle;
+%			\addlegendentry{Population 30}
+%
+%
+%
+%		\end{axis}
+%	\end{tikzpicture}
 	\caption{A Demonstration of a Population Grid for a Cell Area}
 	\label{fig:population}
 \end{figure}
@@ -1171,31 +1178,39 @@ A more sophisticated approach is to triangulate the coverage polygon into triang
 Figure~\ref{fig:triangulation} depicts the triangulation of a polygon into triangles. The polygon is split into 3 triangles by applying Fourniers algorithm.
 \begin{figure}
 	\centering
-	%\includegraphics[width=\columnwidth]{population_export.pdf}
-	\begin{tikzpicture}[scale=0.70]
-		\begin{axis}[
-				xlabel=$x$ in meter,
-				ylabel=$y$ in meter,
-			legend pos=outer north east]
-			%    \addplot+[mark=none,draw=black, very thick,dashed] coordinates
-			%		{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
-			%    \addlegendentry{Cell boundary}
-			\addplot+[mark=none,draw=black, very thick,dashed] coordinates
-			{(0,200) (200,450) (600,350)(700,0)(200,0) } -- cycle;
-			\addlegendentry{Polygon}
-			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates
-			{(0,200) (200,450) (600,350) } -- cycle;
-			\addlegendentry{Triangle 1}
-			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates
-			{(0,200)  (600,350)(200,0) } -- cycle;
-			\addlegendentry{Triangle 2}
-			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates
-			{(200,0)  (600,350)(700,0) } -- cycle;
-			\addlegendentry{Triangle 3}
-			%	\addlegendentry{Polygon}
-			%   	\addlegendentry{Population 240}
-		\end{axis}
-	\end{tikzpicture}
+	\includegraphics[width=\columnwidth]{./images/population_poly}
+%	%\tikzsetnextfilename{population2}
+%	\begin{tikzpicture}[scale=0.70]
+%		\begin{axis}[
+%				xlabel=$x$ in meter,
+%				ylabel=$y$ in meter,
+%			legend pos=outer north east]
+%
+%			%    \addplot+[mark=none,draw=black, very thick,dashed] coordinates
+%			%		{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
+%			%    \addlegendentry{Cell boundary}
+%
+%			\addplot+[mark=none,draw=black, very thick,dashed] coordinates
+%			{(0,200) (200,450) (600,350)(700,0)(200,0) } -- cycle;
+%			\addlegendentry{Polygon}
+%			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates
+%			{(0,200) (200,450) (600,350) } -- cycle;
+%			\addlegendentry{Triangle 1}
+%			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates
+%			{(0,200)  (600,350)(200,0) } -- cycle;
+%			\addlegendentry{Triangle 2}
+%			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates
+%			{(200,0)  (600,350)(700,0) } -- cycle;
+%			\addlegendentry{Triangle 3}
+%			%	\addlegendentry{Polygon}
+%
+%
+%			%   	\addlegendentry{Population 240}
+%
+%
+%
+%		\end{axis}
+%	\end{tikzpicture}
 	\caption{Triangulation of a Polygon into 3 Triangles}
 	\label{fig:triangulation}
 \end{figure}
@@ -1594,7 +1609,8 @@ The first example covers a semi-rural region. A semi-rural region consist of a r
 		\begin{subfigure}[b]{0.5\linewidth}
 			\centering
 %			\tikzsetnextfilename{563_predvorcomp}
-			\input{563_predvorcomp.tex}
+		%	\input{563_predvorcomp.tex}
+			\includegraphics[width=\textwidth]{./images/563_predvorcomp}
 			\caption{}
 			\label{fig:563distcomp}
 		\end{subfigure}
@@ -1685,8 +1701,8 @@ The second example depicts an urban scenario. The trajectory for this example wa
 		\begin{subfigure}[b]{0.5\linewidth}
 		%\pgfplotsset{width=0.8\linewidth,compat=newest}
 %		\tikzsetnextfilename{1058_predvorcomp}
-		\input{1058_predvorcomp.tex}
-		%	\includegraphics[width=\textwidth]{./images/1058_predvorcomp}
+	%	\input{1058_predvorcomp.tex}
+			\includegraphics[width=\textwidth]{./images/1058_predvorcomp}
 			\caption{}
 			\label{fig:1058_distcomp}
 		\end{subfigure}

@@ -158,12 +158,13 @@ The mobility of entities in nature is unpredictable, therefore a variety of mode
 %\end{figure}
 \begin{figure}
 	\centering
-%	\tikzsetnextfilename{randomwalk}
-	\begin{tikzpicture}
-		\begin{axis}[ymin=0,xmajorgrids,ymajorgrids,xlabel={meter},ylabel={meter},title={Random Walk}]
-			\addplot table[mark=none]{random.csv};
-		\end{axis}
-	\end{tikzpicture}
+	%\tikzsetnextfilename{randomwalk}
+	\includegraphics[width=0.7\textwidth]{./images/randomwalk}
+	%	\begin{tikzpicture}
+	%		\begin{axis}[ymin=0,xmajorgrids,ymajorgrids,xlabel={meter},ylabel={meter},title={Random Walk}]
+	%			\addplot table[mark=none]{random.csv};
+	%		\end{axis}
+	%	\end{tikzpicture}
 	\caption{Example for a random walk}
 	\label{fig:randomwalk}
 \end{figure}
@@ -190,7 +191,8 @@ Figure~\ref{fig:disthandover} shows the distribution of handover events for Mond
 \begin{figure}
 \centering
 %\tikzsetnextfilename{hauf_event_32_time_mat}
-\input{hauf_event_32_time_mat.tex}
+\includegraphics{./images/hauf_event_32_time_mat}
+%\input{hauf_event_32_time_mat.tex}
 \caption{Normalized Distribution of Handover Events on Monday, \nth{22} November 2010}
 \label{fig:disthandover}
 \end{figure}

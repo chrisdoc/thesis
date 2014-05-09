@@ -217,33 +217,34 @@ The first step is to load the population density map for the coverage area. A ra
 \begin{figure}
 
 	\centering
-	%\includegraphics[width=\columnwidth]{population_export.pdf}
-	\begin{tikzpicture}[scale=0.70]
-		\begin{axis}[
-				xlabel=$x$ in meter,
-				ylabel=$y$ in meter,
-			legend pos=outer north east]
-
-			\addplot+[mark=none,draw=black, very thick,dashed] coordinates
-			{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
-			\addlegendentry{Cell boundary}
-
-			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates
-			{(0,0) (300,0) (300,300) (0,300)} -- cycle;
-			\addlegendentry{Population 240}
-
-			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates
-			{(0,300) (300,300) (300,500) (0,300) } -- cycle;
-			\addlegendentry{Population 45}
-
-			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates
-			{(300,0) (300,500) (400,300) }-- cycle;
-			\addlegendentry{Population 30}
-
-
-
-		\end{axis}
-	\end{tikzpicture}
+	\includegraphics[width=\columnwidth]{./images/population_cell}
+%	\tikzsetnextfilename{population}
+%	\begin{tikzpicture}[scale=0.70]
+%		\begin{axis}[
+%				xlabel=$x$ in meter,
+%				ylabel=$y$ in meter,
+%			legend pos=outer north east]
+%
+%			\addplot+[mark=none,draw=black, very thick,dashed] coordinates
+%			{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
+%			\addlegendentry{Cell boundary}
+%
+%			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates
+%			{(0,0) (300,0) (300,300) (0,300)} -- cycle;
+%			\addlegendentry{Population 240}
+%
+%			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates
+%			{(0,300) (300,300) (300,500) (0,300) } -- cycle;
+%			\addlegendentry{Population 45}
+%
+%			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates
+%			{(300,0) (300,500) (400,300) }-- cycle;
+%			\addlegendentry{Population 30}
+%
+%
+%
+%		\end{axis}
+%	\end{tikzpicture}
 
 	\caption{A Demonstration of a Population Grid for a Cell Area}
 	\label{fig:population}
@@ -258,38 +259,39 @@ Figure~\ref{fig:triangulation} depicts the triangulation of a polygon into trian
 \begin{figure}
 
 	\centering
-	%\includegraphics[width=\columnwidth]{population_export.pdf}
-	\begin{tikzpicture}[scale=0.70]
-		\begin{axis}[
-				xlabel=$x$ in meter,
-				ylabel=$y$ in meter,
-			legend pos=outer north east]
-
-			%    \addplot+[mark=none,draw=black, very thick,dashed] coordinates
-			%		{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
-			%    \addlegendentry{Cell boundary}
-
-			\addplot+[mark=none,draw=black, very thick,dashed] coordinates
-			{(0,200) (200,450) (600,350)(700,0)(200,0) } -- cycle;
-			\addlegendentry{Polygon}
-			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates
-			{(0,200) (200,450) (600,350) } -- cycle;
-			\addlegendentry{Triangle 1}
-			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates
-			{(0,200)  (600,350)(200,0) } -- cycle;
-			\addlegendentry{Triangle 2}
-			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates
-			{(200,0)  (600,350)(700,0) } -- cycle;
-			\addlegendentry{Triangle 3}
-			%	\addlegendentry{Polygon}
-
-
-			%   	\addlegendentry{Population 240}
-
-
-
-		\end{axis}
-	\end{tikzpicture}
+	\includegraphics[width=\columnwidth]{./images/population_poly}
+%	%\tikzsetnextfilename{population2}
+%	\begin{tikzpicture}[scale=0.70]
+%		\begin{axis}[
+%				xlabel=$x$ in meter,
+%				ylabel=$y$ in meter,
+%			legend pos=outer north east]
+%
+%			%    \addplot+[mark=none,draw=black, very thick,dashed] coordinates
+%			%		{(0,0) (300,0) (400,300) (300,500) (0,300)} -- cycle;
+%			%    \addlegendentry{Cell boundary}
+%
+%			\addplot+[mark=none,draw=black, very thick,dashed] coordinates
+%			{(0,200) (200,450) (600,350)(700,0)(200,0) } -- cycle;
+%			\addlegendentry{Polygon}
+%			\addplot+[mark=none,pattern=crosshatch,area legend,draw=black] coordinates
+%			{(0,200) (200,450) (600,350) } -- cycle;
+%			\addlegendentry{Triangle 1}
+%			\addplot+[mark=none,pattern=grid,area legend,draw=black] coordinates
+%			{(0,200)  (600,350)(200,0) } -- cycle;
+%			\addlegendentry{Triangle 2}
+%			\addplot+[mark=none,pattern=crosshatch dots,area legend,draw=black] coordinates
+%			{(200,0)  (600,350)(700,0) } -- cycle;
+%			\addlegendentry{Triangle 3}
+%			%	\addlegendentry{Polygon}
+%
+%
+%			%   	\addlegendentry{Population 240}
+%
+%
+%
+%		\end{axis}
+%	\end{tikzpicture}
 
 	\caption{Triangulation of a Polygon into 3 Triangles}
 	\label{fig:triangulation}
