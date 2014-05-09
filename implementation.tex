@@ -22,7 +22,8 @@ The trajectory generation group consists of two systems. First the trajectory se
 \section{Architecture}
 \label{sec:architecture}
 After a brief overview has been given in the previous section, here the underlying system will be explained in more detail. It will also cover the process of importing the needed data into the database and how this data can be retrieved from the database. Moreover the used data and the communication between the subsystems will be described.
-\subsection{PostgreSQL Database}
+\subsection{Databases}
+\subsubsection{PostgreSQL Database}
 To store geographic information PostgreSQL together with the PostGIS extension is used. PostGIS extends PostgreSQL in a way that it follows the Simple Features for SQL specification from the Open Geospatial Consortium. The Simple Features are defined in ISO 19125~\cite{ISO19125,ISO191252}. The developed system is using population and land use information stored in the database. This data is needed to estimate a subscribers start and end position within the boundaries of the cell coverage area. In addition to raster data (population and land use) the database also stores the OpenStreetMap road network. Figure~\ref{fig:pg_structure} depicts the internal structure of the PostgreSQL database. The table \emph{at_2po_4pgr} contains the OpenStreetMap road network, \emph{landuse_raster} land use information and \emph{density_raster} population information. 
 \begin{figure}
 \centering
@@ -31,7 +32,7 @@ To store geographic information PostgreSQL together with the PostGIS extension i
 \label{fig:pg_structure}
 \end{figure}
 
-\subsubsection{Import Data}
+\paragraph{Import Data}
 This section describes the process to import both raster and the a road network into the database. Raster data is simply an image where each pixel corresponds to a coordinate in world space. A raster image defines a grid spacing which defines how far in meters pixel are away. A grid spacing of $20$ meters means that each pixel covers an area of $400$ square meters. Usually environmental and demographic geographic information, is stored as a raster image. On the other hand road networks consists of a vector of points. The road network is stored in the database as Simple Features.
 
 \paragraph{Raster}
@@ -46,7 +47,7 @@ Our system is using the routing engine osm2po which operates on the OpenStreetMa
     # java -jar osm2po-4_8_8.jar prefix=at austria.osm.pbf
     # psql -U postgres -d gisdb -f at/at_2po_4pgr.sql.sql
 \end{lstlisting}
-\subsection{MySQL Database}
+\subsubsection{MySQL Database}
 The developed system is using data from A1 and the OpenCoverageMap project. Because this data is not related with geographic information a second database is used to store this data. This information is stored in two separate tables because the structure of A1 and the OpenCoverageMap is different. Figure~\ref{fig:mysql_structure} depicts the structure of the two tables, the first \emph{mfd_events} stores the A1 data and the second \emph{ocm_all} stores information from the OpenCoverageMap project.
 \begin{figure}
 \centering
@@ -55,7 +56,7 @@ The developed system is using data from A1 and the OpenCoverageMap project. Beca
 \label{fig:mysql_structure}
 \end{figure}
 
-\subsubsection{Import A1}
+\paragraph{Import A1}
 To import the A1 data set into the MySQL, the binary event stream needs to be converted first. The conversion takes the binary event stream and converts its to CSV file. Each row in the CSV file represents an event. Later the created CSV file will be imported into the database similar to Listing~\ref{lst:textmysql}.
 \paragraph{Convert}
 The conversion is carried out a by a Java program which takes the binary data stream as input and outputs a CSV file. First a Java \verb|InputStream| from the input file will be created. This input stream will be passed to a \verb|DataInputStream|. As illustrated in Listing~\ref{lst:parsestream} a loop iterates over the data input stream and parses the binary information according to the A1 data structure. At last at the end of each iteration the parsed information will be print to the standard output.
@@ -92,7 +93,7 @@ LOAD DATA INFILE 'data.txt' INTO TABLE tbl_name
   LINES TERMINATED BY '\n';
 \end{lstlisting}
 
-\subsubsection{Import OpenCoverageMap}
+\paragraph{Import OpenCoverageMap}
 The data we got provided by the OpenCoverageMap project was already a CSV file and can be imported into the database with an SQL statement similar to the one in Listing~\ref{lst:textmysql}.
 %\begin{table}
 %    \begin{tabular}{llllll}
@@ -162,7 +163,7 @@ GET /ocmroute?id=USER_ID
 \end{lstlisting}
 
 \paragraph{PostgreSQL API} 
-enables the requesting program to access functions of the PostgreSQL database. It provides access to raster data as population and land use information as well as to retrieve a random point withing a specified area based on population and land use information (see Listing~\ref{pgapireq}). The bounds parameter is encoded as a list  of coordinate -- separated by a comma -- specifying a bounding box (xmin,ymin,xmax,ymax). In comparison the geom parameter is encoded as Well-known text (WKT) which allows defining more advanced areas as polygons and multi polygons (POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))
+enables the requesting program to access functions of the PostgreSQL database. It provides access to raster data as population and land use information as well as to retrieve a random point withing a specified area based on population and land use information (see Listing~\ref{lst:pgapireq}). The bounds parameter is encoded as a list  of coordinate -- separated by a comma -- specifying a bounding box (xmin,ymin,xmax,ymax). In comparison the geom parameter is encoded as Well-known text (WKT) which allows defining more advanced areas as polygons and multi polygons (POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))
 ). 
 \begin{lstlisting}[style=BashInputStyle,caption={PostgreSQL API requests},label={lst:pgapireq}]
 GET /populationBounds?bounds=BOUNDARIES

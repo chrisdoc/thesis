@@ -1,0 +1,131 @@
+% This file was created by matlab2tikz v0.4.7 running on MATLAB 8.2.
+% Copyright (c) 2008--2014, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% Minimal pgfplots version: 1.3
+% 
+% The latest updates can be retrieved from
+%   http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz
+% where you can also make suggestions and rate matlab2tikz.
+% 
+%
+% defining custom colors
+\definecolor{mycolor1}{rgb}{0.12157,0.47059,0.70588}%
+\definecolor{mycolor2}{rgb}{0.65098,0.80784,0.89020}%
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=2.2in,
+height=1.5in,
+scale only axis,
+xmin=0,
+xmax=15,
+xlabel={Handover Index},
+ymin=0,
+ymax=0.7,
+xmajorgrids,
+ymajorgrids,
+ylabel style={align=center}, ylabel={Distance to observed\\handover [km]},
+axis x line*=bottom,
+axis y line*=left,
+legend pos=north east,
+legend style={anchor=north east,draw=black,fill=white,legend cell align=left}
+]
+\addplot [color=mycolor1,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{1	0.500266767072031\\
+1	0.403833380195351\\
+};
+\addplot [color=mycolor2,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{2	0.156180660806584\\
+2	0.2021357385342\\
+};
+\addplot [color=mycolor1,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{3	0.06904818124207\\
+3	0.0690175773659844\\
+};
+\addplot [color=mycolor1,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{4	0.0816747782959422\\
+4	0.0518977374762014\\
+};
+\addplot [color=mycolor1,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{5	0.278895223663847\\
+5	0.278887325365906\\
+};
+\addplot [color=mycolor2,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{6	0.305204360585667\\
+6	0.30521002814451\\
+};
+\addplot [color=mycolor2,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{7	0.047350066258318\\
+7	0.0473793586876721\\
+};
+\addplot [color=mycolor1,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{8	0.362190942224447\\
+8	0.350325971769639\\
+};
+\addplot [color=mycolor2,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{9	0.103163569468859\\
+9	0.10320836001024\\
+};
+\addplot [color=mycolor2,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{10	0.206639412861688\\
+10	0.261690187813169\\
+};
+\addplot [color=mycolor2,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{11	0.0206671106886966\\
+11	0.0206780058925156\\
+};
+\addplot [color=mycolor1,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{12	0.0477743686694561\\
+12	0.0308233923865931\\
+};
+\addplot [color=mycolor1,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{13	0.152222464957132\\
+13	0.136157615534261\\
+};
+\addplot [color=mycolor2,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{14	0.0334508635747766\\
+14	0.0334703841921082\\
+};
+\addplot [color=mycolor2,solid,line width=3.0pt,forget plot]
+  table[row sep=crcr]{15	0.061112433940154\\
+15	0.080214107952751\\
+};
+\addplot[only marks,mark=*,mark options={},color=mycolor2] plot table[row sep=crcr,]{1	0.500266767072031\\
+2	0.156180660806584\\
+3	0.06904818124207\\
+4	0.0816747782959422\\
+5	0.278895223663847\\
+6	0.305204360585667\\
+7	0.047350066258318\\
+8	0.362190942224447\\
+9	0.103163569468859\\
+10	0.206639412861688\\
+11	0.0206671106886966\\
+12	0.0477743686694561\\
+13	0.152222464957132\\
+14	0.0334508635747766\\
+15	0.061112433940154\\
+};
+\addlegendentry{Voronoi};
+
+\addplot[only marks,mark=*,mark options={},color=mycolor1] plot table[row sep=crcr,]{1	0.403833380195351\\
+2	0.2021357385342\\
+3	0.0690175773659844\\
+4	0.0518977374762014\\
+5	0.278887325365906\\
+6	0.30521002814451\\
+7	0.0473793586876721\\
+8	0.350325971769639\\
+9	0.10320836001024\\
+10	0.261690187813169\\
+11	0.0206780058925156\\
+12	0.0308233923865931\\
+13	0.136157615534261\\
+14	0.0334703841921082\\
+15	0.080214107952751\\
+};
+\addlegendentry{Coverage Prediction};
+
+\end{axis}
+\end{tikzpicture}%

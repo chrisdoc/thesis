@@ -1,13 +1,14 @@
 \documentclass[master,english]{hgbthesis}
-% Zulässige Class Options: 
-%   Typ der Arbeit: diplom, master (default), bachelor, praktikum 
+% Zulässige Class Options:
+%   Typ der Arbeit: diplom, master (default), bachelor, praktikum
 %   Hauptsprache: german (default), english
 %%------------------------------------------------------------
 %\usepackage{pbox}
 
-\graphicspath{{images/}}    % wo liegen die Bilder? 
+\graphicspath{{images/}}    % wo liegen die Bilder?
 \bibliography{literatur} 	% Angabe der BibTeX-Datei, % utf8-change
-\usepackage{hyperref}
+\usepackage{lmodern}
+\usepackage[rgb,usenames,svgnames,table]{xcolor}
 \usepackage{bytefield}
 \usepackage{longtable}
 \usepackage{caption}
@@ -15,14 +16,19 @@
 \usepackage[super]{nth}
 \usepackage{pgfplots}
  \usepackage{tikz}
-\usetikzlibrary{intersections,positioning,calc,patterns}
-\usetikzlibrary{external} 
-\tikzexternalize[prefix=tikz/]
-\usepackage{listings}
-\usepackage{xcolor}
+ \usetikzlibrary{intersections,positioning,calc,patterns}
+ %\usetikzlibrary{external}
+% \tikzexternalize[prefix=tikz/]
+ \usepackage{listings}
 \usepackage{breqn}
-\usepackage{color}
-\usepackage{upquote}
+%\pgfplotsset{compat=1.10}
+%\usepackage{upquote}
+%\usepackage[usenames,dvipsnames]{color}
+%\usepackage{color}
+
+\usepackage{hyperref}
+%\define@key{breqn}{color}{\color{#1}}
+
 %\usepackage{subfig}
 \DeclareGraphicsExtensions{%
     .pdf,.PDF,%
@@ -31,27 +37,29 @@
 %\usepackage[]{algorithm2e}
 
 
+		\newlength\figureheight 		% define length \figureheight
+		\newlength\figurewidth 			% define length \figurewidth
 
 
 %%%----------------------------------------------------------
 \begin{document}
 %%%----------------------------------------------------------
 % Einträge für ALLE Arbeiten: --------------------------------
-\title{Generating Driving Trajectories for Mobile Subscriber}
+\title{Estimating Driving Trajectories for Cellular Network Subscribers}
 \author{Christoph Kieslich}
 \studiengang{Mobile Computing}
 \studienort{Hagenberg}
 \abgabedatum{2014}{06}{16}	% {YYYY}{MM}{DD}
 
 %%% zusätzlich für eine Bachelorarbeit: ---------------------
-\nummer{1210455006-A}   % XX...X = Stud-ID, z.B. 0310238045-A  
+\nummer{1210455006-A}   % XX...X = Stud-ID, z.B. 0310238045-A
                         % (A = 1. Bachelorarbeit)
-\semester{Sommersemester 2014} 
-%\gegenstand{Einführung in die Tiefere Problematik 1} 
+\semester{Sommersemester 2014}
+%\gegenstand{Einführung in die Tiefere Problematik 1}
 %\betreuer{Alois B.~Treuer, Päd.\ Phil.} % oder \betreuerin{..}
 
 %%% zusätzlich für einen Praktikumsbericht: -----------------
-%\nummer{XXXXXXXXXX-B}   % XX...X = Stud-ID, z.B. 0310238045-B  
+%\nummer{XXXXXXXXXX-B}   % XX...X = Stud-ID, z.B. 0310238045-B
                         % (B = 2. Bachelorarbeit)
 \betreuer{Prof. (FH) DI Dr. Gerald Ostermayer}  % \betreuerin{..}
 %\firma{%
@@ -71,8 +79,8 @@
 %%%----------------------------------------------------------
 \include{listings}
 %\include{vorwort}		% ggfs. weglassen
-%\include{kurzfassung}		
-%\include{abstract}			
+\include{kurzfassung}
+\include{abstract}
 
 %%%----------------------------------------------------------
 \mainmatter         % Hauptteil (ab hier arab. Seitenzahlen)
