@@ -1,24 +1,52 @@
 \chapter{Introduction}
 %The main goal of this master thesis is to generate driving trajectories for mobile subscribers. 
 %The following chapter guides through the present thesis. It gives an overview of the thesis as well it depicts the main challenges and goals of the thesis. At last the structure will be shown.
-\section{Problem Description}
-Traffic analysis is an import part in road network and mobile network simulations. These simulators require moving subscribers in order to investigate interesting effects in their networks. Moving subscribers can be generated from mobility models which try to describe the mobility of individuals.
+In times of increasing traffic volume in mobile communication networks the research area of mobility simulations gain more and more interest. An important figure in mobility simulations is to understand the mobility behavior of subscribers. Since the beginning of mobile communication networks stochastic mobility models and surveys have been used to describe the mobility behavior of individuals. 
+Stochastic mobility models e.g.\ random walk, however, have a great disadvantage as they do not cover the real behavior. On the other hand mobility models derived from surveys cover the real behavior but their sample size is limited. A third approach is to use call detail records to derive the mobility behavior of subscribers.
+This approach investigates handover events. Handover events are issued whenever a subscriber, who is in an active call, leaves the extent of the cell cite. A handover is than carried out in the network that hands the connection over to a closer cell site. This information can then be used to estimate a coarse subscriber location.
 
-This work focuses on estimating trajectories for mobility simulations by using mobile subscription data. A trajectory describes the path of a moving object through space as a function of time. Network operators need moving subscribers to evaluate and analyze an existing or a virtual network. Replay scenarios can be created to investigate the current or a new network  with a scenario where errors accrued. The trajectory generation process involves several tasks. First useful events have to be filtered in the network. The users path has to be estimated, which involves the start and end position as well as the handover position. 
+Another important aspect of mobility simulations is the timing. The timing reveals when subscribers are go to work or leaving work. This is an interesting fact as it means that an increase in traffic load is happening in cell sites covering work places. Since handover events contain a time-stamp, they can enable mobility simulations with timing information. On the other hand stochastic mobility models are driven by a function and can therefore only provide timing information based on input parameters. Surveys can contain timing information but each survey only covers a particular date. 
 
-Another part of this thesis is to estimate the coverage area for each cell sites. The coverage area is a crucial aspect in trajectory estimation. Trajectories need the location of a subscriber as a function of time. However GSM doesn't expose an accurate position of the subscriber. Therefore a good representation of the coverage area allows to narrow the users position in the network. The problem is to find an approach which creates a good estimation of the coverage area for each cell site.
-\section{Motivation}
-In the last years mobile network simulations have to adopt to the mobility of the subscribers. Subscribers are not stationary and therefore behavior models have to be defined. These models shall represent the entire subscriber database. 
 
-Since the beginning of mobile network simulations random walk and manhattan grid approaches were used to enable mobility. The problem is that random walk and manhattan grid rely on statistical data. The statistical input used is derived from household surveys. This surveys however only depict a special moment in time. To evaluate or gather more moments numerous surveys have to be done. 
 
-Our approach is different, instead of surveys we are using mobile subscriber data. More precise call data records. The motivation behind using mobile subscriber data is that this data represents all users of the mobile network operator. We want to use this data to generate anonymous driving trajectories. The use of call data records allows the generation of trajectories for each day and time of the year. The generated trajectories adopt to daily as well seasonal changes.
-\section{Challenges}
-The first challenge we have to face is that we don't have a model of the coverage area for all cell sites. Therefor we need a good representation to estimate a coarse position for each subscriber.
-In order to generate a trajectory the users start and end position are crucial. At first we only have the serving cell and a representation of its serving area. Therefore the position of the user within the cell has to be estimated. For this purpose we are using a combination of population and land use information data.
+\section{Challenges and Goals}
+The main goal of mobility models is to describe the mobility behavior of a set of individuals. Instead of using expensive surveys or defining a stochastic mobility model, call detail records shall be used to investigate the behavior of subscribers. Call detail records can be gathered by a network operator in an inexpensive ways. Therefore network operators can test and simulate their networks with mobility models derived from their subscribers.
 
-\section{Goals}
-The main goal is to generate trajectories for each mobile subscriber. However due to the design of GSM we can only generate trajectories for mobile users which are in an active call. Additionally we are investigating approaches to annotate the driving trajectories with timing information.
-In the end we are also examining methods to improve the representation of the serving area with public available data (digital elevation model, land use clutter information,...).
+The goal of this thesis is the conception and implementation of a trajectory generation pipeline which allows generating trajectories for mobile subscriber. Since GSM only issue handover event when the subscriber is an active call; trajectories can only be generated for connected subscriber. Although, location area updates are issued in GSM in idle mode, this events are not used to generate trajectories because of their limited location accuracy. The handover events between the call establishment and termination are used for the trajectory generation. One of the main challenges is to estimate the subscribers start and end position. This process utilizes population density maps to assign a random start and end position.
+
+Besides the traveled route, trajectories consists of timing information. The timing information defines for each position the time when it shall be traversed. The generation pipeline uses an estimated handover position and the time-stamp to annotate the trajectory with timing information. To estimate the handover position the coverage area of the involved cell sites is used. Therefore, a valid representation of the coverage area for each cell site is needed.
 \section{Structure}
-At first we are discussing state of the art approaches to estimate driving trajectories and mobility in mobile network simulations. Followed by an overview of fundamental concepts and techniques used in this thesis. The third part explains our concept and approach which will be implemented in the succeeding chapter. At last we will present and discuss our results and give a summary of the work.
+The thesis is divided into seven chapters. This chapter gives a short introduction of the challenges and goals as well as the motivation and importance of this research. 
+
+The second chapter introduces related work in the field of trajectory estimation for mobile subscribers. It points out different approaches researches have proposed for targeting this problem.
+
+In the third chapter the GSM communication network and the data used by the generation pipeline is explained successively.
+
+The concept of the trajectory generation pipeline is described in the fourth chapter. First the required input data is explained in full detail. Second important concepts in respect to the generation process are described.
+
+In the fifth chapter insights on the implementation of the system are given. The most important aspects in respect of input data retrieval and processing are delineated in more detail.
+
+The sixth chapter shows various results that have been gathered using the developed system. Two examples of generated trajectories for subscribers in semi-rural and urban areas are depicted.
+
+The seventh and last chapter gives a brief résumé and describes potential enhancements and limitations of the developed system.
+%\section{Problem Description}
+%Traffic analysis is an import part in road network and mobile network simulations. These simulators require moving subscribers in order to investigate interesting effects in their networks. Moving subscribers can be generated from mobility models which try to describe the mobility of individuals.
+%
+%This work focuses on estimating trajectories for mobility simulations by using mobile subscription data. A trajectory describes the path of a moving object through space as a function of time. Network operators need moving subscribers to evaluate and analyze an existing or a virtual network. Replay scenarios can be created to investigate the current or a new network  with a scenario where errors accrued. The trajectory generation process involves several tasks. First useful events have to be filtered in the network. The users path has to be estimated, which involves the start and end position as well as the handover position. 
+%
+%Another part of this thesis is to estimate the coverage area for each cell sites. The coverage area is a crucial aspect in trajectory estimation. Trajectories need the location of a subscriber as a function of time. However GSM doesn't expose an accurate position of the subscriber. Therefore a good representation of the coverage area allows to narrow the users position in the network. The problem is to find an approach which creates a good estimation of the coverage area for each cell site.
+%\section{Motivation}
+%In the last years mobile network simulations have to adopt to the mobility of the subscribers. Subscribers are not stationary and therefore behavior models have to be defined. These models shall represent the entire subscriber database. 
+%
+%Since the beginning of mobile network simulations random walk and manhattan grid approaches were used to enable mobility. The problem is that random walk and manhattan grid rely on statistical data. The statistical input used is derived from household surveys. This surveys however only depict a special moment in time. To evaluate or gather more moments numerous surveys have to be done. 
+%
+%Our approach is different, instead of surveys we are using mobile subscriber data. More precise call data records. The motivation behind using mobile subscriber data is that this data represents all users of the mobile network operator. We want to use this data to generate anonymous driving trajectories. The use of call data records allows the generation of trajectories for each day and time of the year. The generated trajectories adopt to daily as well seasonal changes.
+%\section{Challenges}
+%The first challenge we have to face is that we don't have a model of the coverage area for all cell sites. Therefor we need a good representation to estimate a coarse position for each subscriber.
+%In order to generate a trajectory the users start and end position are crucial. At first we only have the serving cell and a representation of its serving area. Therefore the position of the user within the cell has to be estimated. For this purpose we are using a combination of population and land use information data.
+%
+%\section{Goals}
+%The main goal is to generate trajectories for each mobile subscriber. However due to the design of GSM we can only generate trajectories for mobile users which are in an active call. Additionally we are investigating approaches to annotate the driving trajectories with timing information.
+%In the end we are also examining methods to improve the representation of the serving area with public available data (digital elevation model, land use clutter information,...).
+%\section{Structure}
+%At first we are discussing state of the art approaches to estimate driving trajectories and mobility in mobile network simulations. Followed by an overview of fundamental concepts and techniques used in this thesis. The third part explains our concept and approach which will be implemented in the succeeding chapter. At last we will present and discuss our results and give a summary of the work.

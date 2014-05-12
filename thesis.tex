@@ -347,22 +347,43 @@ blah balh%%%---------- close: abstract
 \chapter{Introduction}
 %The main goal of this master thesis is to generate driving trajectories for mobile subscribers. 
 %The following chapter guides through the present thesis. It gives an overview of the thesis as well it depicts the main challenges and goals of the thesis. At last the structure will be shown.
-\section{Problem Description}
-Traffic analysis is an import part in road network and mobile network simulations. These simulators require moving subscribers in order to investigate interesting effects in their networks. Moving subscribers can be generated from mobility models which try to describe the mobility of individuals.
-This work focuses on estimating trajectories for mobility simulations by using mobile subscription data. A trajectory describes the path of a moving object through space as a function of time. Network operators need moving subscribers to evaluate and analyze an existing or a virtual network. Replay scenarios can be created to investigate the current or a new network  with a scenario where errors accrued. The trajectory generation process involves several tasks. First useful events have to be filtered in the network. The users path has to be estimated, which involves the start and end position as well as the handover position. 
-Another part of this thesis is to estimate the coverage area for each cell sites. The coverage area is a crucial aspect in trajectory estimation. Trajectories need the location of a subscriber as a function of time. However GSM doesn't expose an accurate position of the subscriber. Therefore a good representation of the coverage area allows to narrow the users position in the network. The problem is to find an approach which creates a good estimation of the coverage area for each cell site.
-\section{Motivation}
-In the last years mobile network simulations have to adopt to the mobility of the subscribers. Subscribers are not stationary and therefore behavior models have to be defined. These models shall represent the entire subscriber database. 
-Since the beginning of mobile network simulations random walk and manhattan grid approaches were used to enable mobility. The problem is that random walk and manhattan grid rely on statistical data. The statistical input used is derived from household surveys. This surveys however only depict a special moment in time. To evaluate or gather more moments numerous surveys have to be done. 
-Our approach is different, instead of surveys we are using mobile subscriber data. More precise call data records. The motivation behind using mobile subscriber data is that this data represents all users of the mobile network operator. We want to use this data to generate anonymous driving trajectories. The use of call data records allows the generation of trajectories for each day and time of the year. The generated trajectories adopt to daily as well seasonal changes.
-\section{Challenges}
-The first challenge we have to face is that we don't have a model of the coverage area for all cell sites. Therefor we need a good representation to estimate a coarse position for each subscriber.
-In order to generate a trajectory the users start and end position are crucial. At first we only have the serving cell and a representation of its serving area. Therefore the position of the user within the cell has to be estimated. For this purpose we are using a combination of population and land use information data.
-\section{Goals}
-The main goal is to generate trajectories for each mobile subscriber. However due to the design of GSM we can only generate trajectories for mobile users which are in an active call. Additionally we are investigating approaches to annotate the driving trajectories with timing information.
-In the end we are also examining methods to improve the representation of the serving area with public available data (digital elevation model, land use clutter information,...).
+In times of increasing traffic volume in mobile communication networks the research area of mobility simulations gain more and more interest. An important figure in mobility simulations is to understand the mobility behavior of subscribers. Since the beginning of mobile communication networks stochastic mobility models and surveys have been used to describe the mobility behavior of individuals. 
+Stochastic mobility models e.g.\ random walk, however, have a great disadvantage as they do not cover the real behavior. On the other hand mobility models derived from surveys cover the real behavior but their sample size is limited. A third approach is to use call detail records to derive the mobility behavior of subscribers.
+This approach investigates handover events. Handover events are issued whenever a subscriber, who is in an active call, leaves the extent of the cell cite. A handover is than carried out in the network that hands the connection over to a closer cell site. This information can then be used to estimate a coarse subscriber location.
+Another important aspect of mobility simulations is the timing. The timing reveals when subscribers are go to work or leaving work. This is an interesting fact as it means that an increase in traffic load is happening in cell sites covering work places. Since handover events contain a time-stamp, they can enable mobility simulations with timing information. On the other hand stochastic mobility models are driven by a function and can therefore only provide timing information based on input parameters. Surveys can contain timing information but each survey only covers a particular date. 
+\section{Challenges and Goals}
+The main goal of mobility models is to describe the mobility behavior of a set of individuals. Instead of using expensive surveys or defining a stochastic mobility model, call detail records shall be used to investigate the behavior of subscribers. Call detail records can be gathered by a network operator in an inexpensive ways. Therefore network operators can test and simulate their networks with mobility models derived from their subscribers.
+The goal of this thesis is the conception and implementation of a trajectory generation pipeline which allows generating trajectories for mobile subscriber. Since GSM only issue handover event when the subscriber is an active call; trajectories can only be generated for connected subscriber. Although, location area updates are issued in GSM in idle mode, this events are not used to generate trajectories because of their limited location accuracy. The handover events between the call establishment and termination are used for the trajectory generation. One of the main challenges is to estimate the subscribers start and end position. This process utilizes population density maps to assign a random start and end position.
+Besides the traveled route, trajectories consists of timing information. The timing information defines for each position the time when it shall be traversed. The generation pipeline uses an estimated handover position and the time-stamp to annotate the trajectory with timing information. To estimate the handover position the coverage area of the involved cell sites is used. Therefore, a valid representation of the coverage area for each cell site is needed.
 \section{Structure}
-At first we are discussing state of the art approaches to estimate driving trajectories and mobility in mobile network simulations. Followed by an overview of fundamental concepts and techniques used in this thesis. The third part explains our concept and approach which will be implemented in the succeeding chapter. At last we will present and discuss our results and give a summary of the work.%%%---------- close: introduction
+The thesis is divided into seven chapters. This chapter gives a short introduction of the challenges and goals as well as the motivation and importance of this research. 
+The second chapter introduces related work in the field of trajectory estimation for mobile subscribers. It points out different approaches researches have proposed for targeting this problem.
+In the third chapter the GSM communication network and the data used by the generation pipeline is explained successively.
+The concept of the trajectory generation pipeline is described in the fourth chapter. First the required input data is explained in full detail. Second important concepts in respect to the generation process are described.
+In the fifth chapter insights on the implementation of the system are given. The most important aspects in respect of input data retrieval and processing are delineated in more detail.
+The sixth chapter shows various results that have been gathered using the developed system. Two examples of generated trajectories for subscribers in semi-rural and urban areas are depicted.
+The seventh and last chapter gives a brief résumé and describes potential enhancements and limitations of the developed system.
+%\section{Problem Description}
+%Traffic analysis is an import part in road network and mobile network simulations. These simulators require moving subscribers in order to investigate interesting effects in their networks. Moving subscribers can be generated from mobility models which try to describe the mobility of individuals.
+%
+%This work focuses on estimating trajectories for mobility simulations by using mobile subscription data. A trajectory describes the path of a moving object through space as a function of time. Network operators need moving subscribers to evaluate and analyze an existing or a virtual network. Replay scenarios can be created to investigate the current or a new network  with a scenario where errors accrued. The trajectory generation process involves several tasks. First useful events have to be filtered in the network. The users path has to be estimated, which involves the start and end position as well as the handover position. 
+%
+%Another part of this thesis is to estimate the coverage area for each cell sites. The coverage area is a crucial aspect in trajectory estimation. Trajectories need the location of a subscriber as a function of time. However GSM doesn't expose an accurate position of the subscriber. Therefore a good representation of the coverage area allows to narrow the users position in the network. The problem is to find an approach which creates a good estimation of the coverage area for each cell site.
+%\section{Motivation}
+%In the last years mobile network simulations have to adopt to the mobility of the subscribers. Subscribers are not stationary and therefore behavior models have to be defined. These models shall represent the entire subscriber database. 
+%
+%Since the beginning of mobile network simulations random walk and manhattan grid approaches were used to enable mobility. The problem is that random walk and manhattan grid rely on statistical data. The statistical input used is derived from household surveys. This surveys however only depict a special moment in time. To evaluate or gather more moments numerous surveys have to be done. 
+%
+%Our approach is different, instead of surveys we are using mobile subscriber data. More precise call data records. The motivation behind using mobile subscriber data is that this data represents all users of the mobile network operator. We want to use this data to generate anonymous driving trajectories. The use of call data records allows the generation of trajectories for each day and time of the year. The generated trajectories adopt to daily as well seasonal changes.
+%\section{Challenges}
+%The first challenge we have to face is that we don't have a model of the coverage area for all cell sites. Therefor we need a good representation to estimate a coarse position for each subscriber.
+%In order to generate a trajectory the users start and end position are crucial. At first we only have the serving cell and a representation of its serving area. Therefore the position of the user within the cell has to be estimated. For this purpose we are using a combination of population and land use information data.
+%
+%\section{Goals}
+%The main goal is to generate trajectories for each mobile subscriber. However due to the design of GSM we can only generate trajectories for mobile users which are in an active call. Additionally we are investigating approaches to annotate the driving trajectories with timing information.
+%In the end we are also examining methods to improve the representation of the serving area with public available data (digital elevation model, land use clutter information,...).
+%\section{Structure}
+%At first we are discussing state of the art approaches to estimate driving trajectories and mobility in mobile network simulations. Followed by an overview of fundamental concepts and techniques used in this thesis. The third part explains our concept and approach which will be implemented in the succeeding chapter. At last we will present and discuss our results and give a summary of the work.%%%---------- close: introduction
 %%%%%%%%%%% jump to relatedwork
 %%%---------- open: relatedwork
 \chapter{Related Work}
@@ -1310,12 +1331,68 @@ The difference of the two handover types is illustrated in Figure~\ref{fig:hando
 After the handover points have been estimated the next step is to enrich this information with the timestamps when the handover occurred. As mentioned before in Section~\ref{subsec:events} each event contains a precise timestamp when the event was captured by the underlying system. This information together with an estimated route and handover point allows to derive the velocity of the driver. The system knows the time difference between two handover events as well as the distance traveled. The traveled distance is the distance between two successive handover points. By cutting the whole route with the two handover points the system can obtain the route between the two handover points and therefore the actual distance between those. The velocity can then be calculated  by dividing the distance $s$ between the handover over the time difference $t$ between the handover $v=\frac{s}{t}$. The calculated velocity represents the average distance between the handover.
 \subsubsection{Velocity Adaption}
 \label{sec:adaption}
-%%%---------- close: concept
+The handover position approximation is a static process and does not take the current situation into account. Therefore, it cannot react to dynamic events. This events can be high network load or short-term obstacles that affect the path loss of the transmitter. Since it is not feasible to get an accurate approximation of the coverage area for each cell site, the handover position can be error-prone. This can lead to a deviation of the exact handover position and the estimated one. To minimize this effect the handover position needs to be repositioned in case the estimate velocity is too high. An example for such an adaption is to move the handover position on the route. 
+A deviation between the exact handover position and the approximated can lead to a higher or a lower average velocity. If the average velocity of one route segment is relative high, then there must exist another route segment with a relative low average velocity. We defined a rule that if the average calculated velocity of a route segment is greater than $50\%$ of the allowed maximum velocity a reposition takes place.  
+Repositioning is done by first calculating the distance a subscriber can move from one handover time-stamp $H_i$ to the next one $H_{i+1}$, considering the allowed maximum velocity. The handover point $H_{i+1 }$ is then reposition so that the distance between $H_i$ and $H_{i+1}$ equals the allowed distance. By decreasing the distance between $H_i$ and $H_{i+1}$ the distance between $H_{i+1}$ and $H_{i+2}$ will increase. This leads to a velocity decrease for the route segment between $H_i$ and $H_{i+1}$ and a velocity increase for $H_{i+1}$  and $H_{i+2}$.
+An example for a handover repositioning is shown in Figure~\ref{fig:1058handoveradapted}. The green points are the handover positions observed by the handset. In contrast, the blue points are the estimated handover points. Handover were estimated with the above presented approach. The example illustrates that the second estimated handover is too far from the observed one away. Here a handover is made to a cell whose coverage the subscriber has not yet entered. Therefore, the above presented approach estimated a wrong handover position based on the assumption that; handovers happen at the edge of coverage cells. 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./images/1058handoveradapted}
+\caption{Derivation between the observed handover position and the estimated handover position}
+\label{fig:1058handoveradapted}
+\end{figure}
+This leads to a deviation between those handover points that resulted in an average route segment (i) velocity of 396 km/h (see Figure~\ref{fig:1058adaptioncomp}). On the other hand the route segment (i+1) velocity of the successive segment was only 44 km/h due to the increased route segment length. By applying the reposition algorithm the velocity of the route segment (i) was decreased to 80 km/h. The velocity of the other route segment (i+1) was increased to 77 km/h. 
+While investigating the benefit of handover reposition we discovered that in some cases it is necessary to not only reposition one handover point but two. This needs to be done if the velocity transition from one route segment to another would lead to a high velocity of the second route segment. In such cases it is necessary to equally move the handover (i-1) and handover (i+1). Generally speaking this means that the velocity overrun from route segment (i) will be equally distributed over route segment (i-1) and (i+1).
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{./images/1058adaptioncomp}
+%\definecolor{mycolor1}{rgb}{0.65098,0.80784,0.89020}%
+%\definecolor{mycolor2}{rgb}{0.12157,0.47059,0.70588}%
+%%
+%\tikzsetnextfilename{1058adaptioncomp}
+%\begin{tikzpicture}
+%
+%\begin{axis}[%
+%width=4in,
+%height=3in,
+%area legend,
+%scale only axis,
+%xmin=0.5,
+%xmax=2.5,
+%xtick={1,2},
+%xticklabels={{i},{i+1}},
+%xlabel={Route segment},
+%ymin=0,
+%ymax=400,
+%ylabel={Velocity [km/h]},
+%legend style={draw=black,fill=white,legend cell align=left}
+%]
+%\addplot[ybar,bar width=0.513103448275862in,bar shift=-0.320689655172414in,draw=black,fill=mycolor1] plot table[row sep=crcr] {%
+%1	396\\
+%2	80\\
+%};
+%\addlegendentry{Without Adaption};
+%
+%\addplot [color=black,solid,forget plot]
+%  table[row sep=crcr]{0.5	0\\
+%2.5	0\\
+%};
+%\addplot[ybar,bar width=0.513103448275862in,bar shift=0.320689655172414in,draw=black,fill=mycolor2] plot table[row sep=crcr] {%
+%1	44\\
+%2	77\\
+%};
+%\addlegendentry{With Adaption};
+%
+%\end{axis}
+%\end{tikzpicture}%
+\caption{Comparison between the velocity without adaption and with adaption}
+\label{fig:1058adaptioncomp}
+\end{figure}%%%---------- close: concept
 %%%%%%%%%%% jump to implementation
 %%%---------- open: implementation
 \chapter{Implementation}
 \label{cha:implementation}
-The following chapter will present the actually implemented system. The implementation is based on Chapter~\ref{cha:concepts} where the concepts for the system have been presented. Through out this chapter all parts of the system and their responsibilities will be explained.  
+The following chapter will present the actually implemented system. The implementation is based on Chapter~\ref{cha:concepts} where the concepts for the system have been presented. Through out this chapter all parts of the system and their responsibilities will be explained.
 \section{System Overview}
 The developer system consists of a set of individual systems. This systems can be grouped in three groups. The first is responsible for storing information such as: mobile subscription data, population and land use information, road network and cell coverage areas. The second is a data abstraction layer which is used to aggregate the data and present to interested systems via an API. The last group is responsible for processing and generating trajectories. It is using the other systems via the API provided by the data abstraction layer. A brief overview of the implemented system is illustrated in Figure~\ref{fig:systemoverview}.
 \begin{figure}
@@ -1331,13 +1408,13 @@ Subscription data is stored in a separate MySQL database. It is storing events c
 \subsection{Data Abstraction API}
 We first started to develop a system with direct access to the database via the JDBC driver for PostgresSQL\footnote{PostgreSQL JDBC driver: \url{http://jdbc.postgresql.org/}, last accessed March, 28 2014} and MySQL\footnote{MySQL JDBC driver: \url{https://dev.mysql.com/downloads/connector/j/}, last accessed March, 28 2014}. But this approach was not sufficient as we experienced a slow data access rate with larger queries. Therefore, we decided to build an abstraction layer which encapsulates the access of the database form the system. The abstraction layer is built with Node.js -- a JavaScript framework -- and it provides a HTTP API. More details will be provided in Section~\ref{sec:architecture}.
 \subsection{Trajectory Generation}
-The trajectory generation group consists of two systems. First the trajectory service which is generating trajectories for subscribers and second the routing engine which is responsible for calculating routes between a start and end point. 
+The trajectory generation group consists of two systems. First the trajectory service which is generating trajectories for subscribers and second the routing engine which is responsible for calculating routes between a start and end point.
 \section{Architecture}
 \label{sec:architecture}
 After a brief overview has been given in the previous section, here the underlying system will be explained in more detail. It will also cover the process of importing the needed data into the database and how this data can be retrieved from the database. Moreover the used data and the communication between the subsystems will be described.
 \subsection{Databases}
 \subsubsection{PostgreSQL Database}
-To store geographic information PostgreSQL together with the PostGIS extension is used. PostGIS extends PostgreSQL in a way that it follows the Simple Features for SQL specification from the Open Geospatial Consortium. The Simple Features are defined in ISO 19125~\cite{ISO19125,ISO191252}. The developed system is using population and land use information stored in the database. This data is needed to estimate a subscribers start and end position within the boundaries of the cell coverage area. In addition to raster data (population and land use) the database also stores the OpenStreetMap road network. Figure~\ref{fig:pg_structure} depicts the internal structure of the PostgreSQL database. The table \emph{at_2po_4pgr} contains the OpenStreetMap road network, \emph{landuse_raster} land use information and \emph{density_raster} population information. 
+To store geographic information PostgreSQL together with the PostGIS extension is used. PostGIS extends PostgreSQL in a way that it follows the Simple Features for SQL specification from the Open Geospatial Consortium. The Simple Features are defined in ISO 19125~\cite{ISO19125,ISO191252}. The developed system is using population and land use information stored in the database. This data is needed to estimate a subscribers start and end position within the boundaries of the cell coverage area. In addition to raster data (population and land use) the database also stores the OpenStreetMap road network. Figure~\ref{fig:pg_structure} depicts the internal structure of the PostgreSQL database. The table \emph{at_2po_4pgr} contains the OpenStreetMap road network, \emph{landuse_raster} land use information and \emph{density_raster} population information.
 \begin{figure}
 \centering
 \includegraphics[width=0.7\linewidth]{./images/pg_structure}
@@ -1443,7 +1520,7 @@ app.get('/postgres', function (req, res) {
     });
 });
 app.listen(3000);
-\end{lstlisting} 
+\end{lstlisting}
 \subsubsection{Features}
 The Node.js provides several features  to the trajectory service. It enables the trajectory service to access the two database via an uniform API. This API hides the implementation from the using program. However, to increase performance the API was split into two parts. The first API resides on the same server as the PostgreSQL and handles geographic request whereas the second one handles subscription data and resides on the MySQL server.
 \paragraph{MySQL API}
@@ -1453,16 +1530,16 @@ GET /mfdevents?id=USER_ID
 GET /ocmraw?id=USER_ID
 GET /ocmroute?id=USER_ID
 \end{lstlisting}
-\paragraph{PostgreSQL API} 
+\paragraph{PostgreSQL API}
 enables the requesting program to access functions of the PostgreSQL database. It provides access to raster data as population and land use information as well as to retrieve a random point withing a specified area based on population and land use information (see Listing~\ref{lst:pgapireq}). The bounds parameter is encoded as a list  of coordinate -- separated by a comma -- specifying a bounding box (xmin,ymin,xmax,ymax). In comparison the geom parameter is encoded as Well-known text (WKT) which allows defining more advanced areas as polygons and multi polygons (POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))
-). 
+).
 \begin{lstlisting}[style=BashInputStyle,caption={PostgreSQL API requests},label={lst:pgapireq}]
 GET /populationBounds?bounds=BOUNDARIES
 GET /landuseBounds?bounds=BOUNDARIES
 GET /randomgeom?geom=GEOMETRY&num=NUMBER_OF_POINTS
 \end{lstlisting}
 \subsection{Routing Engine}
-To calculate routes on the OpenStreetMap road network, the system is using the osm2po routing engine. This engine can either be used as a standalone web server with a defined API or be integrated into a Java application. In our case the engine was integrated into the trajectory service as a library. The benefit of this approach is, that the system has better access to the graph file used by the engine. The graph file is a reduced road network optimized for routing. By accessing the graph file, the trajectory service can retrieve metadata for the calculated route such as speed limits and length of the roads. This information can later be used to validate the calculate route and the timing information. 
+To calculate routes on the OpenStreetMap road network, the system is using the osm2po routing engine. This engine can either be used as a standalone web server with a defined API or be integrated into a Java application. In our case the engine was integrated into the trajectory service as a library. The benefit of this approach is, that the system has better access to the graph file used by the engine. The graph file is a reduced road network optimized for routing. By accessing the graph file, the trajectory service can retrieve metadata for the calculated route such as speed limits and length of the roads. This information can later be used to validate the calculate route and the timing information.
 Listing~\ref{lst:osm2po} illustrates how a route between Linz and Hagenberg im Mühlkreis is calculated. The result is an array with segment IDs that can then be used to retrieve the geometry and the speed limits of the segment from the graph file.
 \begin{lstlisting}[language=Java,style=JAVA,caption={Example code to calculate a route between two points},label={lst:osm2po}]
 File graphFile = new File("at_2po_4pgr.gph");
@@ -1478,8 +1555,8 @@ params.setProperty("findShortestPath", "false");
 int[] path = router.findPath(
     graph, sourceId, targetId, Float.MAX_VALUE, params);
 \end{lstlisting}
-\subsection{Trajectory Service}
-The trajectory service is using the above mentioned data and APIs to generate trajectories for each subscriber. By using different data sources it can estimate trajectories for different data providers in our case mobile network operators. In the current state trajectories can be generated for A1 subscriber and OpenCoverageMap participants. To fulfill its task the trajectory service needs besides the events from the network operator a coverage prediction for each cell site. The trajectory service is using the following data:
+\section{Trajectory Service}
+The trajectory service is using the data and APIs, mentioned in the previous section, to generate trajectories for each subscriber. By using different data sources it can estimate trajectories for different data providers in our case mobile network operators. In the current state trajectories can be generated for A1 subscriber and OpenCoverageMap participants. To fulfill its task the trajectory service needs besides the events from the network operator a coverage prediction for each cell site. The trajectory service is using the following data:
 \begin{itemize}
 \item Mobile subscription data
 \item Population and land use information
@@ -1490,11 +1567,89 @@ The trajectory service is using the above mentioned data and APIs to generate tr
 \subsubsection{Convert Events}
 The structure of events used in the trajectory generator was inspired by the structure used in the A1 event stream. To integrate other data sources such as the OpenCoverageMap a converted needs to be implemented. The objective of the converter is to transform the event structure to the one used by A1 events.
 The OpenCoverageMap doesn't use the same event structure as A1. Rather than issuing events like call establish / termination or hand over it periodically stores the state of the mobile station. Therefore, this information needs to be transformed to an event structure. The steps to convert the OpenCoverageMap data to the A1 structure are the following: First remove all data where no call is active. Second iterate over this data and check for gaps between succeeding timestamps. Gaps greater than 10 seconds indicate that a call was either established or terminated. Afterwards iterate over the data between two gaps. Create a call establish and termination event at the beginning and end of the list. If there is a difference between the cell-id and location area of two succeeding entries add a hand over event to the current call. The result will be a  list of events with the same structure as the ones captured by A1.
+\subsubsection{Generation Process}
+The main aspect of the trajectory service is the implementation of the trajectory generation pipeline introduced in chapter~\ref{cha:concepts}. The generation process is implemented as an iterative process. The process contains of the following steps:
+\begin{enumerate}
+\item Data retrieval
+\item Call Detection
+\item Route Calculation
+\item Route Validation
+\item Timing Estimation
+\item Trajectory Output
+\end{enumerate}
+\paragraph{Input Data}
+The input data needed to generate trajectories is consumed via APIs and file access. The mobile subscriber data is accessed via the APIs described in the previous section. Several data provider can be used as long as the follow the same structure or the provide a converter that converts the data to the correct structure. Additionally the population density maps and land use information can be accessed via the API. The second type of input data, the coverage prediction is loaded from a file. The coverage prediction consists of entries for each transmitter (see Listing~\ref{lst:coverage}). Each of these entries consists of an id, location area, cell-id, cell type and the coverage area as a WKT text. The cell coverage will later be used to estimate the start and end point as well as for the handover point estimation. The third and last input data is the road network provided by osm2po.
+\begin{lstlisting}[style=BashInputStyle,caption={Coverage prediction},label={lst:coverage}]
+1_5503_62905_11_POLYGON ((14.2873 48.2981,...))
+2_5503_23115_11_POLYGON ((14.3159 48.2991,...))
+3_5503_31185_11_POLYGON ((14.3132 48.3026,...))
+4_5503_31115_11_MULTIPOLYGON (((14.3176 48.3044,...)))
+\end{lstlisting}
+\paragraph{Handover Point Estimation}
+The handover point estimation is using a class that implements the \lstinline|CellTimeSynchronizeIF| interface. This interface defines the input and output parameter of the handover point estimation. The interface consists of a method to annotate the trajectory with timing information and a method to compute the handover points. 
+\begin{lstlisting}[language=Java,style=JAVA,caption={Interface for handover point estimation CellTimeSynchronizeIF},label={lst:CellTimeSynchronizeIF}]
+public interface CellTimeSynchronizeIF extends TimeSynchronizerIF<List<MFDEvent>> {
+    public List<RouteSegment> synchronizeTiming(List<RouteSegment> _rs,List<MFDEvent> _events);
+    Point[] getHandoverPoints(List<RouteSegment> _rs,List<MFDEvent> _events);
+}
+\end{lstlisting}
+The implementation in Listing~\ref{lst:SimpleCellTimeSynchronizeIF} depicts a simple algorithm to compute the handover position. Hereby the midpoint between the centroid of two consecutive handover will be used as the handover position. The handover point estimation can latter be replaced with more sophisticated approaches as long as they correspond to the same interface.
+\begin{lstlisting}[language=Java,style=JAVA,caption={Simple implementation of the CellTimeSynchronizeIF},,label={lst:SimpleCellTimeSynchronizeIF}]
+@Override
+public Point[] getHandoverPoints(List<RouteSegment> _rs, List<MFDEvent> _events) {
+	ArrayList<Point> handoverPoints = new ArrayList<Point>();
+	MFDEvent currEvent;
+	MFDEvent nextEvent;
+	Geometry currGeo;
+	Geometry nextGeo;
+	for (int i = 0; i < _events.size() - 1; i++) {
+		currEvent = _events.get(i);
+		nextEvent = _events.get(i + 1);
+		currGeo = CellLoader.getInstance().getCell(currEvent.getLac(), currEvent.getCellID()).getGeom();
+		nextGeo = CellLoader.getInstance().getCell(nextEvent.getLac(), nextEvent.getCellID()).getGeom();
+		Point handoverPoint=gf.createPoint(new Coordinate((currGeo.getCentroid().getX() + nextGeo.getCentroid().getX()) / 2, (currGeo.getCentroid().getY() + nextGeo.getCentroid().getY()) / 2));
+		handoverPoints.add(handoverPoint);
+	}
+	Point[] result = new Point[handoverPoints.size()];
+	result = handoverPoints.toArray(result);
+	return result;
+}
+\end{lstlisting}
+\paragraph{Trajectory Output}
+The trajectory service persists the generated trajectory in a file for further usage. The structure of the trajectory file is depicted in Listing~\ref{lst:output}. It consists of the latitude and longitude coordinates as well as the average velocity. The average velocity was computed with the approach described in section~\ref{sec:velocity}.
+\begin{lstlisting}[style=BashInputStyle,caption={Coverage prediction},label={lst:output}]
+48.391565;16.106760;21.31
+48.391553;16.106985;21.31             
+48.391437;16.107714;21.31
+48.391340;16.108558;21.31
+...
+48.392290;16.170651;85.53
+48.391478;16.173173;85.53
+48.391847;16.171947;85.53
+48.391847;16.171947;85.53
+\end{lstlisting}
+%\begin{table}[h]
+%  \centering
+%\begin{tabular}{c|c|c}
+%\textbf{Latitude} & \textbf{Longitude} & \textbf{Velocity $[km/h]$} \\ \hline
+%48.391565 & 16.106760 & 21.31  \\
+%48.391553 & 16.106985 & 21.31              \\
+%48.391437 & 16.107714 & 21.31             \\
+%48.391340 & 16.108558 & 21.31              \\
+%$\vdots$ &$\vdots$ &$\vdots$ \\
+%48.392290 & 16.170651 & 85.53 \\
+%48.391478 & 16.173173 & 85.53             \\
+%48.391847 & 16.171947 & 85.53              \\
+%48.391847 & 16.171947 & 85.53
+%\end{tabular}
+%\caption{Example output of a generated trajectory}
+%\label{tab:output}
+%\end{table}
 %\begin{enumerate}
 %\item remove data where no call is active
 %\item iterate over all events
 %\item compare cellid and lac of event $i$ and $i+1$
-%\item compare 
+%\item compare
 %\item compare timestamp of event $i$ and $i+1$
 %\item if timestamp difference $>10$ seconds create new call otherwise add event to previous call
 %\end{enumerate}
@@ -1531,14 +1686,11 @@ The OpenCoverageMap doesn't use the same event structure as A1. Rather than issu
 %\EndProcedure
 %\end{algorithmic}
 %\end{algorithm}
-\section{Trajectory Service}
-The first two system layers were responsible for storing and providing access to various data sources, this layer however, is utilizing the data. The trajectory service implements the trajectory generation pipeline that has been introduced in Chapter ~\ref{cha:concepts}. The application provides a rich user interface which offers functionalities that allows investigating the used coverage prediction and generating subscriber trajectories. In this section, the most important aspects of the generation pipeline are explained.
-\subsection{Start and End Position}
-\subsection{Route Validation}
-\subsubsection{Geometry}
-\subsubsection{Timing}
-\subsection{Timing Information}
-\subsubsection{Handover Prediction}
+%\section{Trajectory Service}
+%The first two system layers were responsible for storing and providing access to various data sources, this layer however, is utilizing the data. The trajectory service implements the trajectory generation pipeline that has been introduced in Chapter ~\ref{cha:concepts}. The application provides a rich user interface which offers functionalities that allows investigating the used coverage prediction and generating subscriber trajectories. In this section, the most important aspects of the generation pipeline are explained.
+%subsection{The generation process}
+%As already mentioned in chapter~\ref{cha:concepts}
+%\subsection{Trajectory Output}
 %\section{Call detection / filtering}
 %\subsection{Call Length Distribution}
 %\section{Stat and End Position}
@@ -1568,6 +1720,7 @@ The first two system layers were responsible for storing and providing access to
 %%%%%%%%%%% jump to results
 %%%---------- open: results
 \chapter{Results}
+\label{cha:results}
 In this chapter, various mobile subscriber trajectories will be presented that have been generated using the developed system. Mobile subscription data from several subscribers captured by the OpenCoverageMap was used. The generated trajectories cover rural and urban areas, which allows evaluating the approach for several scenarios. All results are fully reproducible in case the same subscriber and coverage predictions are used.
 \section{Example 1}
 The first example covers a semi-rural region. A semi-rural region consist of a rural and an urban area. The following trajectory was recorded on Monday, 26 March 2012. At 08:08:29 in the morning the subscriber established a call. The duration of the call was 7 minutes and 36 seconds.  During the call the subscriber traversed the highway A7 from Linz\footnote{GPS position of call establishment Latitude: 48.28086955 Longitude:	14.30415398 \url{http://osm.org/go/0JhMzsg9l-?m=}} to Engerwitzdorf\footnote{GPS position of call termination Latitude: 48.3381025 Longitude:	14.4125565 \url{http://osm.org/go/0JhP~5vT--?m=}}. Between the call establishment and call termination the mobile station was connected to 22 transmitters which resulted in 21 handover events. Figure~\ref{fig:563overview} illustrates the traversed route as well as the estimated handover position for both the network planning tool coverage~\ref{fig:563coverage} and the Voronoi diagrams coverage~\ref{fig:563voronoi}.
@@ -1766,12 +1919,21 @@ Similar to example one there was a deviation of estimated and observed handover 
 	\caption{Example 2: Comparison of velocity (a) without adaption  and (b) with adaption}\label{fig:1058velocity}
 \end{figure}
 %%%---------- close: results
-%%%%%%%%%%% jump to discussion
-%%%---------- open: discussion
-\chapter{Discussion}%%%---------- close: discussion
 %%%%%%%%%%% jump to summary
 %%%---------- open: summary
-\chapter{Summary}%%%---------- close: summary
+\chapter{Summary}
+In this thesis a trajectory generation pipeline for the automated generation of mobile subscriber trajectories has been presented. Mobility simulations are an important aspect in mobile network simulations, since they allow to investigate the effects mobile subscriber have on the mobile network. In the recent years real world behavior models have gained more and more importance in the field of mobility analysis, because they allow simulations in a real environment.
+The developed system is using call detail records to estimate driving trajectories for mobile subscribers. The call detail records are used together with coverage predictions and a representation of the road network to estimate the trajectory.
+Trajectories are generated for subscribers during an active call. Therefore, the location of the call establishment marks the begin of the trajectory. Because GSM does not expose an accurate subscriber location an approximation takes place which takes the population density of the area into account.
+To derive the average subscribers velocity between two consecutive handover, the presented system calculates a most likely handover position. In order to make the generated trajectories accessible to third-party applications such as mobility simulation framework a simple output format has been chosen. The output format persists the trajectory as a list of latitude and longitude coordinates as well as an average velocity that defines the subscribers movement.
+\section{Résumé}
+This thesis gives an introduction into GSM in order to provide a better understanding of the working principle of the trajectory generation. Besides that, several approaches of other researches in the field of trajectory generation for mobile subscribers are presented.
+Based on these fundamentals, the trajectory generation pipeline is explained in detail. First, the input data required by the system will be described. This involves the subscriber information, the road network and the network coverage prediction. Two different types of network coverage prediction techniques are described and compared with each other. Afterwards, each step involved in the generation process is outlined, consisting of the call detection, route computation, route validation, handover estimation and timing annotation.   
+\section{Discussion}
+At this time, the developed system can be used to estimate driving trajectories for mobile subscriber based on the subscriber information. The estimated routes correspond to the route driven by the subscriber. As shown in chapter~\ref{cha:results} trajectories can be estimated for subscribers in urban and semi-rural areas.
+The 
+The greatest limitation of that system is that handover events in GSM are only made when the subscriber is in connected mode. With the increase usage of data services on smartphones, a possible extension would be to investigate routing area updates and handover updates in the GPRS, UMTS and LTE network.
+Another enhancement would be to use coverage predictions provided by the network operators. This coverage predictions shall better represent the coverage area. Additionally different coverage predictions can be used for different areas. Therefore, the accuracy of the handover position can be increased. %%%---------- close: summary
 
 
 \MakeBibliography

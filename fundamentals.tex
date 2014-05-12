@@ -38,7 +38,7 @@ Furthermore, the MSC is connected to a \emph{Gateway Mobile Switching Center} (G
 \subsubsection{Visited Location Register - VLR}
 The visited location register (VLR) stores information of all MS who are located in the serving area of the associated MSC. A VLR can be assigned to one or more MSCs. A MS can be registered in a VLR of its home PLMN or a foreign one when a roaming agreement exists.
 \subsubsection{Home Location Register - HLR}
-Typically, there is one home location regiser (HLR) per PLMN and one VLR for each MSC. The HLR stores all permanent and temporary subscriber information for all registered subscribers. Moreover, it stores a coarse current location of each MS. The HLR operates as a central register needed by the MSC for routing of subscribers.
+Typically, there is one home location register (HLR) per PLMN and one VLR for each MSC. The HLR stores all permanent and temporary subscriber information for all registered subscribers. Moreover, it stores a coarse current location of each MS. The HLR operates as a central register needed by the MSC for routing of subscribers.
 \subsection{Radio Resource Management}
 The GSM standard~\cite{Etsi1994} distinguishes between two modes of operation first idle and second connected mode. The radio resource management (RRM) is necessary to manage the physical and logical channels.
 \paragraph{Idle Mode}
@@ -513,7 +513,7 @@ Let $P=\{p_1,p_2,...,p_n\}$ be a set of $n$ distinct points, in our case the loc
 Voronoi diagrams are unbounded which means that the coordinates of vertices can be infinite. Unbounded polygons are undesired in a topology computation. If we would use unbounded polygons for coverage estimation, the area for this cell site would be infinite. A simple approach to eliminate this effect is to clip the Voronoi diagram with a rectangular bounding box. However, this approach is only satisfying if the cell site boundaries shape a rectangle. A better approach is to compute the convex hull over all sites and clip it with the Voronoi diagram.
 
 \subsection{Cell Tower Segmentation}
-We mentioned before that a GSM network consists not only of omni directional antennas but also of sectored antennas. The coverage area of each sector is defined by the angle at which the antenna is mounted on the tower. If we would only consider the location of each cell sites, sectors with different angles would have the same Voronoi polygon and, therefore, the same coverage area. In order to get a better representation of the coverage area for each sector, we moved the location of each sector based on its angle $\phi$. The definition of the movement can be found in Equation~\ref{eq:move}. The constant factor means a maximum movement of 3 meters in either direction.
+We mentioned before that a GSM network consists not only of omnidirectional antennas but also of sectored antennas. The coverage area of each sector is defined by the angle at which the antenna is mounted on the tower. If we would only consider the location of each cell sites, sectors with different angles would have the same Voronoi polygon and, therefore, the same coverage area. In order to get a better representation of the coverage area for each sector, we moved the location of each sector based on its angle $\phi$. The definition of the movement can be found in Equation~\ref{eq:move}. The constant factor means a maximum movement of 3 meters in either direction.
 \begin{equation}
 	\label{eq:move}
 	x=x+\frac{cos(\phi)}{50000},y=y+\frac{cos(\phi)}{50000}

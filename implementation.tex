@@ -1,7 +1,7 @@
 
 \chapter{Implementation}
 \label{cha:implementation}
-The following chapter will present the actually implemented system. The implementation is based on Chapter~\ref{cha:concepts} where the concepts for the system have been presented. Through out this chapter all parts of the system and their responsibilities will be explained.  
+The following chapter will present the actually implemented system. The implementation is based on Chapter~\ref{cha:concepts} where the concepts for the system have been presented. Through out this chapter all parts of the system and their responsibilities will be explained.
 \section{System Overview}
 The developer system consists of a set of individual systems. This systems can be grouped in three groups. The first is responsible for storing information such as: mobile subscription data, population and land use information, road network and cell coverage areas. The second is a data abstraction layer which is used to aggregate the data and present to interested systems via an API. The last group is responsible for processing and generating trajectories. It is using the other systems via the API provided by the data abstraction layer. A brief overview of the implemented system is illustrated in Figure~\ref{fig:systemoverview}.
 \begin{figure}
@@ -18,13 +18,13 @@ Subscription data is stored in a separate MySQL database. It is storing events c
 \subsection{Data Abstraction API}
 We first started to develop a system with direct access to the database via the JDBC driver for PostgresSQL\footnote{PostgreSQL JDBC driver: \url{http://jdbc.postgresql.org/}, last accessed March, 28 2014} and MySQL\footnote{MySQL JDBC driver: \url{https://dev.mysql.com/downloads/connector/j/}, last accessed March, 28 2014}. But this approach was not sufficient as we experienced a slow data access rate with larger queries. Therefore, we decided to build an abstraction layer which encapsulates the access of the database form the system. The abstraction layer is built with Node.js -- a JavaScript framework -- and it provides a HTTP API. More details will be provided in Section~\ref{sec:architecture}.
 \subsection{Trajectory Generation}
-The trajectory generation group consists of two systems. First the trajectory service which is generating trajectories for subscribers and second the routing engine which is responsible for calculating routes between a start and end point. 
+The trajectory generation group consists of two systems. First the trajectory service which is generating trajectories for subscribers and second the routing engine which is responsible for calculating routes between a start and end point.
 \section{Architecture}
 \label{sec:architecture}
 After a brief overview has been given in the previous section, here the underlying system will be explained in more detail. It will also cover the process of importing the needed data into the database and how this data can be retrieved from the database. Moreover the used data and the communication between the subsystems will be described.
 \subsection{Databases}
 \subsubsection{PostgreSQL Database}
-To store geographic information PostgreSQL together with the PostGIS extension is used. PostGIS extends PostgreSQL in a way that it follows the Simple Features for SQL specification from the Open Geospatial Consortium. The Simple Features are defined in ISO 19125~\cite{ISO19125,ISO191252}. The developed system is using population and land use information stored in the database. This data is needed to estimate a subscribers start and end position within the boundaries of the cell coverage area. In addition to raster data (population and land use) the database also stores the OpenStreetMap road network. Figure~\ref{fig:pg_structure} depicts the internal structure of the PostgreSQL database. The table \emph{at_2po_4pgr} contains the OpenStreetMap road network, \emph{landuse_raster} land use information and \emph{density_raster} population information. 
+To store geographic information PostgreSQL together with the PostGIS extension is used. PostGIS extends PostgreSQL in a way that it follows the Simple Features for SQL specification from the Open Geospatial Consortium. The Simple Features are defined in ISO 19125~\cite{ISO19125,ISO191252}. The developed system is using population and land use information stored in the database. This data is needed to estimate a subscribers start and end position within the boundaries of the cell coverage area. In addition to raster data (population and land use) the database also stores the OpenStreetMap road network. Figure~\ref{fig:pg_structure} depicts the internal structure of the PostgreSQL database. The table \emph{at_2po_4pgr} contains the OpenStreetMap road network, \emph{landuse_raster} land use information and \emph{density_raster} population information.
 \begin{figure}
 \centering
 \includegraphics[width=0.7\linewidth]{./images/pg_structure}
@@ -149,7 +149,7 @@ app.get('/postgres', function (req, res) {
 });
 
 app.listen(3000);
-\end{lstlisting} 
+\end{lstlisting}
 
 \subsubsection{Features}
 The Node.js provides several features  to the trajectory service. It enables the trajectory service to access the two database via an uniform API. This API hides the implementation from the using program. However, to increase performance the API was split into two parts. The first API resides on the same server as the PostgreSQL and handles geographic request whereas the second one handles subscription data and resides on the MySQL server.
@@ -162,9 +162,9 @@ GET /ocmraw?id=USER_ID
 GET /ocmroute?id=USER_ID
 \end{lstlisting}
 
-\paragraph{PostgreSQL API} 
+\paragraph{PostgreSQL API}
 enables the requesting program to access functions of the PostgreSQL database. It provides access to raster data as population and land use information as well as to retrieve a random point withing a specified area based on population and land use information (see Listing~\ref{lst:pgapireq}). The bounds parameter is encoded as a list  of coordinate -- separated by a comma -- specifying a bounding box (xmin,ymin,xmax,ymax). In comparison the geom parameter is encoded as Well-known text (WKT) which allows defining more advanced areas as polygons and multi polygons (POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))
-). 
+).
 \begin{lstlisting}[style=BashInputStyle,caption={PostgreSQL API requests},label={lst:pgapireq}]
 GET /populationBounds?bounds=BOUNDARIES
 GET /landuseBounds?bounds=BOUNDARIES
@@ -173,7 +173,7 @@ GET /randomgeom?geom=GEOMETRY&num=NUMBER_OF_POINTS
 
 
 \subsection{Routing Engine}
-To calculate routes on the OpenStreetMap road network, the system is using the osm2po routing engine. This engine can either be used as a standalone web server with a defined API or be integrated into a Java application. In our case the engine was integrated into the trajectory service as a library. The benefit of this approach is, that the system has better access to the graph file used by the engine. The graph file is a reduced road network optimized for routing. By accessing the graph file, the trajectory service can retrieve metadata for the calculated route such as speed limits and length of the roads. This information can later be used to validate the calculate route and the timing information. 
+To calculate routes on the OpenStreetMap road network, the system is using the osm2po routing engine. This engine can either be used as a standalone web server with a defined API or be integrated into a Java application. In our case the engine was integrated into the trajectory service as a library. The benefit of this approach is, that the system has better access to the graph file used by the engine. The graph file is a reduced road network optimized for routing. By accessing the graph file, the trajectory service can retrieve metadata for the calculated route such as speed limits and length of the roads. This information can later be used to validate the calculate route and the timing information.
 
 Listing~\ref{lst:osm2po} illustrates how a route between Linz and Hagenberg im Mühlkreis is calculated. The result is an array with segment IDs that can then be used to retrieve the geometry and the speed limits of the segment from the graph file.
 \begin{lstlisting}[language=Java,style=JAVA,caption={Example code to calculate a route between two points},label={lst:osm2po}]
@@ -193,8 +193,8 @@ params.setProperty("findShortestPath", "false");
 int[] path = router.findPath(
     graph, sourceId, targetId, Float.MAX_VALUE, params);
 \end{lstlisting}
-\subsection{Trajectory Service}
-The trajectory service is using the above mentioned data and APIs to generate trajectories for each subscriber. By using different data sources it can estimate trajectories for different data providers in our case mobile network operators. In the current state trajectories can be generated for A1 subscriber and OpenCoverageMap participants. To fulfill its task the trajectory service needs besides the events from the network operator a coverage prediction for each cell site. The trajectory service is using the following data:
+\section{Trajectory Service}
+The trajectory service is using the data and APIs, mentioned in the previous section, to generate trajectories for each subscriber. By using different data sources it can estimate trajectories for different data providers in our case mobile network operators. In the current state trajectories can be generated for A1 subscriber and OpenCoverageMap participants. To fulfill its task the trajectory service needs besides the events from the network operator a coverage prediction for each cell site. The trajectory service is using the following data:
 \begin{itemize}
 \item Mobile subscription data
 \item Population and land use information
@@ -207,11 +207,95 @@ The trajectory service is using the above mentioned data and APIs to generate tr
 The structure of events used in the trajectory generator was inspired by the structure used in the A1 event stream. To integrate other data sources such as the OpenCoverageMap a converted needs to be implemented. The objective of the converter is to transform the event structure to the one used by A1 events.
 
 The OpenCoverageMap doesn't use the same event structure as A1. Rather than issuing events like call establish / termination or hand over it periodically stores the state of the mobile station. Therefore, this information needs to be transformed to an event structure. The steps to convert the OpenCoverageMap data to the A1 structure are the following: First remove all data where no call is active. Second iterate over this data and check for gaps between succeeding timestamps. Gaps greater than 10 seconds indicate that a call was either established or terminated. Afterwards iterate over the data between two gaps. Create a call establish and termination event at the beginning and end of the list. If there is a difference between the cell-id and location area of two succeeding entries add a hand over event to the current call. The result will be a  list of events with the same structure as the ones captured by A1.
+\subsubsection{Generation Process}
+The main aspect of the trajectory service is the implementation of the trajectory generation pipeline introduced in chapter~\ref{cha:concepts}. The generation process is implemented as an iterative process. The process contains of the following steps:
+\begin{enumerate}
+\item Data retrieval
+\item Call Detection
+\item Route Calculation
+\item Route Validation
+\item Timing Estimation
+\item Trajectory Output
+\end{enumerate}
+\paragraph{Input Data}
+The input data needed to generate trajectories is consumed via APIs and file access. The mobile subscriber data is accessed via the APIs described in the previous section. Several data provider can be used as long as the follow the same structure or the provide a converter that converts the data to the correct structure. Additionally the population density maps and land use information can be accessed via the API. The second type of input data, the coverage prediction is loaded from a file. The coverage prediction consists of entries for each transmitter (see Listing~\ref{lst:coverage}). Each of these entries consists of an id, location area, cell-id, cell type and the coverage area as a WKT text. The cell coverage will later be used to estimate the start and end point as well as for the handover point estimation. The third and last input data is the road network provided by osm2po.
+
+\begin{lstlisting}[style=BashInputStyle,caption={Coverage prediction},label={lst:coverage}]
+1_5503_62905_11_POLYGON ((14.2873 48.2981,...))
+2_5503_23115_11_POLYGON ((14.3159 48.2991,...))
+3_5503_31185_11_POLYGON ((14.3132 48.3026,...))
+4_5503_31115_11_MULTIPOLYGON (((14.3176 48.3044,...)))
+\end{lstlisting}
+
+\paragraph{Handover Point Estimation}
+The handover point estimation is using a class that implements the \lstinline|CellTimeSynchronizeIF| interface. This interface defines the input and output parameter of the handover point estimation. The interface consists of a method to annotate the trajectory with timing information and a method to compute the handover points. 
+\begin{lstlisting}[language=Java,style=JAVA,caption={Interface for handover point estimation CellTimeSynchronizeIF},label={lst:CellTimeSynchronizeIF}]
+public interface CellTimeSynchronizeIF extends TimeSynchronizerIF<List<MFDEvent>> {
+    public List<RouteSegment> synchronizeTiming(List<RouteSegment> _rs,List<MFDEvent> _events);
+    Point[] getHandoverPoints(List<RouteSegment> _rs,List<MFDEvent> _events);
+}
+\end{lstlisting}
+The implementation in Listing~\ref{lst:SimpleCellTimeSynchronizeIF} depicts a simple algorithm to compute the handover position. Hereby the midpoint between the centroid of two consecutive handover will be used as the handover position. The handover point estimation can latter be replaced with more sophisticated approaches as long as they correspond to the same interface.
+\begin{lstlisting}[language=Java,style=JAVA,caption={Simple implementation of the CellTimeSynchronizeIF},,label={lst:SimpleCellTimeSynchronizeIF}]
+@Override
+public Point[] getHandoverPoints(List<RouteSegment> _rs, List<MFDEvent> _events) {
+	ArrayList<Point> handoverPoints = new ArrayList<Point>();
+	MFDEvent currEvent;
+	MFDEvent nextEvent;
+	Geometry currGeo;
+	Geometry nextGeo;
+	for (int i = 0; i < _events.size() - 1; i++) {
+		currEvent = _events.get(i);
+		nextEvent = _events.get(i + 1);
+		currGeo = CellLoader.getInstance().getCell(currEvent.getLac(), currEvent.getCellID()).getGeom();
+		nextGeo = CellLoader.getInstance().getCell(nextEvent.getLac(), nextEvent.getCellID()).getGeom();
+	
+		Point handoverPoint=gf.createPoint(new Coordinate((currGeo.getCentroid().getX() + nextGeo.getCentroid().getX()) / 2, (currGeo.getCentroid().getY() + nextGeo.getCentroid().getY()) / 2));
+		handoverPoints.add(handoverPoint);
+	}
+	Point[] result = new Point[handoverPoints.size()];
+	result = handoverPoints.toArray(result);
+	return result;
+}
+
+\end{lstlisting}
+
+\paragraph{Trajectory Output}
+The trajectory service persists the generated trajectory in a file for further usage. The structure of the trajectory file is depicted in Listing~\ref{lst:output}. It consists of the latitude and longitude coordinates as well as the average velocity. The average velocity was computed with the approach described in section~\ref{sec:velocity}.
+\begin{lstlisting}[style=BashInputStyle,caption={Coverage prediction},label={lst:output}]
+48.391565;16.106760;21.31
+48.391553;16.106985;21.31             
+48.391437;16.107714;21.31
+48.391340;16.108558;21.31
+...
+48.392290;16.170651;85.53
+48.391478;16.173173;85.53
+48.391847;16.171947;85.53
+48.391847;16.171947;85.53
+\end{lstlisting}
+
+%\begin{table}[h]
+%  \centering
+%\begin{tabular}{c|c|c}
+%\textbf{Latitude} & \textbf{Longitude} & \textbf{Velocity $[km/h]$} \\ \hline
+%48.391565 & 16.106760 & 21.31  \\
+%48.391553 & 16.106985 & 21.31              \\
+%48.391437 & 16.107714 & 21.31             \\
+%48.391340 & 16.108558 & 21.31              \\
+%$\vdots$ &$\vdots$ &$\vdots$ \\
+%48.392290 & 16.170651 & 85.53 \\
+%48.391478 & 16.173173 & 85.53             \\
+%48.391847 & 16.171947 & 85.53              \\
+%48.391847 & 16.171947 & 85.53
+%\end{tabular}
+%\caption{Example output of a generated trajectory}
+%\label{tab:output}
+%\end{table}
 %\begin{enumerate}
 %\item remove data where no call is active
 %\item iterate over all events
 %\item compare cellid and lac of event $i$ and $i+1$
-%\item compare 
+%\item compare
 %\item compare timestamp of event $i$ and $i+1$
 %\item if timestamp difference $>10$ seconds create new call otherwise add event to previous call
 %\end{enumerate}
@@ -251,14 +335,12 @@ The OpenCoverageMap doesn't use the same event structure as A1. Rather than issu
 %\end{algorithmic}
 %\end{algorithm}
 
-\section{Trajectory Service}
-The first two system layers were responsible for storing and providing access to various data sources, this layer however, is utilizing the data. The trajectory service implements the trajectory generation pipeline that has been introduced in Chapter ~\ref{cha:concepts}. The application provides a rich user interface which offers functionalities that allows investigating the used coverage prediction and generating subscriber trajectories. In this section, the most important aspects of the generation pipeline are explained.
-\subsection{Start and End Position}
-\subsection{Route Validation}
-\subsubsection{Geometry}
-\subsubsection{Timing}
-\subsection{Timing Information}
-\subsubsection{Handover Prediction}
+%\section{Trajectory Service}
+%The first two system layers were responsible for storing and providing access to various data sources, this layer however, is utilizing the data. The trajectory service implements the trajectory generation pipeline that has been introduced in Chapter ~\ref{cha:concepts}. The application provides a rich user interface which offers functionalities that allows investigating the used coverage prediction and generating subscriber trajectories. In this section, the most important aspects of the generation pipeline are explained.
+%subsection{The generation process}
+%As already mentioned in chapter~\ref{cha:concepts}
+%\subsection{Trajectory Output}
+
 %\section{Call detection / filtering}
 %\subsection{Call Length Distribution}
 %\section{Stat and End Position}
