@@ -1,9 +1,8 @@
-
 \chapter{Implementation}
 \label{cha:implementation}
 The following chapter will present the actually implemented system. The implementation is based on Chapter~\ref{cha:concepts} where the concepts for the system have been presented. Through out this chapter all parts of the system and their responsibilities will be explained.
 \section{System Overview}
-The developer system consists of a set of individual systems. This systems can be grouped in three groups. The first is responsible for storing information such as: mobile subscription data, population and land use information, road network and cell coverage areas. The second is a data abstraction layer which is used to aggregate the data and present to interested systems via an API. The last group is responsible for processing and generating trajectories. It is using the other systems via the API provided by the data abstraction layer. A brief overview of the implemented system is illustrated in Figure~\ref{fig:systemoverview}.
+The developer system consists of a set of individual systems. This systems can be grouped in three groups. The first is responsible for storing information such as: mobile subscription data, population and land use information, road network and cell coverage areas. The second is a data abstraction layer which is used to aggregate the data and present it to interested systems via an API. The last group is responsible for processing and generating trajectories. It is using the other systems via the API provided by the data abstraction layer. A brief overview of the implemented system is illustrated in Figure~\ref{fig:systemoverview}.
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{./images/systemoverview}
@@ -12,7 +11,7 @@ The developer system consists of a set of individual systems. This systems can b
 \end{figure}
 It depicts the data store which consists of two different databases, the first is responsible for storing geographic information and the second for storing subscription information from A1 and OCM.
 \subsection{Data Store}
-The data store is responsible for storing data, this data either is either geographic information or subscription data. For geographic data the system is using PostgreSQL with the PostGIS extension. PostGIS extends PostgreSQL with support for spatial data structures and topological queries~\cite{Obe2011}. Therefore, it allows the system to store the OpenStreetMap road network, population and land use information, the coverage area and the location of each cell site. PostGIS allows the use of advanced spatial queries as intersections and clipping which is later needed by the system.
+The data store is responsible for storing data, this data is either geographic information or subscription data. For geographic data the system is using PostgreSQL with the PostGIS extension. PostGIS extends PostgreSQL with support for spatial data structures and topological queries~\cite{Obe2011}. Therefore, it allows the system to store the OpenStreetMap road network, population and land use information, the coverage area and the location of each cell site. PostGIS allows the use of advanced spatial queries such as intersections and clipping which is later needed by the system.
 
 Subscription data is stored in a separate MySQL database. It is storing events captured by the A1 system and the OpenCoverageMap project. The database consists of two tables, one for A1 and the second one for OpenCoverageMap.
 \subsection{Data Abstraction API}
@@ -33,16 +32,16 @@ To store geographic information PostgreSQL together with the PostGIS extension i
 \end{figure}
 
 \paragraph{Import Data}
-This section describes the process to import both raster and the a road network into the database. Raster data is simply an image where each pixel corresponds to a coordinate in world space. A raster image defines a grid spacing which defines how far in meters pixel are away. A grid spacing of $20$ meters means that each pixel covers an area of $400$ square meters. Usually environmental and demographic geographic information, is stored as a raster image. On the other hand road networks consists of a vector of points. The road network is stored in the database as Simple Features.
+This section describes the process to import both raster and the road network into the database. Raster data is simply an image where each pixel corresponds to a coordinate in world space. A raster image defines a grid spacing which defines how far in meters pixel are away. A grid spacing of $20$ meters means that each pixel covers an area of $400$ square meters. Usually environmental and demographic geographic information, is stored as a raster image. On the other hand road networks consists of a vector of points. The road network is stored in the database as Simple Features.
 
 \paragraph{Raster}
-To import raster data into the PostgreSQL database the tool \verb|raster2pgsql| was used. Listing~\ref{lst:raster2pgsql} illustrates how to import the data. The parameter \verb|s| defines the spatial reference system of the raster image. The grid spacing of the raster image is defined by parameter \verb|t| and is in this case $100$ by $100$ meters. The tool converts the raster image into an SQL file which can be inserted into the database. To insert the created into the database the second command is used.
+To import raster data into the PostgreSQL database the tool \verb|raster2pgsql| was used. Listing~\ref{lst:raster2pgsql} illustrates how to import the data. The parameter \verb|s| defines the spatial reference system of the raster image. The grid spacing of the raster image is defined by parameter \verb|t| and is in this case $100$ by $100$ meters. The tool converts the raster image into an SQL file which can be inserted into the database. To insert the created SQL file into the database the second command is used.
 \begin{lstlisting}[style=BashInputStyle,caption={Import raster data into PostgreSQL database},label={lst:raster2pgsql}]
     # raster2pgsql -s 4236 -I -C -M *.tif -F -t 100x100 population > pop.sql
     # psql -U postgres -d gisdb -f pop.sql
 \end{lstlisting}
 \paragraph{Road Network}
-Our system is using the routing engine osm2po which operates on the OpenStreetMap road network. Osm2po can convert the OpenStreetMap road network to a PostgreSQL compatible SQL file. Listing~\ref{lst:osm2pgsql} shows the step to import an OpenStreetMap road network -- in this case from Austria -- into the PostgreSQL  database.
+Our system is using the routing engine OSM2PO which operates on the OpenStreetMap road network. OSM2PO can convert the OpenStreetMap road network to a PostgreSQL compatible SQL file. Listing~\ref{lst:osm2pgsql} shows the step to import an OpenStreetMap road network -- in this case from Austria -- into the PostgreSQL  database.
 \begin{lstlisting}[style=BashInputStyle,caption={Import OpenStreetmap data into PostgreSQL database},label={lst:osm2pgsql}]
     # java -jar osm2po-4_8_8.jar prefix=at austria.osm.pbf
     # psql -U postgres -d gisdb -f at/at_2po_4pgr.sql.sql
@@ -152,7 +151,7 @@ app.listen(3000);
 \end{lstlisting}
 
 \subsubsection{Features}
-The Node.js provides several features  to the trajectory service. It enables the trajectory service to access the two database via an uniform API. This API hides the implementation from the using program. However, to increase performance the API was split into two parts. The first API resides on the same server as the PostgreSQL and handles geographic request whereas the second one handles subscription data and resides on the MySQL server.
+The Node.js API provides several features to the trajectory service. It enables the trajectory service to access the two database via an uniform API. This API hides the implementation from the program using it. However, to increase performance the API was split into two parts. The first API resides on the same server as the PostgreSQL and handles geographic request whereas the second one handles subscription data and resides on the MySQL server.
 
 \paragraph{MySQL API}
 provides access to mobile subscription data for both the A1 and OpenCoverageMap data. In addition, the route traveled by a subscriber can be retrieved from the OpenCoverageMap data. This route consists of a timestamp and the latitude and longitude coordinate. All the returned data is encoded as JSON that eases the parsing. Listing~\ref{lst:mysqlapireq} depicts the request that can be made to the database. The first one retrieves events from A1 for the specified user, the second one retrieves events from OpenCoverageMap and the last one get the route traveled by the OpenCoverageMap user.
@@ -163,7 +162,7 @@ GET /ocmroute?id=USER_ID
 \end{lstlisting}
 
 \paragraph{PostgreSQL API}
-enables the requesting program to access functions of the PostgreSQL database. It provides access to raster data as population and land use information as well as to retrieve a random point withing a specified area based on population and land use information (see Listing~\ref{lst:pgapireq}). The bounds parameter is encoded as a list  of coordinate -- separated by a comma -- specifying a bounding box (xmin,ymin,xmax,ymax). In comparison the geom parameter is encoded as Well-known text (WKT) which allows defining more advanced areas as polygons and multi polygons (POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))
+enables the requesting program to access functions of the PostgreSQL database. It provides access to raster data such as population and land use information as well as to retrieve a random point withing a specified area based on population and land use information (see Listing~\ref{lst:pgapireq}). The bounds parameter is encoded as a list  of coordinate -- separated by a comma -- specifying a bounding box (xmin,ymin,xmax,ymax). In comparison the geom parameter is encoded as Well-known text (WKT) which allows defining more advanced areas as polygons and multi polygons (POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10))
 ).
 \begin{lstlisting}[style=BashInputStyle,caption={PostgreSQL API requests},label={lst:pgapireq}]
 GET /populationBounds?bounds=BOUNDARIES
@@ -173,7 +172,7 @@ GET /randomgeom?geom=GEOMETRY&num=NUMBER_OF_POINTS
 
 
 \subsection{Routing Engine}
-To calculate routes on the OpenStreetMap road network, the system is using the osm2po routing engine. This engine can either be used as a standalone web server with a defined API or be integrated into a Java application. In our case the engine was integrated into the trajectory service as a library. The benefit of this approach is, that the system has better access to the graph file used by the engine. The graph file is a reduced road network optimized for routing. By accessing the graph file, the trajectory service can retrieve metadata for the calculated route such as speed limits and length of the roads. This information can later be used to validate the calculate route and the timing information.
+To calculate routes on the OpenStreetMap road network, the system is using the OSM2PO routing engine. This engine can either be used as a standalone web server with a defined API or be integrated into a Java application. In our case the engine was integrated into the trajectory service as a library. The benefit of this approach is, that the system has better access to the graph file used by the engine. The graph file is a reduced road network optimized for routing. By accessing the graph file, the trajectory service can retrieve metadata for the calculated route such as speed limits and length of the roads. This information can later be used to validate the calculate route and annotate it with timing information.
 
 Listing~\ref{lst:osm2po} illustrates how a route between Linz and Hagenberg im Mühlkreis is calculated. The result is an array with segment IDs that can then be used to retrieve the geometry and the speed limits of the segment from the graph file.
 \begin{lstlisting}[language=Java,style=JAVA,caption={Example code to calculate a route between two points},label={lst:osm2po}]
@@ -204,9 +203,9 @@ The trajectory service is using the data and APIs, mentioned in the previous sec
 \end{itemize}
 
 \subsubsection{Convert Events}
-The structure of events used in the trajectory generator was inspired by the structure used in the A1 event stream. To integrate other data sources such as the OpenCoverageMap a converted needs to be implemented. The objective of the converter is to transform the event structure to the one used by A1 events.
+The structure of events used in the trajectory generator was inspired by the structure used in the A1 event stream. To integrate other data sources such as the OpenCoverageMap a converter needs to be implemented. The objective of the converter is to transform the event structure to the one used by A1 events.
 
-The OpenCoverageMap doesn't use the same event structure as A1. Rather than issuing events like call establish / termination or hand over it periodically stores the state of the mobile station. Therefore, this information needs to be transformed to an event structure. The steps to convert the OpenCoverageMap data to the A1 structure are the following: First remove all data where no call is active. Second iterate over this data and check for gaps between succeeding timestamps. Gaps greater than 10 seconds indicate that a call was either established or terminated. Afterwards iterate over the data between two gaps. Create a call establish and termination event at the beginning and end of the list. If there is a difference between the cell-id and location area of two succeeding entries add a hand over event to the current call. The result will be a  list of events with the same structure as the ones captured by A1.
+The OpenCoverageMap does not use the same event structure as A1. Rather than issuing events like call establish / termination or handover events it periodically stores the state of the mobile station. Therefore, this information needs to be transformed to an event structure. The steps to convert the OpenCoverageMap data to the A1 structure are the following: First remove all data where no call is active. Second iterate over this data and check for gaps between succeeding timestamps. Gaps greater than 10 seconds indicate that a call was either established or terminated. Afterwards iterate over the data between the two gaps. Create a call establish and termination event at the beginning and end of the list. If there is a difference between the cell-id and location area of two succeeding entries add a hand over event to the current call. The result will be a  list of events with the same structure as the ones captured by A1.
 \subsubsection{Generation Process}
 The main aspect of the trajectory service is the implementation of the trajectory generation pipeline introduced in chapter~\ref{cha:concepts}. The generation process is implemented as an iterative process. The process contains of the following steps:
 \begin{enumerate}

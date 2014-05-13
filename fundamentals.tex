@@ -3,14 +3,14 @@
 This chapter covers fundamentals that are necessary for a better understanding of the concepts presented in this work. It gives a short introduction into mobile communications systems which our system uses. Mobile communications systems are used in our system to estimate the users coarse location. Furthermore, state of the art analytical mobility models for mobile network simulations are presented. Another section covers the data (provided by A1) our system is using to generate driving trajectories. At last, the process to estimate the coverage area for cell sites with Voronoi tessellation is shown.
 \section{Global System for Mobile Communications}
 %\section{GSM}
-Mobile communication networks are the basis of our modern communication and interaction. However the beginning of wireless communication began in the late \nth{19} century and was shaped by the work of Hughes, Maxwell, Hertz, Tesla and Faraday.
+Mobile communication networks are the basis of our modern communication and interaction. However the start of wireless communication began in the late \nth{19} century and was shaped by the work of Hughes, Maxwell, Hertz, Tesla and Faraday.
 
 In 1982, a new mobile communication network was developed by the Group Spécial Mobile (GSM) of the CEPT (Conférence Européenne des Administrations des Postes et des Télécommunications). The main goal of GSM was to develop a Europe-wide standard for digital mobile communication. Over the past two centuries, there has been a rapid increase in the use of GSM all over the world. The present section is based on the books \emph{GSM: Switching, Services and Protocols} by Jörg Eberspächer et al.\ \cite{Eberspaecher2001} and \emph{Mobilfunknetze und ihre Protokolle 1} by Bernhard Walke \cite{Walke2001}.
 
 Besides GSM, there are other mobile communication currently in use. These systems are known as 3G (UMTS, HSPA, WCDMA, etc.\ ) and 4G (LET, LTE Advanced, etc.\ ) networks whereas GSM is a network of the second generation (2G).
 
 \subsection{Components - System architecture}
-GSM consists of a large number of components which are necessary for its operation. However, we will only focus on components that are necessary to understand the functionality of our system. The overview of a GSM network with GPRS capability is visible in Figure~\ref{fig:GSMNetwork}.  The various standardized interfaces which are responsible for communication between the components can be seen as well as the different components of the \emph{Radio Access Network} RAN and the \emph{Core Network} CN. The RAN consists of a BTS and BSC in GSM and a Node B and a RNC in GPRS.
+GSM consists of a large number of components which are necessary for its operation. However, we will only focus on components that are necessary to understand the functionality of our system. The overview of a GSM network with GPRS capability is visible in Figure~\ref{fig:GSMNetwork}. The various standardized interfaces which are responsible for communication between the components can be seen as well as the different components of the \emph{Radio Access Network} RAN and the \emph{Core Network} CN. The RAN consists of a BTS and BSC in GSM and a Node B and a RNC in GPRS.
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{./images/GSMNetwork}
@@ -29,18 +29,18 @@ For management purposes GSM assigns the following numbers and identities to a MS
 
 \end{itemize}
 \subsubsection{Base Transceiver Station}
-The base transceiver station (BTS) provides the radio channels for signaling and user traffic data with in a cell. The mobile station establishes a connection with the BTS over the air interface. The BTS consists only of a few parts, the high-frequency equipment (transceiver and receiver) and the signaling and protocol processing unit. The control remains in the BSC.
-\subsubsection{Base Station Controller }
-A base station controller (BSC) is used to manage one or more BTS. It is directly connected to a MSC. Together with the BTS, the BSC forms the \emph{Base Station Subsystem} (BSS). For example, the BSC executes the handover protocol and switches a MS to a new BTS.
-\subsubsection{Mobile Switching Center - MSC}
-The mobile switching center (MSC) together with the databases (HLR, VLR) forms the \emph{Mobile Switching System} (MSS). The MSC is responsible for the switching in the network. For example, the MSC performs signal routing, routing path search and service processing. Additionally the MSC has to pay attention to the allocation and administration of radio channel and the mobility of subscribers. A \emph{Public Land Mobile Network} (PLMN) can consists of several MSCs where each is responsible for a dedicated area.
+The \emph{Base Transceiver Station} (BTS) provides the radio channels for signaling and user traffic data within a cell. The mobile station establishes a connection with the BTS over the air interface. The BTS consists only of a few parts, the high-frequency equipment (transceiver and receiver) and the signaling and protocol processing unit. The control remains in the BSC.
+\subsubsection{Base Station Controller}
+A \emph{Base Station Controller} (BSC) is used to manage one or more BTS. It is directly connected to a MSC. Together with the BTS, the BSC forms the \emph{Base Station Subsystem} (BSS). For example, the BSC executes the handover protocol and switches a MS to a new BTS.
+\subsubsection{Mobile Switching Center}
+The \emph{Mobile Switching Center} (MSC) together with the databases (HLR, VLR) forms the \emph{Mobile Switching System} (MSS). The MSC is responsible for the switching in the network. For example, the MSC performs signal routing, routing path search and service processing. Additionally the MSC has to pay attention to the allocation and administration of radio channels and the mobility of subscribers. A \emph{Public Land Mobile Network} (PLMN) can consists of several MSCs where each is responsible for a dedicated area.
 Furthermore, the MSC is connected to a \emph{Gateway Mobile Switching Center} (GMSC) which forwards voice traffic between fixed and mobile networks. The GMSC enables the subscriber to call subscribers in different MSCs or PLMNs.
-\subsubsection{Visited Location Register - VLR}
-The visited location register (VLR) stores information of all MS who are located in the serving area of the associated MSC. A VLR can be assigned to one or more MSCs. A MS can be registered in a VLR of its home PLMN or a foreign one when a roaming agreement exists.
-\subsubsection{Home Location Register - HLR}
-Typically, there is one home location register (HLR) per PLMN and one VLR for each MSC. The HLR stores all permanent and temporary subscriber information for all registered subscribers. Moreover, it stores a coarse current location of each MS. The HLR operates as a central register needed by the MSC for routing of subscribers.
+\subsubsection{Visited Location Register}
+The \emph{Visited Location Register} (VLR) stores information of all MS who are located in the serving area of the associated MSC. A VLR can be assigned to one or more MSCs. A MS can be registered in a VLR of its home PLMN or a foreign one when a roaming agreement exists.
+\subsubsection{Home Location Register}
+Typically, there is one \emph{Home Location Register} (HLR) per PLMN and one VLR for each MSC. The HLR stores all permanent and temporary subscriber information for all registered subscribers. Moreover, it stores a coarse current location of each MS. The HLR operates as a central register needed by the MSC for routing of subscribers.
 \subsection{Radio Resource Management}
-The GSM standard~\cite{Etsi1994} distinguishes between two modes of operation first idle and second connected mode. The radio resource management (RRM) is necessary to manage the physical and logical channels.
+The GSM standard~\cite{Etsi1994} distinguishes between two modes of operation first idle and second connected mode. The \emph{Radio Resource Management} (RRM) is necessary to manage the physical and logical channels.
 \paragraph{Idle Mode}
 In idle mode there is no dedicated channel assigned to a MS. However, the MS listens on signaling channels (BCCH and CCCH). The higher layers are only informed when a MS reaches the boundaries of a location area.
 \paragraph{Connected Mode}
@@ -57,7 +57,7 @@ A handover is the transfer of an established connection to a new BTS. A handover
 
 Handovers are only performed when the MS is in connected mode. If the MS is in idle mode and reaches the boundaries of the cell a location area update is performed if the new cell is in a different location area.
 
-The GSM standard does not define an algorithm for handover decision. Therefore, network suppliers are responsible for implement them. A basic handover algorithm is specified in appendix A of the ETSI GMS 05.08 \cite{Etsi19942}.
+The GSM standard does not define an algorithm for handover decision. Therefore, network suppliers are responsible for implementing them. A basic handover algorithm is specified in appendix A of the ETSI GMS 05.08 \cite{Etsi19942}.
 \paragraph{Intra-Cell-Handover} The channel within the cell will be changed, e.g.\ when the channel is noisy. The change can either be done to a new frequency or to a new time-slot with the same (old) frequency.
 \paragraph{Inter-Cell/Intra-BSC-Handover}
 The channel will be changed between two cells within the same BSC.
@@ -96,7 +96,7 @@ A location area (LA) defines the area within the mobile network in which the mob
 	\label{fig:locationarea}
 \end{figure}
 
-One or more BTS with the same MSC can be part of one location area, in most cases they are part of the same BSC. Figure~\ref{fig:locationarea} shows that a location area can consists of several BTS. Each location area is uniquely defined by the \emph{Location Area Identity} (LAI). The LAI (see Tab.\ \ref{tab:lai}) consists of the Mobile Country Code (e.g.\ Austria 232) which identifies the country, the Mobile Network Code (e.g.\ A1 1) which identifies the PLMN and the Location Area which identifies the location area within the PLMN. Together with the Cell-ID (CID) the LAI forms the Global Cell-ID (GCID).
+One or more BTS with the same MSC can be part of one location area, in most cases they are part of the same BSC. Figure~\ref{fig:locationarea} shows that a location area can consists of several BTS. Each location area is uniquely defined by the \emph{Location Area Identity} (LAI). The LAI (see Table~\ref{tab:lai}) consists of the Mobile Country Code (e.g.\ Austria 232) which identifies the country, the Mobile Network Code (e.g.\ A1 1) which identifies the PLMN and the Location Area which identifies the location area within the PLMN. Together with the Cell-ID (CID) the LAI forms the Global Cell-ID (GCID).
 The size of a location area depends on:
 \begin{itemize}
 	\item Cell density
@@ -139,7 +139,7 @@ Two major analytic models which are used in mobile network simulation are the \e
 %\subsection{Mobility}
 \subsection{Random walk}
 The mobility of entities in nature is unpredictable, therefore a variety of models exists in literature. These models try to describe the mobility for different scenarios. The random walk model is a memory-less system and maintains no record of previous locations and speed. In each iteration dices a new direction and speed within a predefined range \cite{Camp2002}. An example for a generated random walk is depicted in Figure~\ref{fig:randomwalk}. The speed is limited to the interval $0..5$ and angle is limited to $-15..15^\circ$.
-The mobility of entities in nature is unpredictable, therefore a variety of models exists in literature. These models try to describe the mobility for different scenarios. The random walk model is a memory-less system and maintains no record of previous locations and speed. In each iteration dices a new direction and speed within a predefined range \cite{Camp2002}. An example for a generated random walk is depicted in Figure~\ref{fig:randomwalk}. The speed is limited to the interval $0..5$ and angle is limited to $-15..15^\circ$.
+
 %\begin{figure}
 %        \centering
 %%        \begin{subfigure}[b]{0.5\textwidth}
@@ -217,7 +217,7 @@ Figure~\ref{fig:disthandover} shows the distribution of handover events for Mond
 %\end{figure}
 
 \subsection{System Overview}
-Monitoring units need to be installed in the Core Network of A1 to capture useful events. Fig~\ref{fig:A1Network} illustrates the system architecture used by A1 to capture events. The architecture is almost the same as for a typical GSM system, the only differences are the monitoring units responsible for capturing and forwarding events.
+Monitoring units need to be installed in the Core Network of A1 to capture useful events. Figure~\ref{fig:A1Network} illustrates the system architecture used by A1 to capture events. The architecture is almost the same as for a typical GSM system, the only differences are the monitoring units responsible for capturing and forwarding events.
 In order to intercept the network, the monitoring units are attached to the main interfaces (A, IuCS, Gb/IuPS, IuPS) of the Core Network. The processing unit is responsible for aggregating events and ensuring anonymity.
 \begin{figure}
 	\centering
@@ -227,12 +227,12 @@ In order to intercept the network, the monitoring units are attached to the main
 \end{figure}
 
 \subsubsection{Interfaces}
-The monitoring units capture both \emph{Circuit Switched} (CS) and \emph{Packed Switched} (PS) data. Therefore, it intercepts the communication of CS and PS interfaces. The CS interfaces are A and IuCS and they belong to the MSC and enable voice calls and sms. The PS interfaces are the Gb/IuPS and the IuPS. Both are connected to the SGSN and enable subscribers to use packed orientated services (e.g.\ Internet).
+The monitoring units capture both \emph{Circuit Switched} (CS) and \emph{Packed Switched} (PS) data. Therefore, it intercepts the communication of CS and PS interfaces. The CS interfaces are A and IuCS and they belong to the MSC and enable voice calls and SMS. The PS interfaces are the Gb/IuPS and the IuPS. Both are connected to the SGSN and enable subscribers to use packed orientated services (e.g.\ Internet).
 %\ subsubsection{Components}
 %The monitoring unit is responsible for
 \subsection{Data Structure}
 \label{sec:dataa1}
-Each event captured by the monitoring unit is forwarded to the processing unit for further aggregation. An event is encoded into a binary format and then forwarded to thr consumer. Each event has a fixed length (88 bytes) and its structure is shown in Figure~\ref{fig:a1structure}.
+Each event captured by the monitoring unit is forwarded to the processing unit for further aggregation. An event is encoded into a binary format and then forwarded to the consumer. Each event has a fixed length (88 bytes) and its structure is shown in Figure~\ref{fig:a1structure}.
 Because not all fields were used by our system, only the ones used are described.
 
 \subsubsection{Anonymous ID}
@@ -240,11 +240,10 @@ Because not all fields were used by our system, only the ones used are described
 This 32 bytes field contains a unique anonymous identifier of the mobile terminal. It changes every day at midnight, i.e. a device can be followed for maximum 24 hours time span before the assigned anonymous ID changes.
 \subsubsection{Timestamp} The timestamp represents the exact time of occurrence of the event (i.e., the instant when the event has been captured by the monitoring unit).
 \subsubsection{Latitude and Longitude}
-These two fields represent the position of the BTS in which the event occurred. They are both encoded as decimal numbers representing the WGS84 coordinates in degrees. The decimal number is encoded according to IEEE 754 floating-point double format\cite{IEEE754}.
+These two fields represent the position of the BTS in which the event occurred. They are both encoded as decimal numbers representing the WGS84 coordinate system in degrees. The decimal number is encoded according to IEEE 754 floating-point double format~\cite{IEEE754}.
 
 \subsubsection{Event type}
-Every event includes a field (i.e., Event type) that indicates which type of event
-has been detected. All possible signaling events are described in Table~\ref{tab:eventtype}.
+Every event includes a field (i.e., Event type) that indicates which type of event has been detected. All possible signaling events are described in Table~\ref{tab:eventtype}.
 \subsubsection{Angle}
 This field defines the installment of a sector antenna. It is the angle at which the antenna is mounted on the mast. Figure~\ref{fig:antennaangle} illustrates the mounting of a directional antenna on a mast.
 %\begin{figure}
@@ -316,10 +315,10 @@ E4A2E4E263A2B54214A2B28E09AE02C36089219123696993EF9E1DF9D8647F18\\
 \end{itemize}
 \subsection{Events}
 \label{subsec:events}
-In this subsection, we describe how everyday users activities are visible in the A1 data stream. The events detected by the monitoring units from each terminal depends on the type of terminal. While it is not feasible to cover all events (complete list of events is shown in Tab.~\ref{tab:eventtype}), we only describe the ones --highlighted in the table-- used in our system.
+In this subsection, we describe how everyday users activities are visible in the A1 data stream. The events detected by the monitoring units from each terminal depends on the type of terminal. While it is not feasible to cover all events (complete list of events is shown in Table~\ref{tab:eventtype}), we only describe the ones --highlighted in the table-- used in our system.
 
 \subsubsection{Calls}
-When a terminal establishes a call with another subscriber a Mobile Originated Call event is created. The receiving terminal will create a Mobile Terminated Call event. Whenever a call is ended (e.g.\ one subscriber hangs up)an A Disconnect event is created. However in our research of the data stream, there was no evidence of an A Disconnect event.
+When a terminal establishes a call with another subscriber a Mobile Originated Call event is created. The receiving terminal will create a Mobile Terminated Call event. Whenever a call is ended (e.g.\ one subscriber hangs up) an A Disconnect event is created. However in our research of the data stream, there was no evidence of an A Disconnect event.
 \begin{itemize}
 	\item MOBILE TERMINATED CALL (0x1D): terminal receives a call
 	\item MOBILE ORIGINATED CALL (0x22): terminal originates a call
@@ -333,7 +332,7 @@ This message appears in the data stream as:
 	\item IUCS LOCATION UPDATE NORMAL (0x15), in case of 3G terminal
 \end{itemize}
 
-If a devices do not change its Location Area for a specific time and the PLAU timer expires it sends a keep alive message to the core network.
+If a devices does not change its Location Area for a specific time and the PLAU timer expires it sends a keep alive message to the core network.
 \begin{itemize}
 	\item IUPS RA PERIODIC UPDATE (0x0C) and IUCS LOC UPD PERIODIC
 	      (0x17) in case of 3G terminal (for PS and CS domain respectively)
@@ -356,9 +355,7 @@ Figure~\ref{fig:latraversed} illustrates where a location area update (red cell)
 \end{figure}
 
 \subsubsection{Handover Cell Update}
-When a call is established the terminal is said to be in active "connected" state (see \ref{subsub:connected}).  In this state, the network is informed about each change of
-cell, regardless of the LA to which the cell belongs. A limitation is that the A1 data stream is not able to capture cell changes for 3G terminals (these messages do not reach the core network, but terminate in the radio access network,
-i.e. they cannot be monitored by the systems).
+When a call is established the terminal is said to be in active "connected" state (see \ref{subsub:connected}).  In this state, the network is informed about each change of cell, regardless of the LA to which the cell belongs. A limitation is that the A1 data stream is not able to capture cell changes for 3G terminals (these messages do not reach the core network, but terminate in the radio access network, i.e. they cannot be monitored by the systems).
 However cell changes for 2G terminals appear as:
 \begin{itemize}
 	\item GB CELL CHANGE (0x02), in case of an ongoing data connection,
@@ -461,8 +458,8 @@ However cell changes for 2G terminals appear as:
 
 
 \section{OpenCoverageMap}
-OpenCoverageMap was a project and  master thesis done by a colleague of mine at the University of Applied Science Upper Austria. Dieter Schlosser~\cite{Schlosser2012} goal was to create an open network coverage map for mobile networks. Instead of relying on measurements and coverage reports handed out by network operators he was using smartphones that were doing the measurements. This approach, where users a carrying out work, is know as crowd-sourcing~\cite{Surowiecki2004}.
-\subsection{Purpose}
+OpenCoverageMap was a project and master thesis done by a colleague of mine at the University of Applied Science Upper Austria. Dieter Schlosser~\cite{Schlosser2012} goal was to create an open network coverage map for mobile networks. Instead of relying on measurements and coverage reports handed out by network operators he was using smartphones that were doing the measurements. This approach, where users a carrying out work, is know as crowd-sourcing~\cite{Surowiecki2004}.
+\paragraph{Purpose}
 In our project, we are using OpenCoverageMap data to evaluate our approaches. In order to measure the network, OpenCoverageMap captures events similar to the events captured by A1.
 %The main events are:
 %\begin{itemize}
@@ -470,30 +467,30 @@ In our project, we are using OpenCoverageMap data to evaluate our approaches. In
 %\item Call termination
 %\item Handover update
 %\end{itemize}
-The OpenCoverageMap application which is installed on the smartphone periodically records the position (using GPS), the phone state as well as the currently connected cell site. Tab.\ \ref{tab:ocmrecord} shows an example of data that was recorded by the OpenCoverageMap application.
+The OpenCoverageMap application which is installed on the smartphone periodically records the position (using GPS), the phone state as well as the currently connected cell site. Table~\ref{tab:ocmrecord} shows an example of data that was recorded by the OpenCoverageMap application.
 \begin{table}[ht]
 	\begin{tabular}{|l|l|l|l|l|l|l|}  \hline
-		\textbf{Timestamp} & \textbf{Id} & \textbf{Cell-Id} & \textbf{LAC} & \textbf{Latitude} & \textbf{Longitude} & \textbf{State} \\    \hline 1328693325 & 57         & 9884   & 5502 & 48.2443810477206 & 14.2600039950952 & 2 \\  \hline
-		1328693326 & 57         & 9884   & 5502 & 48.2443056521896 & 14.2599996518319 & 2\\  \hline
-		1328693327 & 57         & 9884   & 5502 & 48.2442309368497 & 14.2600018504158 & 2\\  \hline
-		1328693328 & 57         & 9884   & 5502 & 48.2441566900106 & 14.2600058762345 & 2\\  \hline
-		1328693329 & 57         & 9884   & 5502 & 48.2440827177131 & 14.2600098594458 & 2\\  \hline
+		\textbf{Timestamp} & \textbf{Id} & \textbf{Cell-Id} & \textbf{LAC} & \textbf{Latitude} & \textbf{Longitude} & \textbf{State} \\    \hline 1328693325 & 57         & 9884   & 5502 & 48.244381 & 14.260003 & 2 \\  \hline
+		1328693326 & 57         & 9884   & 5502 & 48.244305& 14.259999 & 2\\  \hline
+		1328693327 & 57         & 9884   & 5502 & 48.244230 & 14.260001 & 2\\  \hline
+		1328693328 & 57         & 9884   & 5502 & 48.244156 & 14.260005 & 2\\  \hline
+		1328693329 & 57         & 9884   & 5502 & 48.244082 & 14.260009 & 2\\  \hline
 	\end{tabular}
 	\caption{Data recorded by OpenCoverageMap for the user 57}
 	\label{tab:ocmrecord}
 \end{table}
-The GPS information allows us to evaluate a route estimated by our system with the actually traveled route (see ~\ref{sec:routevalidation} for more information).
+The GPS information allows us to evaluate a route estimated by our system with the actually traveled route (see Section~\ref{sec:routevalidation} for more information).
 %\subsection{System Architecture}
-\subsection{Data Structure}
+\paragraph{Data Structure}
 %\subsection{Conversion}
-OpenCoverageMap does not capture events, therefore, our systems needs to covert the OpenCoverageMap data stream to the same format as the A1 data steam. Call establishment and termination events are generated by comparing the timestamps of each record. OpenCoverageMap logs the state of the MS every second. By iterating over the records and comparing the current state with the previous one, it is possible to extract call establishment and termination events. To generate handover events, an iteration over all records is done, each record compares the cell id and lac with the previous one. If both are similar no event is generated. However, if they are different a handover event is generated. After the conversion is done the OpenCoverageMap event stream looks the same as the A1 event stream.
+OpenCoverageMap does not capture events, therefore, our systems needs to covert the OpenCoverageMap data stream to the same format as the A1 data stream. Call establishment and termination events are generated by comparing the timestamps of each record. OpenCoverageMap logs the state of the MS every second. By iterating over the records and comparing the current state with the previous one, it is possible to extract call establishment and termination events. To generate handover events, an iteration over all records is done, each record compares the cell id and lac with the previous one. If both are similar no event is generated. However, if they are different a handover event is generated. After the conversion is done the OpenCoverageMap event stream looks the same as the A1 event stream.
 \section{Voronoi Tessellation}
 \label{sec:voronoites}
 To generate trajectories for each mobile subscriber their coarse location is needed.
-For this purpose,we first need an estimation of the coverage area of all cell sites. When a mobile subscriber is connected to a cell site we know that his current position must be withing the coverage area of the cell site. A fast approximation of the coverage area can be done with Voronoi diagrams.
-As mentioned before Tettamanti2012 et al.\ \cite{Tettamanti2012} used Voronoi tessellation to estimate the coverage area.
+For this purpose, we first need an estimation of the coverage area of all cell sites. When a mobile subscriber is connected to a cell site we know that his current position must be within the coverage area of the cell site. A fast approximation of the coverage area can be done with Voronoi diagrams.
+As mentioned before Tettamanti et al.~\cite{Tettamanti2012} used Voronoi tessellation to estimate the coverage area.
 
-Voronoi diagrams are widely used in computer science, e.g.\ pattern matching, space division, cluster analysis, collision detection, etc.\ as mentioned by Aurenhammer~\cite{Aurenhammer1991}.
+Voronoi diagrams are widely used in computer science, e.g.\ pattern matching, space division, cluster analysis, collision detection as mentioned by Aurenhammer~\cite{Aurenhammer1991}.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{./images/voronoi2}
@@ -502,7 +499,7 @@ Voronoi diagrams are widely used in computer science, e.g.\ pattern matching, sp
 \end{figure}
 
 \subsection{Point Tessellation}
-The following assumptions are based on \emph{Voronoi diagrams--a survey of a fundamental geometric data structure} by Aurenhammer~\cite{Aurenhammer1991} \emph{Computational Geometry: Algorithms and Applications} by Makr de Berg~\cite{Berg2000}.
+The following assumptions are based on \emph{Voronoi diagrams--a survey of a fundamental geometric data structure} by Aurenhammer~\cite{Aurenhammer1991} and \emph{Computational Geometry: Algorithms and Applications} by Makr de Berg~\cite{Berg2000}.
 
 Let $P=\{p_1,p_2,...,p_n\}$ be a set of $n$ distinct points, in our case the location of each cell site. The Voronoi diagram of $P$ is a subdivision of the plane into $n$ cells. The property that each Voronoi cell must fulfill is that a point $q$ lies in the cell respective to a site $p_i$ only if $dist\left(q,p_i\right) < dist\left(q,p_j\right)$ for each $p_j \in P$ where $i \neq j$. Each cell defines the coverage area for the n-th cell site. Moreover each cell is a (possibly unbounded) open convex polygon. Figure~\ref{fig:voronoi2} illustrates a Voronoi diagram for 16 random points in a two dimensional space. It can be seen that the outer cells are not closed, they shape an open convex polygon. In Section~\ref{sec:boundaries} we show a method to produce closed polygons.
 \begin{equation}
@@ -518,3 +515,21 @@ We mentioned before that a GSM network consists not only of omnidirectional ante
 	\label{eq:move}
 	x=x+\frac{cos(\phi)}{50000},y=y+\frac{cos(\phi)}{50000}
 \end{equation}
+
+%\begin{figure}
+%	\centering
+%	\begin{subfigure}[b]{0.45\textwidth}
+%		\includegraphics[width=\textwidth]{./images/voronoi_linz_split.pdf}
+%		\caption{}
+%		\label{fig:voronoi_linz_split}
+%	\end{subfigure}%
+%	~ %add desired spacing between images, e. g. ~, \quad, \qquad etc.
+%	%(or a blank line to force the subfigure onto a new line)
+%	\begin{subfigure}[b]{0.45\textwidth}
+%		\includegraphics[width=\textwidth]{./images/voronoi_linz_orig.pdf}
+%		\caption{}
+%		\label{fig:voronoi_linz_orig}
+%	\end{subfigure}
+%	\caption{Comparison of a Voronoi diagram for Linz, Austria with (a) and without (b) cell tower segmentation}
+%	\label{fig:voronoi_linz}
+%\end{figure}

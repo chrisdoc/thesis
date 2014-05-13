@@ -24,14 +24,47 @@ extendedchars=true, breaklines=true, literate=
 Kurzfassung
 ===========
 
-An dieser Stelle steht eine Zusammenfassung der Arbeit,
+Mobilitätssimulationen sind ein wichtiges Instrument um den Betrieb von
+mobilen Kommunikationssystemen zu garantieren. Der Zweck von
+Mobilitätssimulationen ist herauszufinden wie mobile Benutzer das
+Netzwerk beeinflussen. Üblicherweise werden diese Mobilitätsmodelle von
+stochastischen Prozessen oder Umfragen abgleitet. Ein weiterer Ansatz
+ist es, diese Modelle aus echten Informationen der Mobilfunkbenutzer
+abzuleiten. Dies erlaubt dem Netzwerkbetreiber sein Netzwerk mit
+Bewegungsmodellen seiner Mobilfunknutzer zu simulieren. In dieser Arbeit
+wir ein System vorgestellt zur Erzeugung von Trajektorien für
+Mobilfunkbenutzer. Die hierdurch erzeugten Trajektorien können
+anschließend in Mobilsimulationen verwendet werden. Das vorgestellte
+System untersucht Handover Events. Da GSM Handover nur durchführt wenn
+das Mobiltelefon im “connected” Modus ist, können Trajektorien nur für
+Mobilfunkbenutzer erzeugt werden welche gerade Telefonieren. Es wird ein
+Ansatz präsentiert welcher mit Hilfe von Prädiktionsrechnungen die
+Position des Handover ermittelt. Das System verwendet
+Bevölkerungsdichtekarten um die Start- und Endposition des
+Mobilfunkbenutzers zu schätzen. Die erzeugten Trajektorien bestehen aus
+der gefahrenen Route und Zeitstempeln welche Rückschlüsse auf die
+Geschwindigkeit geben.
 
 Abstract
 ========
 
-This should be a 1-page (maximum) summary of your work in English.
-
-blah balh
+Mobility simulations are important for the operations of mobile
+communication networks. They aim to investigate how moving subscribers
+affect the underlying core network. Usually the mobility models behind
+this simulations are derived from stochastic processes or surveys. A
+different approach is to derive this mobility model from real world
+subscriber information. Therefore, network operators can make mobility
+simulations with their own subscriber behavior. Within the scope of this
+thesis, a system to estimate driving trajectories for subscribers in
+cellular networks will be presented. The estimated driving trajectories
+can then be used in mobility simulation frameworks .The developed system
+investigates handover updates in the network operator’s core network.
+Since handover events only expose a coarse location information, an
+approach to estimate the handover position based on coverage prediction
+maps will be delineated. The developed system utilizes population
+density maps to estimate the start and end position of the subscriber’s
+journey. The estimated trajectories covers the traveled route as well as
+timestamp to derive the subscriber’s velocity.
 
 Introduction
 ============
@@ -125,7 +158,7 @@ used in traffic modeling since the early 1960s @Beckmann
 (FPD) has gained interest in traffic estimation and congestion
 detection. FPD are used due to its high penetration rate e.g. the market
 penetration in Austria was $159\%$[^1] in 2013. There is a large volume
-of published studies describing the role of FDP for traffic analysis
+of published studies describing the role of FPD for traffic analysis
 @Yim2001 [@Qiu2007; @Caceres2008]. The approaches that will be presented
 here have a higher penetration rate due to the fact that they
 investigate a whole network whereas surveys can only cover parts of the
@@ -181,7 +214,7 @@ Schlaich et al. @Schlaich2010a](./images/schlaichcomp.png "fig:")
 The results showed that this technique works well for longer trips
 around 20 kilometers because trips can only be estimated if the number
 of different location areas is greater than 3. Schlaich et al. also
-stated that the presented approach only generates trajectories for sim
+stated that the presented approach only generates trajectories for SIM
 cards and not for vehicles. A vehicle can have none, one or more SIM
 cards therefore a vehicle can generate $0..n$ trajectories where $n$ is
 the number of SIM cards within the vehicle.
@@ -204,17 +237,17 @@ updates is that a handover update is only propagated when the mobile
 phone is in connected mode (during a call). The start and end of the
 trajectory were set by the centroid of the cell where the call
 originated and terminated. To derive routes, a traffic modeling
-simulation framework *VISSIM* was used. VISSIM was used to generate
-routes between the start and the end of the call. For each of the
-generated routes, the euclidean distance between each of the cell sites
-and the generated route was calculated. To compare different routes
+simulation framework VISSIM was used. VISSIM was used to generate routes
+between the start and the end of the call. For each of the generated
+routes, the euclidean distance between each of the cell sites and the
+generated route was calculated. To compare different routes
 equation [eq:sumsquare] was used as a metric. For each route $j$, the
 squared sum of all minimum distances $d_{i,j}$ between the route and the
 cell site was calculated. The route with the minimum sum was used as a
 trajectory for the subscriber. In Figure [fig:tettaroutes] an example
 for four different routes which were generated by VISSIM can be seen.
-Tab. [tab:tetta] depicts the results of the above stated equations (see
-Equation. [eq:sumsquare]). In this example route 4 (see
+Table [tab:tetta] depicts the results of the above stated equations (see
+Equation [eq:sumsquare]). In this example route 4 (see
 Figure [fig:tettaroutes](d)) had the smallest squared sum of all four
 routes.
 
@@ -250,7 +283,14 @@ min(D_j), j = 1,2,\ldots,n$$
 [tab:tetta]
 
 The research by Tettamanti et al. showed that trajectories can be
-generated for mobile @Valerio2009 [@Valerio20092] at the FTW
+generated for mobile subscribers by analyzing their handover events.
+This can be done without using special equipment and can be used to
+investigate the travel behavior of many subscribers.
+
+#### RoadCell – Road Traffic Estimation from Cellular Network Signaling
+
+By using cellular network monitoring and therefore mobile subscription
+data Valerio et al. @Valerio2009 [@Valerio20092] at the FTW
 Forschungszentrum Telekommunikation Wien GmbH are investigating road
 networks in Austria. *RoadCell*[^2] is using the same mobile
 subscription data source as our system @RoadCell2009. The aim of
@@ -258,32 +298,25 @@ subscription data source as our system @RoadCell2009. The aim of
 events in the core network of the mobile network operator. Driven by the
 fact that each road user is also a subscriber of a cellular network,
 network operator can be seen as another source to gather traffic
-subscribers by analyzing their handover events. This can be done without
-using special equipment and can be used to investigate the travel
-behavior for many subscribers.
-
-#### RoadCell – Road Traffic Estimation from Cellular Network Signaling
-
-By using cellular network monitoring and therefore mobile subscription
-data Valerio et al. information. Their motivation is to provide road
-operators with an inexpensive toolkit to observe the traffic flow
-without the installment of costly sensors. Thereby it is possible to not
-only investigate the traffic flow on the higher road network but also on
-minor roads where the installment of dedicated sensors cost-effective.
-The idea is to observe changes in network signaling events and extract
-road conditions for example: drop in the handover rate;abrupt change in
-the LR update; (c) increase in the number of calls/SMS; change in the
-number of road users. Figure [fig:raodcell~a~ccident] shows how an
-accident effects the amount of Routing Area Update (RAU) and Location
-Area Update (LAU). An accident is indicated by sharp decrease in RAU and
-LAU events followed by a sharp increase in RAU an LAU events.
+information. Their motivation is to provide road operators with an
+inexpensive toolkit to observe the traffic flow without the installment
+of costly sensors. Thereby it is possible to not only investigate the
+traffic flow on the higher road network but also on minor roads where
+the installment of dedicated sensors is not cost-effective. The idea is
+to observe changes in network signaling events and extract road
+conditions for example: drop in the handover rate; abrupt change in the
+LR update; increase in the number of calls/SMS; change in the number of
+road users. Figure [fig:raodcell~a~ccident] shows how an accident
+effects the amount of Routing Area Update (RAU) and Location Area Update
+(LAU). An accident is indicated by a sharp decrease in RAU and LAU
+events followed by a sharp increase in RAU an LAU events.
 
 ![Effect of the accident on the number of combined RAU and LAU; tic=300s
 @Valerio20092](./images/raodcell_accident.png "fig:")
 [fig:raodcell~a~ccident]
 
 Figure [fig:roadcell] depicts the system overview of the *RoadCell*
-project. It can be seen that, despite cellular network data, there are
+project. It can be seen, that despite cellular network data, there are
 additionally data sources used. In order to map a particular event to a
 road segment, they are using coverage predictions from the network
 operator. To support data processing they are using third-party sources
@@ -293,9 +326,9 @@ accurate, but have a lower penetration rate.
 ![RoadCell System Overview @Valerio2009](./images/roadcell.png "fig:")
 [fig:roadcell]
 
-During their research found out that a combination of passive and active
-tracking is best to observe road conditions. Passive tracking is done
-without the involvement of the mobile station. This approach only
+During their research they found out that a combination of passive and
+active tracking is best to observe road conditions. Passive tracking is
+done without the involvement of the mobile station. This approach only
 utilizes the events captured in the operators core network. While
 passive tracking offers a high penetration and no increase in network
 load, it is less accurate than active tracking. Active tracking requires
@@ -307,6 +340,32 @@ always used and once the system detects a possible accident active
 tracking is used for the area in which the accident occurred. This
 approach improves the accuracy while trying to minimize the additional
 network load introduced by active tracking.
+
+#### Differences and Contribution
+
+Our approach utilizes handover events. Consecutive Handovers during a
+call will be combined to a handover sequence. This sequence will be used
+to model the subscriber mobility. Handovers allow the subscriber to move
+from the coverage of one cell site to another while still maintaining an
+ongoing call or data transfer. By estimating the origin of each handover
+event a trajectory can be computed. The computed trajectory represents
+the subscriber route. The time of occurrence of a handover event is used
+as the timestamp. Timestamps in combination with the route will later be
+used to compute the average velocity for each route segment between two
+consecutive handover events. Thus, the system can only compute the
+average velocity for each route segment; the smaller the coverage area
+of succeeding handovers is, the more accurate the velocity will be. The
+main limitation of our approach is that it only works for subscriber in
+connected mode. Therefore, it can only be used to generate trajectories
+for subscribers during a call. However, this limitation is not a
+drawback for network simulation since most of the traffic is produced by
+connected subscribers. This approach allows mobile network operators to
+test their mobile networks with simulations based on subscriber
+behavior. The benefit is that trajectories can be generated for each day
+of the year. Therefore, this approach can be used to investigate, how
+changes in the network infrastructure deal with recent scenarios.
+Annotating the derived route with timing information is an important
+figure as it influences the network load and traffic.
 
 Fundamentals {#cha:fundamentals}
 ============
@@ -325,10 +384,10 @@ Global System for Mobile Communications
 ---------------------------------------
 
 Mobile communication networks are the basis of our modern communication
-and interaction. However the beginning of wireless communication began
-in the late century and was shaped by the work of Hughes, Maxwell,
-Hertz, Tesla and Faraday. In 1982, a new mobile communication network
-was developed by the Group Spécial Mobile (GSM) of the CEPT (Conférence
+and interaction. However the start of wireless communication began in
+the late century and was shaped by the work of Hughes, Maxwell, Hertz,
+Tesla and Faraday. In 1982, a new mobile communication network was
+developed by the Group Spécial Mobile (GSM) of the CEPT (Conférence
 Européenne des Administrations des Postes et des Télécommunications).
 The main goal of GSM was to develop a Europe-wide standard for digital
 mobile communication. Over the past two centuries, there has been a
@@ -374,45 +433,45 @@ a MS:
 
 #### Base Transceiver Station
 
-The base transceiver station (BTS) provides the radio channels for
-signaling and user traffic data with in a cell. The mobile station
+The *Base Transceiver Station* (BTS) provides the radio channels for
+signaling and user traffic data within a cell. The mobile station
 establishes a connection with the BTS over the air interface. The BTS
 consists only of a few parts, the high-frequency equipment (transceiver
 and receiver) and the signaling and protocol processing unit. The
 control remains in the BSC.
 
-#### Base Station Controller 
+#### Base Station Controller
 
-A base station controller (BSC) is used to manage one or more BTS. It is
-directly connected to a MSC. Together with the BTS, the BSC forms the
+A *Base Station Controller* (BSC) is used to manage one or more BTS. It
+is directly connected to a MSC. Together with the BTS, the BSC forms the
 *Base Station Subsystem* (BSS). For example, the BSC executes the
 handover protocol and switches a MS to a new BTS.
 
-#### Mobile Switching Center - MSC
+#### Mobile Switching Center
 
-The mobile switching center (MSC) together with the databases (HLR, VLR)
-forms the *Mobile Switching System* (MSS). The MSC is responsible for
-the switching in the network. For example, the MSC performs signal
+The *Mobile Switching Center* (MSC) together with the databases (HLR,
+VLR) forms the *Mobile Switching System* (MSS). The MSC is responsible
+for the switching in the network. For example, the MSC performs signal
 routing, routing path search and service processing. Additionally the
 MSC has to pay attention to the allocation and administration of radio
-channel and the mobility of subscribers. A *Public Land Mobile Network*
+channels and the mobility of subscribers. A *Public Land Mobile Network*
 (PLMN) can consists of several MSCs where each is responsible for a
 dedicated area. Furthermore, the MSC is connected to a *Gateway Mobile
 Switching Center* (GMSC) which forwards voice traffic between fixed and
 mobile networks. The GMSC enables the subscriber to call subscribers in
 different MSCs or PLMNs.
 
-#### Visited Location Register - VLR
+#### Visited Location Register
 
-The visited location register (VLR) stores information of all MS who are
-located in the serving area of the associated MSC. A VLR can be assigned
-to one or more MSCs. A MS can be registered in a VLR of its home PLMN or
-a foreign one when a roaming agreement exists.
+The *Visited Location Register* (VLR) stores information of all MS who
+are located in the serving area of the associated MSC. A VLR can be
+assigned to one or more MSCs. A MS can be registered in a VLR of its
+home PLMN or a foreign one when a roaming agreement exists.
 
-#### Home Location Register - HLR
+#### Home Location Register
 
-Typically, there is one home location regiser (HLR) per PLMN and one VLR
-for each MSC. The HLR stores all permanent and temporary subscriber
+Typically, there is one *Home Location Register* (HLR) per PLMN and one
+VLR for each MSC. The HLR stores all permanent and temporary subscriber
 information for all registered subscribers. Moreover, it stores a coarse
 current location of each MS. The HLR operates as a central register
 needed by the MSC for routing of subscribers.
@@ -420,7 +479,7 @@ needed by the MSC for routing of subscribers.
 ### Radio Resource Management
 
 The GSM standard @Etsi1994 distinguishes between two modes of operation
-first idle and second connected mode. The radio resource management
+first idle and second connected mode. The *Radio Resource Management*
 (RRM) is necessary to manage the physical and logical channels.
 
 ##### Idle Mode
@@ -456,8 +515,8 @@ the MS is in connected mode. If the MS is in idle mode and reaches the
 boundaries of the cell a location area update is performed if the new
 cell is in a different location area. The GSM standard does not define
 an algorithm for handover decision. Therefore, network suppliers are
-responsible for implement them. A basic handover algorithm is specified
-in appendix A of the ETSI GMS 05.08 @Etsi19942.
+responsible for implementing them. A basic handover algorithm is
+specified in appendix A of the ETSI GMS 05.08 @Etsi19942.
 
 ##### Intra-Cell-Handover
 
@@ -519,7 +578,7 @@ One or more BTS with the same MSC can be part of one location area, in
 most cases they are part of the same BSC. Figure [fig:locationarea]
 shows that a location area can consists of several BTS. Each location
 area is uniquely defined by the *Location Area Identity* (LAI). The LAI
-(see Tab. [tab:lai]) consists of the Mobile Country Code (e.g. Austria
+(see Table [tab:lai]) consists of the Mobile Country Code (e.g. Austria
 232) which identifies the country, the Mobile Network Code (e.g. A1 1)
 which identifies the PLMN and the Location Area which identifies the
 location area within the PLMN. Together with the Cell-ID (CID) the LAI
@@ -625,15 +684,7 @@ system and maintains no record of previous locations and speed. In each
 iteration dices a new direction and speed within a predefined range
 @Camp2002. An example for a generated random walk is depicted in
 Figure [fig:randomwalk]. The speed is limited to the interval $0..5$ and
-angle is limited to $-15..15^\circ$. The mobility of entities in nature
-is unpredictable, therefore a variety of models exists in literature.
-These models try to describe the mobility for different scenarios. The
-random walk model is a memory-less system and maintains no record of
-previous locations and speed. In each iteration dices a new direction
-and speed within a predefined range @Camp2002. An example for a
-generated random walk is depicted in Figure [fig:randomwalk]. The speed
-is limited to the interval $0..5$ and angle is limited to
-$-15..15^\circ$.
+angle is limited to $-15..15^\circ$.
 
 ![Example for a random walk](./images/randomwalk.png "fig:")
 [fig:randomwalk]
@@ -676,7 +727,7 @@ friends while on their way home.
 ### System Overview
 
 Monitoring units need to be installed in the Core Network of A1 to
-capture useful events. Fig [fig:A1Network] illustrates the system
+capture useful events. Figure [fig:A1Network] illustrates the system
 architecture used by A1 to capture events. The architecture is almost
 the same as for a typical GSM system, the only differences are the
 monitoring units responsible for capturing and forwarding events. In
@@ -693,7 +744,7 @@ System](./images/A1Network.png "fig:") [fig:A1Network]
 The monitoring units capture both *Circuit Switched* (CS) and *Packed
 Switched* (PS) data. Therefore, it intercepts the communication of CS
 and PS interfaces. The CS interfaces are A and IuCS and they belong to
-the MSC and enable voice calls and sms. The PS interfaces are the
+the MSC and enable voice calls and SMS. The PS interfaces are the
 Gb/IuPS and the IuPS. Both are connected to the SGSN and enable
 subscribers to use packed orientated services (e.g. Internet).
 
@@ -701,7 +752,7 @@ subscribers to use packed orientated services (e.g. Internet).
 
 Each event captured by the monitoring unit is forwarded to the
 processing unit for further aggregation. An event is encoded into a
-binary format and then forwarded to thr consumer. Each event has a fixed
+binary format and then forwarded to the consumer. Each event has a fixed
 length (88 bytes) and its structure is shown in
 Figure [fig:a1structure]. Because not all fields were used by our
 system, only the ones used are described.
@@ -723,8 +774,8 @@ unit).
 
 These two fields represent the position of the BTS in which the event
 occurred. They are both encoded as decimal numbers representing the
-WGS84 coordinates in degrees. The decimal number is encoded according to
-IEEE 754 floating-point double format@IEEE754.
+WGS84 coordinate system in degrees. The decimal number is encoded
+according to IEEE 754 floating-point double format @IEEE754.
 
 #### Event type
 
@@ -810,7 +861,7 @@ In this subsection, we describe how everyday users activities are
 visible in the A1 data stream. The events detected by the monitoring
 units from each terminal depends on the type of terminal. While it is
 not feasible to cover all events (complete list of events is shown in
-Tab. [tab:eventtype]), we only describe the ones –highlighted in the
+Table [tab:eventtype]), we only describe the ones –highlighted in the
 table– used in our system.
 
 #### Calls
@@ -818,7 +869,7 @@ table– used in our system.
 When a terminal establishes a call with another subscriber a Mobile
 Originated Call event is created. The receiving terminal will create a
 Mobile Terminated Call event. Whenever a call is ended (e.g. one
-subscriber hangs up)an A Disconnect event is created. However in our
+subscriber hangs up) an A Disconnect event is created. However in our
 research of the data stream, there was no evidence of an A Disconnect
 event.
 
@@ -841,8 +892,9 @@ stream as:
 
 -   IUCS LOCATION UPDATE NORMAL (0x15), in case of 3G terminal
 
-If a devices do not change its Location Area for a specific time and the
-PLAU timer expires it sends a keep alive message to the core network.
+If a devices does not change its Location Area for a specific time and
+the PLAU timer expires it sends a keep alive message to the core
+network.
 
 -   IUPS RA PERIODIC UPDATE (0x0C) and IUCS LOC UPD PERIODIC (0x17) in
     case of 3G terminal (for PS and CS domain respectively)
@@ -939,37 +991,37 @@ reports handed out by network operators he was using smartphones that
 were doing the measurements. This approach, where users a carrying out
 work, is know as crowd-sourcing @Surowiecki2004.
 
-### Purpose
+##### Purpose
 
 In our project, we are using OpenCoverageMap data to evaluate our
 approaches. In order to measure the network, OpenCoverageMap captures
 events similar to the events captured by A1. The OpenCoverageMap
 application which is installed on the smartphone periodically records
 the position (using GPS), the phone state as well as the currently
-connected cell site. Tab. [tab:ocmrecord] shows an example of data that
+connected cell site. Table [tab:ocmrecord] shows an example of data that
 was recorded by the OpenCoverageMap application.
 
 [ht]
 
-  **Timestamp**   **Id**   **Cell-Id**   **LAC**   **Latitude**       **Longitude**      **State**
-  --------------- -------- ------------- --------- ------------------ ------------------ -----------
-  1328693325      57       9884          5502      48.2443810477206   14.2600039950952   2
-  1328693326      57       9884          5502      48.2443056521896   14.2599996518319   2
-  1328693327      57       9884          5502      48.2442309368497   14.2600018504158   2
-  1328693328      57       9884          5502      48.2441566900106   14.2600058762345   2
-  1328693329      57       9884          5502      48.2440827177131   14.2600098594458   2
+  **Timestamp**   **Id**   **Cell-Id**   **LAC**   **Latitude**   **Longitude**   **State**
+  --------------- -------- ------------- --------- -------------- --------------- -----------
+  1328693325      57       9884          5502      48.244381      14.260003       2
+  1328693326      57       9884          5502      48.244305      14.259999       2
+  1328693327      57       9884          5502      48.244230      14.260001       2
+  1328693328      57       9884          5502      48.244156      14.260005       2
+  1328693329      57       9884          5502      48.244082      14.260009       2
 
 [tab:ocmrecord]
 
 The GPS information allows us to evaluate a route estimated by our
-system with the actually traveled route (see  [sec:routevalidation] for
-more information).
+system with the actually traveled route (see
+Section [sec:routevalidation] for more information).
 
-### Data Structure {#data-structure}
+##### Data Structure {#data-structure}
 
 OpenCoverageMap does not capture events, therefore, our systems needs to
 covert the OpenCoverageMap data stream to the same format as the A1 data
-steam. Call establishment and termination events are generated by
+stream. Call establishment and termination events are generated by
 comparing the timestamps of each record. OpenCoverageMap logs the state
 of the MS every second. By iterating over the records and comparing the
 current state with the previous one, it is possible to extract call
@@ -984,15 +1036,15 @@ Voronoi Tessellation {#sec:voronoites}
 --------------------
 
 To generate trajectories for each mobile subscriber their coarse
-location is needed. For this purpose,we first need an estimation of the
+location is needed. For this purpose, we first need an estimation of the
 coverage area of all cell sites. When a mobile subscriber is connected
-to a cell site we know that his current position must be withing the
+to a cell site we know that his current position must be within the
 coverage area of the cell site. A fast approximation of the coverage
-area can be done with Voronoi diagrams. As mentioned before
-Tettamanti2012 et al. @Tettamanti2012 used Voronoi tessellation to
-estimate the coverage area. Voronoi diagrams are widely used in computer
-science, e.g. pattern matching, space division, cluster analysis,
-collision detection, etc. as mentioned by Aurenhammer @Aurenhammer1991.
+area can be done with Voronoi diagrams. As mentioned before Tettamanti
+et al. @Tettamanti2012 used Voronoi tessellation to estimate the
+coverage area. Voronoi diagrams are widely used in computer science,
+e.g. pattern matching, space division, cluster analysis, collision
+detection as mentioned by Aurenhammer @Aurenhammer1991.
 
 ![Voronoi diagram of 16 random points in a 2D
 space](./images/voronoi2.png "fig:") [fig:voronoi2]
@@ -1001,7 +1053,7 @@ space](./images/voronoi2.png "fig:") [fig:voronoi2]
 
 The following assumptions are based on *Voronoi diagrams–a survey of a
 fundamental geometric data structure* by Aurenhammer @Aurenhammer1991
-*Computational Geometry: Algorithms and Applications* by Makr de
+and *Computational Geometry: Algorithms and Applications* by Makr de
 Berg @Berg2000. Let $P=\{p_1,p_2,...,p_n\}$ be a set of $n$ distinct
 points, in our case the location of each cell site. The Voronoi diagram
 of $P$ is a subdivision of the plane into $n$ cells. The property that
@@ -1030,12 +1082,12 @@ hull over all sites and clip it with the Voronoi diagram.
 
 ### Cell Tower Segmentation
 
-We mentioned before that a GSM network consists not only of omni
-directional antennas but also of sectored antennas. The coverage area of
-each sector is defined by the angle at which the antenna is mounted on
-the tower. If we would only consider the location of each cell sites,
-sectors with different angles would have the same Voronoi polygon and,
-therefore, the same coverage area. In order to get a better
+We mentioned before that a GSM network consists not only of
+omnidirectional antennas but also of sectored antennas. The coverage
+area of each sector is defined by the angle at which the antenna is
+mounted on the tower. If we would only consider the location of each
+cell sites, sectors with different angles would have the same Voronoi
+polygon and, therefore, the same coverage area. In order to get a better
 representation of the coverage area for each sector, we moved the
 location of each sector based on its angle $\phi$. The definition of the
 movement can be found in Equation [eq:move]. The constant factor means a
@@ -1052,7 +1104,7 @@ subscribers is introduced. The developed pipeline consists of a
 five-steps model, which is shown in Figure [fig:pipeline]. The concept
 to generate trajectories is the following: The input data is iteratively
 used to generate trajectories for each subscriber. The output is a
-trajectory which consists of the route, traveled by the subscriber as
+trajectory which consists of the route, traveled by the subscriber, as
 well as timestamps, which defines the point in time when the subscriber
 was located at this location. Given below each step of the pipeline is
 described in more detail to better understand how the system operates.
@@ -1087,7 +1139,7 @@ information is derived from data from the *CORINE*[^3] project which was
 initiated by the European Commission in 1985. The main purpose of this
 project was to generate a geographic information system for the member
 states of the European Union. The *CORINE* land cover (CLC) project is
-one essential part of the *CORINE* projects which aim to develop a land
+one essential part of the *CORINE* projects which aims to develop a land
 cover information system for twelve member states of the European Union
 (Effective 2006). The *CORINE* land cover project distinguishes between
 five main categories and in total 44 land cover classes. Out of the five
@@ -1099,7 +1151,7 @@ areas where subscribers are not starting or ending their calls. The
 *CORINE* land cover data for Austria can be obtained from the following
 service[^4]. The land cover data is provided in two different data
 types, first as a raster image with a grid size of 100 meters and second
-as a Shapefile..Figure [fig:clc~a~ustria] illustrates the land cover
+as a Shapefile. Figure [fig:clc~a~ustria] illustrates the land cover
 map[^5] of Austria. The red spots within the image represents urban
 fabric areas whereas green denotes to forest and semi-natural areas.
 
@@ -1110,7 +1162,7 @@ fabric areas whereas green denotes to forest and semi-natural areas.
 
 The second type of input data used in the generation pipeline are
 population density maps. Population density maps belong to the class of
-socio-statistical and provide information about the distribution of
+socio-statistical maps and provide information about the distribution of
 population in a geographical area. Gallego et al. @Gallego2010
 [@Gallego2011] describe several disaggregation methods which can be used
 to generate a population density map of the European Union. Their
@@ -1229,14 +1281,14 @@ Environment Agency[^9] provides a Digital Elevation Model of Europe. A
 Digital Elevation Model is aligned in a grid and for each cell of the
 grid the altitude above sea level is known. The EEA Digital Elevation
 Model consists of a raster with 25 meters grid spacing. The quality of
-the coverage prediction is limited by the resolution of the underlaying
+the coverage prediction is limited by the resolution of the underlying
 Digital Elevation Model. Therefore by using a better model the accuracy
 of the prediction can be increased.
 
 ##### Transmit Power
 
 The transmit power defines the power level of the transmitter of the
-antenna. An increase in transmit power means an increase in coverage
+antenna. An increase in transmit power Since an increase in coverage
 since the path loss effect will be minimized. Because the network
 operator has not provided any information about the transmit power of
 its BTS the system is using an alternative data source. In Austria the
@@ -1256,9 +1308,9 @@ defines the following four categories for transmit power:
 
 By querying the Senderkataster with the research area, the system can
 get the transmitting power. However, the Senderkataster is a voluntary
-project and relies on the data provided mobile network operators. This
-has the disadvantage that every cell site of a network operator is
-listed in the Senderkataster.
+project and relies on the data provided by mobile network operators.
+This has the disadvantage that not every cell site of a network operator
+is listed in the Senderkataster.
 
 ##### Data Extraction
 
@@ -1305,21 +1357,21 @@ cell site can be connected to one or more transmitters. By querying the
 A1 data set and only storing unique tuples of latitude and longitude,
 the system can derive all cell site locations. To get the transmitters
 for each cell site, the A1 data set is queried for each unique location
-tuple. A basic transmitter consists of a location, Cell-ID, LAC, power,
-height and angle. The location is a direct relation to the cell site.
-The power indicates the transmit power. As there is not information
-about the installment height of the transmitter it was set to be $20$
-meters for all transmitters. A higher transmitter height might increase
-the coverage area for areas shadowed by hills or buildings. The angle
-defines the mounting angle and indicates in which direction the
-transmitter is beaming.
+tuple. A basic transmitter consists of a location, Cell-ID, LAC,
+transmit power, height and angle. The location is a direct relation to
+the cell site. The power indicates the transmit power of the
+transmitter. As there is not information about the installment height of
+the transmitter it was set to be $20$ meters for all transmitters. A
+higher transmitter height might increase the coverage area for areas
+shadowed by hills or buildings. The angle defines the mounting angle and
+indicates in which direction the transmitter is beaming.
 
 ##### Best Server Plot
 
 All the above mentioned data is fed into the network planning tool to
 calculate the best server plot that is used as a coverage prediction. A
-best server plot calculates for each transmitter its path loss effect.
-The path loss specifies the reduction of power density of an
+best server plot calculates the path-loss effect for each transmitter.
+The path-loss specifies the reduction of power density of an
 electromagnetic wave as it propagates through space. To calculate the
 path loss for each transmitter the COST-Hata model is used which extends
 the urban Okumura-Hata model . The main equations of the COST-Hata model
@@ -1362,16 +1414,16 @@ Prediction](./images/coveragemapsmall.png "fig:") [fig:coveragepred]
 
 [fig:cellarea]
 
-Figure [fig:cellarea] shows two plots different path loss plots for
-Hagenberg, Austria. The first one Figure [fig:signallevel] depicts the
-attenuation for each transmitter in the area. The red area indicates a
-small attenuation whereas yellow indicates a high attenuation. The
-colorbar in Figure [fig:signallevelbar] indicates the signal strength
-(dBm) for the above signal level plot. From theses attenuation values, a
-best server plot – coverage prediction – for each transmitter can be
-derived as shown in Figure [fig:coveragepred]. It can be seen that there
-is an overlapping area between neighboring transmitters. The system is
-using the predicted coverage area for start and end point estimation and
+Figure [fig:cellarea] shows two different path-loss plots for Hagenberg,
+Austria. The first one Figure [fig:signallevel] depicts the attenuation
+for each transmitter in the area. The red area indicates a small
+attenuation whereas yellow indicates a high attenuation. The colorbar in
+Figure [fig:signallevelbar] indicates the signal strength (dBm) for the
+above signal level plot. From theses attenuation values, a best server
+plot – coverage prediction – for each transmitter can be derived as
+shown in Figure [fig:coveragepred]. It can be seen that there is an
+overlapping area between neighboring transmitters. The system is using
+the predicted coverage area for start and end point estimation and
 timing purposes.
 
 Call Detection
@@ -1418,8 +1470,8 @@ follow-up event.
 Route Calculation
 -----------------
 
-The following section presents the process of calculation a route for a
-mobile subscriber. In genera,l each call is used to calculate one route
+The following section presents the process of calculating a route for a
+mobile subscriber. In general each call is used to calculate one route
 which is later transfered to a trajectory. The process consists of
 several steps which will be described in the succeeding sections.
 
@@ -1450,7 +1502,7 @@ areas](./images/pop_vienna.png "fig:") [fig:pop~v~ienna]
 
 #### Corine Land Cover Clipping
 
-By clipping and therefore removing unwanted areas the system can narrows
+By clipping and therefore removing unwanted areas the system can narrow
 the boundaries in which a subscriber is located. To clip the coverage
 area of a cell the system loads the *Corine* land cover map for the
 particular area. The next step is to clip the cell coverage area with
@@ -1472,26 +1524,26 @@ areas.
 
 The first step is to load the population density map for the coverage
 area. A random number generator with a defined probability density
-function will created. The probability density function is derived from
-the population density map. When the system loads the population density
-map for the coverage area it will get $n$ polygons with $n$ different
-population densities. More generally speaking each area with a unique
-population density is represented by a polygon. Afterwards the random
-number generator is used to dice a area of interest. By using the
-population density as function for the random number generator areas
-with a hight population density will be picked more often than less
+function will be created. The probability density function is derived
+from the population density map. When the system loads the population
+density map for the coverage area it will get $n$ polygons with $n$
+different population densities. More generally speaking each area with a
+unique population density is represented by a polygon. Afterwards the
+random number generator is used to dice an area of interest. By using
+the population density as a function for the random number generator,
+areas with a high population density will be picked more often than less
 populated areas. Once the system picked a polygon based on the random
 number generator it clips this polygon with the coverage area. This
 process narrows the boundaries of the subscribers location. Following
 the subscribers location will be set by dicing a location within the
-remaining coverage area. Figure [fig:population] illustrates an example
+remaining coverage area. Figure [fig:population] illustrates an example
 for different population densities within the boundaries of one cell. We
-can see that total population is $315$. We calculate a *pdf* for all
+can see that the total population is $315$. We calculate a *pdf* for all
 three population cells based on the ratio of the population and the
 total population. The calculated *pdf* will be used to estimate the
 user’s start and end position. As an example the probability that the
-starting point is within the polygon with Population 240 is given by
-240/315. Within the polygon “Population 240” the starting point is
+starting point is within the polygon with Population $240$ is given by
+$240$/$315$. Within the polygon “Population 240” the starting point is
 selected based on a uniform distribution.
 
 ![A Demonstration of a Population Grid for a Cell
@@ -1524,13 +1576,13 @@ distribute subscribers location with the polygon. A *pdf* will be
 created by using the area of each triangle as input. A random number
 generator will use this *pdf* and randomly assign the triangle in which
 the subscribers location shall be diced. In Figure [fig:comprandom] two
-different approaches for random triangle point picking. The first one is
-picking a point within the boundaries of the triangle whereas the second
-one is picking a point in a quadrilateral which consist of the triangle
-and its mirroring. To pick a point in a triangle the first approach is
-using Equation [eq:randtriangle] where $a_1$ and $a_2$ are uniform
-random numbers in the interval $ \left[0,1 \right] $, $v_1$ and $v_2$
-are two vertices’s of the triangle. As depicted in
+different approaches for random triangle point picking are illustrated.
+The first one is picking a point within the boundaries of the triangle
+whereas the second one is picking a point in a quadrilateral which
+consist of the triangle and its mirroring. To pick a point in a triangle
+the first approach is using Equation [eq:randtriangle] where $a_1$ and
+$a_2$ are uniform random numbers in the interval $ \left[0,1 \right] $,
+$v_1$ and $v_2$ are two vertices’s of the triangle. As depicted in
 Figure [fig:randtriangle] this approach does not create uniform
 distributed points within the triangle. The second approach is different
 from the first one as it does not pick points within the triangle but
@@ -1567,7 +1619,7 @@ calculated with OSM2PO.
 
 ##### OSM2PO
 
-OSM2PO is a project developer by Carsten Moeller which allows routing on
+OSM2PO is a project developed by Carsten Moeller which allows routing on
 the freely available OpenStreetMap road network. On the first start
 OSM2PO is generating a graph network out of the road network. The graph
 network is used internally of OSM2PO and allows a faster route
@@ -1741,7 +1793,7 @@ allowed maximum velocity a reposition takes place. Repositioning is done
 by first calculating the distance a subscriber can move from one
 handover time-stamp $H_i$ to the next one $H_{i+1}$, considering the
 allowed maximum velocity. The handover point $H_{i+1 }$ is then
-reposition so that the distance between $H_i$ and $H_{i+1}$ equals the
+repositioned so that the distance between $H_i$ and $H_{i+1}$ equals the
 allowed distance. By decreasing the distance between $H_i$ and $H_{i+1}$
 the distance between $H_{i+1}$ and $H_{i+2}$ will increase. This leads
 to a velocity decrease for the route segment between $H_i$ and $H_{i+1}$
@@ -1795,10 +1847,10 @@ systems can be grouped in three groups. The first is responsible for
 storing information such as: mobile subscription data, population and
 land use information, road network and cell coverage areas. The second
 is a data abstraction layer which is used to aggregate the data and
-present to interested systems via an API. The last group is responsible
-for processing and generating trajectories. It is using the other
-systems via the API provided by the data abstraction layer. A brief
-overview of the implemented system is illustrated in
+present it to interested systems via an API. The last group is
+responsible for processing and generating trajectories. It is using the
+other systems via the API provided by the data abstraction layer. A
+brief overview of the implemented system is illustrated in
 Figure [fig:systemoverview].
 
 ![System overview of the implemented
@@ -1810,16 +1862,16 @@ for storing subscription information from A1 and OCM.
 
 ### Data Store
 
-The data store is responsible for storing data, this data either is
-either geographic information or subscription data. For geographic data
-the system is using PostgreSQL with the PostGIS extension. PostGIS
-extends PostgreSQL with support for spatial data structures and
-topological queries @Obe2011. Therefore, it allows the system to store
-the OpenStreetMap road network, population and land use information, the
+The data store is responsible for storing data, this data is either
+geographic information or subscription data. For geographic data the
+system is using PostgreSQL with the PostGIS extension. PostGIS extends
+PostgreSQL with support for spatial data structures and topological
+queries @Obe2011. Therefore, it allows the system to store the
+OpenStreetMap road network, population and land use information, the
 coverage area and the location of each cell site. PostGIS allows the use
-of advanced spatial queries as intersections and clipping which is later
-needed by the system. Subscription data is stored in a separate MySQL
-database. It is storing events captured by the A1 system and the
+of advanced spatial queries such as intersections and clipping which is
+later needed by the system. Subscription data is stored in a separate
+MySQL database. It is storing events captured by the A1 system and the
 OpenCoverageMap project. The database consists of two tables, one for A1
 and the second one for OpenCoverageMap.
 
@@ -1873,7 +1925,7 @@ database](./images/pg_structure.png "fig:") [fig:pg~s~tructure]
 
 ##### Import Data
 
-This section describes the process to import both raster and the a road
+This section describes the process to import both raster and the road
 network into the database. Raster data is simply an image where each
 pixel corresponds to a coordinate in world space. A raster image defines
 a grid spacing which defines how far in meters pixel are away. A grid
@@ -1891,13 +1943,13 @@ import the data. The parameter `s` defines the spatial reference system
 of the raster image. The grid spacing of the raster image is defined by
 parameter `t` and is in this case $100$ by $100$ meters. The tool
 converts the raster image into an SQL file which can be inserted into
-the database. To insert the created into the database the second command
-is used.
+the database. To insert the created SQL file into the database the
+second command is used.
 
 ##### Road Network
 
-Our system is using the routing engine osm2po which operates on the
-OpenStreetMap road network. Osm2po can convert the OpenStreetMap road
+Our system is using the routing engine OSM2PO which operates on the
+OpenStreetMap road network. OSM2PO can convert the OpenStreetMap road
 network to a PostgreSQL compatible SQL file. Listing [lst:osm2pgsql]
 shows the step to import an OpenStreetMap road network – in this case
 from Austria – into the PostgreSQL database.
@@ -2014,13 +2066,13 @@ provided in Listing [lst:nodemodules]:
 
 #### Features
 
-The Node.js provides several features to the trajectory service. It
+The Node.js API provides several features to the trajectory service. It
 enables the trajectory service to access the two database via an uniform
-API. This API hides the implementation from the using program. However,
-to increase performance the API was split into two parts. The first API
-resides on the same server as the PostgreSQL and handles geographic
-request whereas the second one handles subscription data and resides on
-the MySQL server.
+API. This API hides the implementation from the program using it.
+However, to increase performance the API was split into two parts. The
+first API resides on the same server as the PostgreSQL and handles
+geographic request whereas the second one handles subscription data and
+resides on the MySQL server.
 
 ##### MySQL API
 
@@ -2041,9 +2093,9 @@ get the route traveled by the OpenCoverageMap user.
 ##### PostgreSQL API
 
 enables the requesting program to access functions of the PostgreSQL
-database. It provides access to raster data as population and land use
-information as well as to retrieve a random point withing a specified
-area based on population and land use information (see
+database. It provides access to raster data such as population and land
+use information as well as to retrieve a random point withing a
+specified area based on population and land use information (see
 Listing [lst:pgapireq]). The bounds parameter is encoded as a list of
 coordinate – separated by a comma – specifying a bounding box
 (xmin,ymin,xmax,ymax). In comparison the geom parameter is encoded as
@@ -2058,7 +2110,7 @@ polygons and multi polygons (POLYGON ((30 10, 40 40, 20 40, 10 20, 30
 ### Routing Engine
 
 To calculate routes on the OpenStreetMap road network, the system is
-using the osm2po routing engine. This engine can either be used as a
+using the OSM2PO routing engine. This engine can either be used as a
 standalone web server with a defined API or be integrated into a Java
 application. In our case the engine was integrated into the trajectory
 service as a library. The benefit of this approach is, that the system
@@ -2066,11 +2118,11 @@ has better access to the graph file used by the engine. The graph file
 is a reduced road network optimized for routing. By accessing the graph
 file, the trajectory service can retrieve metadata for the calculated
 route such as speed limits and length of the roads. This information can
-later be used to validate the calculate route and the timing
-information. Listing [lst:osm2po] illustrates how a route between Linz
-and Hagenberg im Mühlkreis is calculated. The result is an array with
-segment IDs that can then be used to retrieve the geometry and the speed
-limits of the segment from the graph file.
+later be used to validate the calculate route and annotate it with
+timing information. Listing [lst:osm2po] illustrates how a route between
+Linz and Hagenberg im Mühlkreis is calculated. The result is an array
+with segment IDs that can then be used to retrieve the geometry and the
+speed limits of the segment from the graph file.
 
     File graphFile = new File("at_2po_4pgr.gph");
     Graph graph = new Graph(graphFile);
@@ -2111,19 +2163,19 @@ site. The trajectory service is using the following data:
 
 The structure of events used in the trajectory generator was inspired by
 the structure used in the A1 event stream. To integrate other data
-sources such as the OpenCoverageMap a converted needs to be implemented.
+sources such as the OpenCoverageMap a converter needs to be implemented.
 The objective of the converter is to transform the event structure to
-the one used by A1 events. The OpenCoverageMap doesn’t use the same
+the one used by A1 events. The OpenCoverageMap does not use the same
 event structure as A1. Rather than issuing events like call establish /
-termination or hand over it periodically stores the state of the mobile
-station. Therefore, this information needs to be transformed to an event
-structure. The steps to convert the OpenCoverageMap data to the A1
-structure are the following: First remove all data where no call is
+termination or handover events it periodically stores the state of the
+mobile station. Therefore, this information needs to be transformed to
+an event structure. The steps to convert the OpenCoverageMap data to the
+A1 structure are the following: First remove all data where no call is
 active. Second iterate over this data and check for gaps between
 succeeding timestamps. Gaps greater than 10 seconds indicate that a call
 was either established or terminated. Afterwards iterate over the data
-between two gaps. Create a call establish and termination event at the
-beginning and end of the list. If there is a difference between the
+between the two gaps. Create a call establish and termination event at
+the beginning and end of the list. If there is a difference between the
 cell-id and location area of two succeeding entries add a hand over
 event to the current call. The result will be a list of events with the
 same structure as the ones captured by A1.
@@ -2229,13 +2281,11 @@ computed with the approach described in section [sec:velocity].
 Results {#cha:results}
 =======
 
-In this chapter, various mobile subscriber trajectories will be
-presented that have been generated using the developed system. Mobile
-subscription data from several subscribers captured by the
-OpenCoverageMap was used. The generated trajectories cover rural and
-urban areas, which allows evaluating the approach for several scenarios.
-All results are fully reproducible in case the same subscriber and
-coverage predictions are used.
+In this chapter, two mobile subscriber trajectories will be presented
+that have been generated using the developed system. The generated
+trajectories cover semi-rural and urban areas, which allows evaluating
+the approach for different scenarios. All results are fully reproducible
+in case the same subscriber and coverage predictions are used.
 
 Example 1
 ---------
@@ -2277,24 +2327,27 @@ within the coverage area of the first and last cell were used. The
 random positions were derived from a probability density function that
 was generated by the population density in the area as described in
 Section [sec:startandend]. Table [tab:563route] depicts the metrics used
-to choose the best approximation. An illustration of all computed routes
-can be found in Figure [fig:563~r~outes]. The time-ration in conjunction
-with the squared sum of distances between the route and each coverage
-area allows the system to choose the best approximated route. In case of
-subscriber 563 the route with time-ratio $1.00$ and
+to choose the best approximation. This metrics are the time-ratio
+between the journey time and the time it takes to traverse the route as
+well as the summed square of distances between the route and the
+centroids of the involved cell sites. An illustration of all computed
+routes can be found in Figure [fig:563~r~outes]. The time-ration in
+conjunction with the squared sum of distances between the route and each
+coverage area allows the system to choose the best approximated route.
+In case of subscriber 563 the route with time-ratio $1.00$ and
 $\sum {d}_{i}^{2}=0.35$ was picked. To compare the estimated route with
 the real route recorded with GPS the Hausdorff metric was used. The
 Hausdorff metric for the chosen route compared with the actual route was
-$0.990138 $. That means that maximum distance between the chosen route
-and the actual route was very small. Thus, the similarity of both routes
-is high. A second metric which takes the continuity of both routes into
-account is the Frechet distance. A Frechet distance of $0$ means that
-both routes are identical. Therefore, the smaller the Frechet distance
-is, the higher is the similarity. The computed Frechet distance for the
-estimated route was $0.0134$. Even if the estimated route corresponds to
-the actual route – recorded with GPS – there is a Frechet distance $>0$.
-This is due to the fact that GPS introduces an error which can lead to a
-deviation.
+$0.990138 $. That means that the maximum distance between the chosen
+route and the actual route was very small. Thus, the similarity of both
+routes is high. A second metric which takes the continuity of both
+routes into account is the Frechet distance. A Frechet distance of $0$
+means that both routes are identical. Therefore, the smaller the Frechet
+distance is, the higher is the similarity. The computed Frechet distance
+for the estimated route was $0.0134$. Even if the estimated route
+corresponds to the actual route – recorded with GPS – the Frechet
+distance is not $0$. This is due to the fact that GPS introduces an
+error which can lead to a deviation.
 
 ![Example 1: Illustration of 20 routes with different start and end
 position](./images/563_routes.png "fig:") [fig:563~r~outes]
@@ -2326,15 +2379,16 @@ position](./images/563_routes.png "fig:") [fig:563~r~outes]
 
 #### Handover
 
-After an approximation of the subscriber has been chosen handover points
-were estimated. The estimation was done for both the network coverage
+After the subscriber route was approximated handover points were
+estimated. The estimation was done for both the network coverage
 prediction and the Voronoi diagram coverage. Figure [fig:563distcomp]
 shows a comparison of distances between the observed handover position
-and the estimated handover position for both coverage predictions. It
-can be seen that the handover estimation done with Voronoi diagram
-coverage performed better than the network coverage prediction for the
-first half of the route. On the other hand the network coverage
-prediction performed better in the second half of the route.
+and the estimated handover position for both the network coverage
+prediction and Voronoi diagram coverage. It can be seen that the
+handover estimation done with Voronoi diagram coverage performed better
+than the network coverage prediction for the first half of the route. On
+the other hand the network coverage prediction performed better in the
+second half of the route.
 
 #### Velocity {#velocity}
 
@@ -2400,12 +2454,12 @@ shown; the most suitable was highlighted. The most suitable route in
 this example had a time-ratio of $0.97$ and a sum square distance of
 $\sum {d}_{i}^{2}=0.40$. The Hausdorff metric and Frechet distance was
 used again to measure the similarity of the most suited route and the
-observed route. Figure [fig:1058~r~outes] illustrates the 20 routes
-which have been computed between the estimated start and end position.
-The Hausdorff metric was $0.933091$ which indicates that there has been
-a deviation with the estimated start and end position and the actual
-one. However, the Frechet distance was $0.0034$ which means that the
-geometry of both routes is very similar.
+actual traveled route. Figure [fig:1058~r~outes] illustrates the 20
+routes which have been computed between the estimated start and end
+position. The Hausdorff metric was $0.933091$ which indicates that there
+has been a deviation with the estimated start and end position and the
+actual one. However, the Frechet distance was $0.0034$ which means that
+the geometry of both routes is very similar.
 
 ![Example 2: Illustration of 20 routes with different start and end
 position](./images/1058_routes.png "fig:") [fig:1058~r~outes]
@@ -2449,12 +2503,12 @@ with both Voronoi diagram coverage and network coverage prediction.
 
 #### Velocity {#velocity-1}
 
-Similar to example one there was a deviation of estimated and observed
-handover positions. This deviation introduced an error which led to an
-increase in speed for the segment where the deviation happened. In
-Figure [fig:1058~v~elocityNoAdapt] the speed increase is visible as four
-spikes. The adaption algorithm was used to remove this speed over-runs.
-The result of the adaption algorithm can be seen in
+Similar to the first example there was a deviation of estimated and
+observed handover positions. This deviation introduced an error which
+led to an increase in speed for the segment where the deviation
+happened. In Figure [fig:1058~v~elocityNoAdapt] the speed increase is
+visible as four spikes. The adaption algorithm was used to remove this
+speed over-runs. The result of the adaption algorithm can be seen in
 Figure [fig:1058~v~elocityAdapt].
 
 [b] ![](./images/1058_velocityNoAdapt.png "fig:")
@@ -2514,16 +2568,26 @@ At this time, the developed system can be used to estimate driving
 trajectories for mobile subscriber based on the subscriber information.
 The estimated routes correspond to the route driven by the subscriber.
 As shown in chapter [cha:results] trajectories can be estimated for
-subscribers in urban and semi-rural areas. The The greatest limitation
-of that system is that handover events in GSM are only made when the
-subscriber is in connected mode. With the increase usage of data
-services on smartphones, a possible extension would be to investigate
-routing area updates and handover updates in the GPRS, UMTS and LTE
-network. Another enhancement would be to use coverage predictions
-provided by the network operators. This coverage predictions shall
-better represent the coverage area. Additionally different coverage
-predictions can be used for different areas. Therefore, the accuracy of
-the handover position can be increased.
+subscribers in urban and semi-rural areas. As seen in the example a
+major drawback of this approach is the unpredictability of the handover
+points. Both coverage perdiction methods have shown that there exist a
+deviation between the estimated handover point and the observed one.
+Therefore enhancement would be to use coverage predictions provided by
+the network operators. This coverage predictions shall better represent
+the coverage area. Additionally different coverage predictions can be
+used for different areas. Therefore, the accuracy of the handover
+position can be increased. This, however, only affects the timing
+information, the route finding process is not affected. To overcome this
+deviation we presented an approach which adapts the handover position.
+This approach eliminates the velocity overrun and produces reliable
+velocity values that correspond to the actual velocity of the
+subscriber. The greatest limitation of that system is that handover
+events in GSM are only made when the subscriber is in connected mode.
+With the increase usage of data services on smartphones, a possible
+extension would be to investigate routing area updates and handover
+updates in the GPRS, UMTS and LTE network. Right now these events can
+not be used because they terminate in the radio access network and are
+not forwared to the core network where the monitoring units are placed.
 
 [^1]: Press conference by the Forum Mobilkommunication [press conference
     link](http://www.fmk.at/Medien/Pressekonferenzen/FMK-Jahrespressekonferenz-2012)
