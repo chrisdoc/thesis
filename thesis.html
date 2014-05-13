@@ -189,13 +189,16 @@
 <p>The timestamp represents the exact time of occurrence of the event (i.e., the instant when the event has been captured by the monitoring unit).</p>
 <h4 id="latitude-and-longitude">Latitude and Longitude</h4>
 <p>These two fields represent the position of the BTS in which the event occurred. They are both encoded as decimal numbers representing the WGS84 coordinate system in degrees. The decimal number is encoded according to IEEE 754 floating-point double format <span class="citation"></span>.</p>
+<h4 id="cell-id">Cell ID</h4>
+<p>This field specifies the cell id in which the event occured. The cell id is not unique can can therefore be used for more than one cell site.</p>
+<h4 id="lac">LAC</h4>
+<p>This field indicitas the location area code in which the event occured, together with the cell-id it is used as a unique identifier for a cell site.</p>
 <h4 id="event-type">Event type</h4>
 <p>Every event includes a field (i.e., Event type) that indicates which type of event has been detected. All possible signaling events are described in Table [tab:eventtype].</p>
 <h4 id="angle">Angle</h4>
 <p>This field defines the installment of a sector antenna. It is the angle at which the antenna is mounted on the mast. Figure [fig:antennaangle] illustrates the mounting of a directional antenna on a mast.</p>
 <p><img src="./images/antennaangle.png" title="fig:" alt="Example for an antenna installation" /> [fig:antennaangle]</p>
-<p>[bitwidth=1.1em]<span>32</span><br /><br /><br /><br /><br /><br /><br /><br />&amp;<br /><br />&amp; &amp;<br /><br /></p>
-<p>[fig:a1structure]</p>
+<p><img src="./images/datenstruktur.png" title="fig:" alt="Bitstream structure of the A1 Interface" /> [fig:a1structure]</p>
 <h4 id="encoding-example">Encoding example</h4>
 <p>The following example illustrates the decoding of the input bit stream.<br />E4A2E4E263A2B54214A2B28E09AE02C36089219123696993EF9E1DF9D8647F18<br />496DC7340006E61B4030747CF7F849A84048143577861E6800000000000005780200<br />00000000000023000000000000000000000000000000</p>
 <ul>

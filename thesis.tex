@@ -4,7 +4,6 @@
 \bibliography{literatur} 	% Angabe der BibTeX-Datei, % utf8-change
 \usepackage{lmodern}
 \usepackage[rgb,usenames,svgnames,table]{xcolor}
-\usepackage{bytefield}
 \usepackage{longtable}
 \usepackage{caption}
 \usepackage{subcaption}
@@ -667,7 +666,7 @@ Figure~\ref{fig:disthandover} shows the distribution of handover events for Mond
 \begin{figure}
 \centering
 %\tikzsetnextfilename{hauf_event_32_time_mat}
-\includegraphics{./images/hauf_event_32_time_mat}
+\includegraphics[width=0.7\linewidth]{./images/hauf_event_32_time_mat}
 %\input{hauf_event_32_time_mat.tex}
 \caption{Normalized Distribution of Handover Events on Monday, \nth{22} November 2010}
 \label{fig:disthandover}
@@ -712,6 +711,10 @@ This 32 bytes field contains a unique anonymous identifier of the mobile termina
 \subsubsection{Timestamp} The timestamp represents the exact time of occurrence of the event (i.e., the instant when the event has been captured by the monitoring unit).
 \subsubsection{Latitude and Longitude}
 These two fields represent the position of the BTS in which the event occurred. They are both encoded as decimal numbers representing the WGS84 coordinate system in degrees. The decimal number is encoded according to IEEE 754 floating-point double format~\cite{IEEE754}.
+\subsubsection{Cell ID}
+This field specifies the cell id in which the event occured. The cell id is not unique can can therefore be used for more than one cell site.
+\subsubsection{LAC}
+This field indicitas the location area code in which the event occured, together with the cell-id it is used as a unique identifier for a cell site.
 \subsubsection{Event type}
 Every event includes a field (i.e., Event type) that indicates which type of event has been detected. All possible signaling events are described in Table~\ref{tab:eventtype}.
 \subsubsection{Angle}
@@ -729,22 +732,28 @@ This field defines the installment of a sector antenna. It is the angle at which
 	\caption{Example for an antenna installation}
 	\label{fig:antennaangle}
 \end{figure}
+%\begin{figure}
+%	\begin{bytefield}[bitwidth=1.1em]{32}
+%		\bitheader{0-31} \\
+%		\wordbox[lrt]{2}{Anonymous ID (32 bytes) } \\
+%		\skippedwords\\
+%		\wordbox[lrb]{2}{}\\
+%		\wordbox{4}{Timestamp (8 bytes)} \\
+%		\wordbox{4}{Latitude (8 bytes)} \\
+%		\wordbox{4}{Longitude (8 bytes)} \\
+%		\wordbox{4}{Radius (8 bytes)} \\
+%		\bitbox{8}{Source (1byte)}&\bitbox{24}{Reserved (3 bytes)}\\
+%		\wordbox{2}{Reserved (4 bytes)}\\
+%		\bitbox{8}{Event (1 byte)}&\bitbox{8}{Reserved (1 byte)} & \bitbox{16}{Reserved (8 bytes)} \\
+%		\wordbox{4}{Angle (8 bytes)}\\
+%		\wordbox{2}{Speed (4 bytes)}
+%	\end{bytefield}
+%	\caption{Bitstream structure of the A1 Interface}
+%	\label{fig:a1structure}
+%\end{figure}
 \begin{figure}
-	\begin{bytefield}[bitwidth=1.1em]{32}
-		\bitheader{0-31} \\
-		\wordbox[lrt]{2}{Anonymous ID (32 bytes) } \\
-		\skippedwords\\
-		\wordbox[lrb]{2}{}\\
-		\wordbox{4}{Timestamp (8 bytes)} \\
-		\wordbox{4}{Latitude (8 bytes)} \\
-		\wordbox{4}{Longitude (8 bytes)} \\
-		\wordbox{4}{Radius (8 bytes)} \\
-		\bitbox{8}{Source (1byte)}&\bitbox{24}{Reserved (3 bytes)}\\
-		\wordbox{2}{Reserved (4 bytes)}\\
-		\bitbox{8}{Event (1 byte)}&\bitbox{8}{Reserved (1 byte)} & \bitbox{16}{Reserved (8 bytes)} \\
-		\wordbox{4}{Angle (8 bytes)}\\
-		\wordbox{2}{Speed (4 bytes)}
-	\end{bytefield}
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/datenstruktur}
 	\caption{Bitstream structure of the A1 Interface}
 	\label{fig:a1structure}
 \end{figure}

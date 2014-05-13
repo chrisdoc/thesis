@@ -777,6 +777,17 @@ occurred. They are both encoded as decimal numbers representing the
 WGS84 coordinate system in degrees. The decimal number is encoded
 according to IEEE 754 floating-point double format @IEEE754.
 
+#### Cell ID
+
+This field specifies the cell id in which the event occured. The cell id
+is not unique can can therefore be used for more than one cell site.
+
+#### LAC
+
+This field indicitas the location area code in which the event occured,
+together with the cell-id it is used as a unique identifier for a cell
+site.
+
 #### Event type
 
 Every event includes a field (i.e., Event type) that indicates which
@@ -792,20 +803,8 @@ illustrates the mounting of a directional antenna on a mast.
 ![Example for an antenna installation](./images/antennaangle.png "fig:")
 [fig:antennaangle]
 
-[bitwidth=1.1em]<span>32</span>\
-\
-\
-\
-\
-\
-\
-\
-&\
-\
-& &\
-\
-
-[fig:a1structure]
+![Bitstream structure of the A1
+Interface](./images/datenstruktur.png "fig:") [fig:a1structure]
 
 #### Encoding example
 
