@@ -57,7 +57,7 @@
 %\usepackage[latin1]{inputenc} %UNIX support if unicode package fails
 %\usepackage{siunitx}
 \usepackage[ruled,norelsize]{algorithm2e}
-\usepackage{cleveref}
+
 
 
 \makeatletter
@@ -96,126 +96,126 @@
 
 %%% Start of article front matter
 \begin{frontmatter}
-
-\begin{fmbox}
-\dochead{Research}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                          %%
-%% Enter the title of your article here     %%
-%%                                          %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\title{A sample article title}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                          %%
-%% Enter the authors here                   %%
-%%                                          %%
-%% Specify information, if available,       %%
-%% in the form:                             %%
-%%   <key>={<id1>,<id2>}                    %%
-%%   <key>=                                 %%
-%% Comment or delete the keys which are     %%
-%% not used. Repeat \author command as much %%
-%% as required.                             %%
-%%                                          %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\author[
-   addressref={aff1},                   % id's of addresses, e.g. {aff1,aff2}
-   corref={aff1},                       % id of corresponding address, if any
-  % noteref={n1},                        % id's of article notes, if any
-   email={christoph.kieslich@fh-hagenberg.at}   % email address
-]{\inits{C}\fnm{Christoph} \snm{Kieslich}}
-\author[
-   addressref={aff1},           
-   email={gerald.ostermayer@fh-hagenberg.com}
-]{\inits{G}\fnm{Gerald} \snm{Ostermayer}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                          %%
-%% Enter the authors' addresses here        %%
-%%                                          %%
-%% Repeat \address commands as much as      %%
-%% required.                                %%
-%%                                          %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\address[id=aff1]{%                           % unique id
-  \orgname{RG Mobile Radio Networks, UAS Upper Austria}, % university, etc
-  \street{Softwarepark 11},                     %
-  %\postcode{}                                % post or zip code
-  \city{Hagenberg im Mühlkreis},                              % city
-  \cny{Austria}                                    % country
-}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                          %%
-%% Enter short notes here                   %%
-%%                                          %%
-%% Short notes will be after addresses      %%
-%% on first page.                           %%
-%%                                          %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\begin{artnotes}
-%%\note{Sample of title note}     % note to the article
-%\note[id=n1]{Equal contributor} % note, connected to author
-%\end{artnotes}
-
-%\end{fmbox}% comment this for two column layout
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                          %%
-%% The Abstract begins here                 %%
-%%                                          %%
-%% Please refer to the Instructions for     %%
-%% authors on http://www.biomedcentral.com  %%
-%% and include the section headings         %%
-%% accordingly for your article type.       %%
-%%                                          %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{abstractbox}
-
-\begin{abstract} % abstract
-\parttitle{First part title} %if any
-Text for this section.
-
-\parttitle{Second part title} %if any
-Text for this section.
-\end{abstract}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                                          %%
-%% The keywords begin here                  %%
-%%                                          %%
-%% Put each keyword in separate \kwd{}.     %%
-%%                                          %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{keyword}
-\kwd{handover}
-\kwd{GSM}
-\kwd{velocity}
-\kwd{mobility}
-\kwd{simulation}
-\kwd{coverage}
-\kwd{prediction}
-\end{keyword}
-
-% MSC classifications codes, if any
-%\begin{keyword}[class=AMS]
-%\kwd[Primary ]{}
-%\kwd{}
-%\kwd[; secondary ]{}
-%\end{keyword}
-
-\end{abstractbox}
-%
-\end{fmbox}% uncomment this for twcolumn layout
-
+	
+	\begin{fmbox}
+		\dochead{Research}
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%                                          %%
+		%% Enter the title of your article here     %%
+		%%                                          %%
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\title{A sample article title}
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%                                          %%
+		%% Enter the authors here                   %%
+		%%                                          %%
+		%% Specify information, if available,       %%
+		%% in the form:                             %%
+		%%   <key>={<id1>,<id2>}                    %%
+		%%   <key>=                                 %%
+		%% Comment or delete the keys which are     %%
+		%% not used. Repeat \author command as much %%
+		%% as required.                             %%
+		%%                                          %%
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\author[
+			addressref={aff1},                   % id's of addresses, e.g. {aff1,aff2}
+			corref={aff1},                       % id of corresponding address, if any
+			% noteref={n1},                        % id's of article notes, if any
+			email={christoph.kieslich@fh-hagenberg.at}   % email address
+		]{\inits{C}\fnm{Christoph} \snm{Kieslich}}
+		\author[
+			addressref={aff1},           
+			email={gerald.ostermayer@fh-hagenberg.com}
+		]{\inits{G}\fnm{Gerald} \snm{Ostermayer}}
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%                                          %%
+		%% Enter the authors' addresses here        %%
+		%%                                          %%
+		%% Repeat \address commands as much as      %%
+		%% required.                                %%
+		%%                                          %%
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\address[id=aff1]{%                           % unique id
+			\orgname{RG Mobile Radio Networks, UAS Upper Austria}, % university, etc
+			\street{Softwarepark 11},                     %
+			%\postcode{}                                % post or zip code
+			\city{Hagenberg im Mühlkreis},                              % city
+			\cny{Austria}                                    % country
+		}
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%                                          %%
+		%% Enter short notes here                   %%
+		%%                                          %%
+		%% Short notes will be after addresses      %%
+		%% on first page.                           %%
+		%%                                          %%
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		%\begin{artnotes}
+		%%\note{Sample of title note}     % note to the article
+		%\note[id=n1]{Equal contributor} % note, connected to author
+		%\end{artnotes}
+		
+		%\end{fmbox}% comment this for two column layout
+		
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		%%                                          %%
+		%% The Abstract begins here                 %%
+		%%                                          %%
+		%% Please refer to the Instructions for     %%
+		%% authors on http://www.biomedcentral.com  %%
+		%% and include the section headings         %%
+		%% accordingly for your article type.       %%
+		%%                                          %%
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		\begin{abstractbox}
+			
+			\begin{abstract} % abstract
+				\parttitle{First part title} %if any
+				Text for this section.
+				
+				\parttitle{Second part title} %if any
+				Text for this section.
+			\end{abstract}
+			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			%%                                          %%
+			%% The keywords begin here                  %%
+			%%                                          %%
+			%% Put each keyword in separate \kwd{}.     %%
+			%%                                          %%
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+			
+			\begin{keyword}
+				\kwd{handover}
+				\kwd{GSM}
+				\kwd{velocity}
+				\kwd{mobility}
+				\kwd{simulation}
+				\kwd{coverage}
+				\kwd{prediction}
+			\end{keyword}
+			
+			% MSC classifications codes, if any
+			%\begin{keyword}[class=AMS]
+			%\kwd[Primary ]{}
+			%\kwd{}
+			%\kwd[; secondary ]{}
+			%\end{keyword}
+			
+		\end{abstractbox}
+		%
+	\end{fmbox}% uncomment this for twcolumn layout
+	
 \end{frontmatter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -304,11 +304,11 @@ In order to estimate the subscribes mobility we need a record of its behavior. T
 
 An event captured in the core network consists of the following attributes:
 \begin{itemize}
-\item Time stamp, time when the event was captured
-\item Id, identifies the subscriber
-\item Cell-id, id of the currently connected cell id
-\item LAC, location area of the current cell
-\item Event, defines the captured event
+	\item Time stamp, time when the event was captured
+	\item Id, identifies the subscriber
+	\item Cell-id, id of the currently connected cell id
+	\item LAC, location area of the current cell
+	\item Event, defines the captured event
 \end{itemize}
 
 An example for events captured in the core network is depicted in Table~\ref{table:events}. Here the first event describes a call establishment, followed by three handover event and at last a call termination event.
@@ -337,19 +337,19 @@ However, many of the cell sites consists of more than one BTS and form a sector 
 We overcome this by moving the location of each sector, based on the angle of the sector, out of the center location of the cell site. The longitude location of the sector will be moved with Equation~\ref{eq:sectorX} and likewise will be the latitude location moved with Equation~\ref{eq:sectorY}. The constant factor $\frac{1}{50000}$ means a maximum movement of $1.6$ meters in either direction.
 
 \begin{align}
-x & =x+\cos(\alpha)\frac{1}{50000}\label{eq:sectorX}\\
-y & =y+\sin(\alpha)\frac{1}{50000} \label{eq:sectorY}
+	x & =x+\cos(\alpha)\frac{1}{50000}\label{eq:sectorX}  \\
+	y & =y+\sin(\alpha)\frac{1}{50000} \label{eq:sectorY} 
 \end{align}
 \newline
 
 A more accurate method for estimating the coverage area is the use of a network planning tool. Voronoi diagrams, only use the location of each cell site, however, in a real mobile network the coverage area is influenced by a variety of factors such as:
 \begin{itemize}
-\item Network load
-\item Antenna characteristics
-\item Transmitter power
-\item Shadowing
-\item Landscape characteristics
-\item Surrounding cell cites
+	\item Network load
+	\item Antenna characteristics
+	\item Transmitter power
+	\item Shadowing
+	\item Landscape characteristics
+	\item Surrounding cell cites
 \end{itemize}
 
 We estimated the coverage area for all cell sites of the Austrian network operator A1 in the research area. The accuracy of the coverage prediction depends on the quality of the input data. Since A1 only provided us with the location and the beam direction angle of its antennas, we were using publicly available datasets, to enrich our coverage estimation. Part of this dataset are digital elevation models, buildings models and a transmitter power database that will be used by the network planning tool for the coverage prediction.
@@ -370,14 +370,14 @@ The digital elevation model\footnote{The Digital Elevation Model over Europe fro
 
 To improve the coverage prediction further we integrated a building block model for the two research areas. For the city of Linz, the footprint of every buildings is known from OpenStreetMap\footnote{More information about how building information can be retrieved from OpenStreetMap \url{http://wiki.openstreetmap.org/w/index.php?title=Buildings&oldid=1050850}}, though, their height is unknown. For these buildings we assumed a medium height of 15 meters. On the contrary, the city of Vienna\footnote{The GIS service from the city of Vienna is located here \url{https://www.wien.gv.at/kultur/kulturgut/architektur/gebaeudedaten.html}} provides a building model with height information. The building model of the city of Vienna consists of the footprint of the building and a category that specify its height. The available height categories are: 
 \begin{itemize}
-\item 1.6 - 4.5 m
-\item 4.6 - 7.5 m
-\item 7.6 - 9.0 m
-\item 9.1 - 12.0 m
-\item 12.1 - 16.0 m
-\item 16.1 - 21.0 m
-\item 21.1 - 26.0 m
-\item $>$ 26 m
+	\item 1.6 - 4.5 m
+	\item 4.6 - 7.5 m
+	\item 7.6 - 9.0 m
+	\item 9.1 - 12.0 m
+	\item 12.1 - 16.0 m
+	\item 16.1 - 21.0 m
+	\item 21.1 - 26.0 m
+	\item $>$ 26 m
 \end{itemize}
 
 In our building model we enriched the building footprint from OpenStreetMap for the city of Vienna with the mean height of the specified category.
@@ -425,8 +425,8 @@ route and the cell site was calculated.
 
 We introduce a duration ratio $route_{ratio}$ between the call duration $d_{call}$ and the time it takes to drive the route $d_{route}$ as depicted in Equation~\ref{eq:ratio}. The ratio gives information whether the estimated route is either too fast or too slow. 
 \begin{align}
-D_j &=\sum_{i=1}^{m} \min(d_{i,j})^{2} \label{eq:sumsquaremine} \\
-route_{ratio} &=\frac{d_{call}}{d_{route}} \label{eq:ratio}
+	D_j           & =\sum_{i=1}^{m} \min(d_{i,j})^{2} \label{eq:sumsquaremine} \\
+	route_{ratio} & =\frac{d_{call}}{d_{route}} \label{eq:ratio}               
 \end{align} 
 
 The squared sum $D_j$ in combination with the duration ratio $route_{ratio}$ was used to chose the most likely route the subscriber has traveled in terms of distance to cell sites and travel time.
@@ -450,32 +450,32 @@ For unconnected handover the line between the closest points of the two coverage
 \SetAlFnt{\footnotesize}
 
 \begin{figure}[!t]
- \removelatexerror
-  \begin{algorithm}[H]
-   \caption{Handover prediction}
-   \label{alg:prediction}
-   HP$\leftarrow$List()\;
-   \For( \emph{Handover loop}){$i\leftarrow 1$ \KwTo $length(handover)-1$}
-   {
-      curr=handover[i]; next=handover[i+1]\;
-      /*overlapping handover*/\\
-      \uIf{Intersects(curr,next)}{
-      centroid=Centroid(Intersects(curr,next));
-      Add(HP,NearestPoint(route,centroid));
-      }
-      \Else{
-      line=LineBetweenNearestPoint(curr,next)\;
-      	/*line crossing route*/ \\
-	      \uIf{Intersects(line,route)}{
-	      Add(HP,Intersects(line,route))\;
-	      }
-	      \Else{
-	      midPoint=MidPoint(line)\;
-	      Add(HP,NearestPoint(route,midPoint))\;
-	      }
-      }
-      }
-  \end{algorithm}
+	\removelatexerror
+	\begin{algorithm}[H]
+		\caption{Handover prediction}
+		\label{alg:prediction}
+		HP$\leftarrow$List()\;
+		\For( \emph{Handover loop}){$i\leftarrow 1$ \KwTo $length(handover)-1$}
+		{
+			curr=handover[i]; next=handover[i+1]\;
+			/*overlapping handover*/\\
+			\uIf{Intersects(curr,next)}{
+				centroid=Centroid(Intersects(curr,next));
+				Add(HP,NearestPoint(route,centroid));
+			}
+			\Else{
+				line=LineBetweenNearestPoint(curr,next)\;
+				/*line crossing route*/ \\
+				\uIf{Intersects(line,route)}{
+					Add(HP,Intersects(line,route))\;
+				}
+				\Else{
+					midPoint=MidPoint(line)\;
+					Add(HP,NearestPoint(route,midPoint))\;
+				}
+			}
+		}
+	\end{algorithm}
 \end{figure}
 
 \paragraph{Computing the Average Velocity}
@@ -542,47 +542,47 @@ If, however, the handover segment has both a predecessor and a successor, which 
 %\end{figure}
 
 \begin{figure}[!t]
- \removelatexerror
-  \begin{algorithm}[H]
-   \caption{Handover adaption}
-   \label{alg:adaption}
-   \For( \emph{Adaption loop}){$i\leftarrow 1$ \KwTo $length(trajectory)$}
-   {
-   	allowedSpeed<-MaxSpeed(trajectory[i])\;
-   	c=trajectory[i]\;p=trajectory[i-1]\;n=trajectory[i+1]\;
-      /*speed overrun*/\\
-      \uIf{Speed(c)$\geq1.7$*allowedSpeed}{
-      	cDist=Distance(c)\;
-      	pDist=Distance(p)\;
-      	nDist=Distance(n)\;
-      	nominalDist=allowedSpeed*Duration(c)\;
-      	SetSpeed(c,allowedSpeed)\;
-      	\uIf{p==NULL$\&\&$n!=NULL}{
-      		pDist=pDist+(cDist-nominalDist)\;
-      		SetSpeed(prev,pDist/Duration(p))\;
-      	}
-      	\uElseIf{p!=NULL$\&\&$p!=NULL}{
-      	nDist=nDist+(cDist-nominalDist)\;
-      	SetSpeed(n,nDist/Duration(n))\;
-      	}
-      	\uElse{
-      	      	nTempDist=nDist+(cDist-nominalDist)/2\;
-      	      	pTempDist=pDist+(cDist-nominalDist)/2\;
-      	      	\uIf{nTempDist/Duration(n)$\gg$nominalSpeed}{
-      	      	nTempDist=nDist;
-      	      	pTempDist=pDist+(cDist-nominalDist)\;
-      	      	}
-      	      	\uElseIf{pTempDist/Duration(p)$\gg$nominalSpeed}{
-      	      	      	      
-      	      	      	      	nTempDist=nDist+(cDist-nominalDist)\;
-      	      	      	       	pTempDist=nDist;
-      	      	  }
-      	      	SetSpeed(n,nTempDist/Duration(n))\;
-      	      	SetSpeed(p,pTempDist/Duration(p))\;
-      	}
-      }
-      }
-  \end{algorithm}
+	\removelatexerror
+	\begin{algorithm}[H]
+		\caption{Handover adaption}
+		\label{alg:adaption}
+		\For( \emph{Adaption loop}){$i\leftarrow 1$ \KwTo $length(trajectory)$}
+		{
+			allowedSpeed<-MaxSpeed(trajectory[i])\;
+			c=trajectory[i]\;p=trajectory[i-1]\;n=trajectory[i+1]\;
+			/*speed overrun*/\\
+			\uIf{Speed(c)$\geq1.7$*allowedSpeed}{
+				cDist=Distance(c)\;
+				pDist=Distance(p)\;
+				nDist=Distance(n)\;
+				nominalDist=allowedSpeed*Duration(c)\;
+				SetSpeed(c,allowedSpeed)\;
+				\uIf{p==NULL$\&\&$n!=NULL}{
+					pDist=pDist+(cDist-nominalDist)\;
+					SetSpeed(prev,pDist/Duration(p))\;
+				}
+				\uElseIf{p!=NULL$\&\&$p!=NULL}{
+					nDist=nDist+(cDist-nominalDist)\;
+					SetSpeed(n,nDist/Duration(n))\;
+				}
+				\uElse{
+					nTempDist=nDist+(cDist-nominalDist)/2\;
+					pTempDist=pDist+(cDist-nominalDist)/2\;
+					\uIf{nTempDist/Duration(n)$\gg$nominalSpeed}{
+						nTempDist=nDist;
+						pTempDist=pDist+(cDist-nominalDist)\;
+					}
+					\uElseIf{pTempDist/Duration(p)$\gg$nominalSpeed}{
+						      	      	      	      
+						nTempDist=nDist+(cDist-nominalDist)\;
+						pTempDist=nDist;
+					}
+					SetSpeed(n,nTempDist/Duration(n))\;
+					SetSpeed(p,pTempDist/Duration(p))\;
+				}
+			}
+		}
+	\end{algorithm}
 \end{figure}
 \subsection*{Evaluation of Subscriber Trajectories}
 To evaluate our findings we define a set of measurements that will be computed for each of the generated movement trajectories. To validate the route geometry, the handover position and the velocity of the subscriber we recored a GPS track for each test ride. Additionally we stored the position of each handover by tracking changes in the Cell-Id and LAC on the handset and storing the location when the subscriber is connected to a new cell site. From the GPS track and the timestamp information the velocity of the subscriber can be derived and later be compared with the estimated one. The velocity evaluation compares  the average velocity of the subscriber between two handover points with the estimated velocity. GPS was only used during research in order to validate our approaches and assumption.
@@ -671,259 +671,259 @@ A future enhancement would be to create a better model of the mobile network to 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{backmatter}
-
-\section*{Competing interests}
-  The authors declare that they have no competing interests.
-
-\section*{Author's contributions}
-    Text for this section \ldots
-
-\section*{Acknowledgements}
-  Text for this section \ldots
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                  The Bibliography                       %%
-%%                                                         %%
-%%  Bmc_mathpys.bst  will be used to                       %%
-%%  create a .BBL file for submission.                     %%
-%%  After submission of the .TEX file,                     %%
-%%  you will be prompted to submit your .BBL file.         %%
-%%                                                         %%
-%%                                                         %%
-%%  Note that the displayed Bibliography will not          %%
-%%  necessarily be rendered by Latex exactly as specified  %%
-%%  in the online Instructions for Authors.                %%
-%%                                                         %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% if your bibliography is in bibtex format, use those commands:
-\bibliographystyle{bmc-mathphys} % Style BST file
-\bibliography{bmc_article}      % Bibliography file (usually '*.bib' )
-
-% or include bibliography directly:
-% \begin{thebibliography}
-% \bibitem{b1}
-% \end{thebibliography}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                               %%
-%% Figures                       %%
-%%                               %%
-%% NB: this is for captions and  %%
-%% Titles. All graphics must be  %%
-%% submitted separately and NOT  %%
-%% included in the Tex document  %%
-%%                               %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%
-%% Do not use \listoffigures as most will included as separate files
-
-\section*{Figures}
- 
-
-\begin{figure}[h!]
-	\label{fig:transmitpower}
-  \caption{\csentence{Sample Power Interpolation}
-      Here an power interpolation was done for 20 cell sites with a random transmitter power in the range of 45--52dBm}
-      \includegraphics[width=0.9\columnwidth]{senderpower}
-\end{figure}
-      \begin{figure}[h!]
-      \label{fig:populationgrid}
-        \caption{\csentence{Popualtion grid} The following demonstrates an area with 3 different population densities. Our assumption is that people will more likely start or end their journey in a higher populated area.
-            }
-            \includegraphics[width=0.9\columnwidth]{populationgrid}
-      \end{figure}
-\begin{figure}[h!]
-\label{fig:handover}
-  \caption{\csentence{Types of handover} An overlapping handover (a) and an unconnected handover are depicted together with the estimated handover position (red point)
-      }
-      \includegraphics[width=0.9\columnwidth]{handover}
-\end{figure}
-
-\begin{figure*}[h!]
-\label{fig:563}
-  \caption{\csentence{Trajectoy 1} A comparison of handover deviations between the real handover position and the estimated one with the three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi)
-      }
-      \includegraphics[height=0.40\textheight]{images/563standalone.png}
-\end{figure*}
-
-
-
-\begin{figure*}[h!]
-\label{fig:144}
-  \caption{\csentence{Trajectory 4} A comparison of handover deviations between the real handover position and the estimated one with the three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi)
-      }
-      \includegraphics[height=0.40\textheight]{images/144standalone.png}
-\end{figure*}
-
-
-\begin{figure}[h!]
-\label{fig:handoverdeviation}
-  \caption{\csentence{Trajectory 1 handover deviations} A comparison of handover deviations between the real handover position and the estimated one with the three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi)
-      }
-      \includegraphics[width=0.9\columnwidth]{images/563_HandoverDeviation}
-\end{figure}
-
-
-\begin{figure}[h!]
-\label{fig:velocity}
-  \caption{\csentence{Trajectory 1 velocity without adaption} The estimated velocity for all three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi) without the adaption algorithm
-      }
-      \includegraphics[width=0.9\columnwidth]{images/563_SpeedWithoutAdaption}
-\end{figure}
-
-\begin{figure}[h!]
-\label{fig:velocityadaption}
-  \caption{\csentence{Trajectory 1 Velocity with adaption} The estimated velocity for all three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi) with the adaption algorithm
-        }
-      \includegraphics[width=0.9\columnwidth]{images/563_SpeedsWithAdaption}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                               %%
-%% Tables                        %%
-%%                               %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%% Use of \listoftables is discouraged.
-%%
-\section*{Tables}
-%\begin{table}[h!]
-%\caption{The phone state captured by the Android application}
-%\begin{tabular}{|c|c|c|c|c|c|c|}
-%\hline
-%\textbf{Time stamp} & \textbf{Id} & \textbf{Cell-Id} & \textbf{LAC} &\textbf{State} & \textbf{Longitude} & \textbf{Latitude} \\ \hline
-%1327678833 & 4 & 51520 & 5501 & 0 & 48.36632 & 14.51978 \\
-%1327678834 & 4 & 51510 & 5501 & 2 & 48.36606 & 14.52017 \\
-%1327678835 & 4 & 51510 & 5501 & 2 & 48.36591 & 14.52035 \\
-%1327678836 & 4 & 51510 & 5501 & 2 & 48.36583 & 14.52046 \\
-%1327678837 & 4 & 51510 & 5501 & 2 & 48.36573 & 14.52061
-%\\ \hline
-%\end{tabular}
-%\label{table:phonestate}
-%\end{table}
-
-\begin{table}[h]
-\caption{Events captured in the core network of the network operator}
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-Time stamp & Id & Cell-Id & LAC  & Event              \\ \hline
-1327678833 & 4  & 51520   & 5501 & Call Establishment \\
-1327678854 & 4  & 31510   & 5501 & Handover Update    \\
-1327678935 & 4  & 31210   & 5502 & Handover Update    \\
-1327678949 & 4  & 40510   & 5502 & Handover Update    \\
-1327679027 & 4  & 40510   & 5502 & Call Termination  \\ \hline
-\end{tabular}
-\label{table:events}
-\end{table}
-
-\begin{table}[h]
-\caption{Overview of the start and end position and the amount of handover events (unfiltered handover) for the four test drive trajectories}
-\begin{tabular}{|c|c|c|c|}
-\hline
-\textbf{$\#$} & \textbf{Start [Lat,Lon]}& \textbf{End [Lat,Lon]}& \textbf{Handover}                \\ \hline
-1 &  48.28105,14.30415   & 48.33499,14.3780 & 18 (22) \\ %563
-2 &  48.31616,14.29052   & 48.28169,14.30275 & 17 (19)   \\  %1058
-3 &  48.13993,16.32367  & 48.19880,16.25597& 16 (20)    \\ %367
-4 &  48.19283,16.27260   & 48.15278,16.30172 & 27 (37)   \\  \hline %144
-\end{tabular}
-\label{table:tracks}
-\end{table}
-
-
-\begin{table}[h]
-\caption{The route similarity computed with the discrete Hausdorff distance and the Fr\'{e}chet distance}
-\begin{tabular}{|c|c|c|}
-\hline
-\textbf{Trajectory} & \textbf{$d_{H}(X,Y)$ }& \textbf{$\delta_F(f,g)$}  \\ \hline
-1 &   $0.0135^\circ$ & $0.0047^\circ$   \\ %563
-2 &   $0.0075^\circ$ & $0.0015^\circ$  \\  %1058
-3 &  $0.0151^\circ$  &  $0.0021^\circ$   \\ %367
-4 &  $0.0107^\circ$ & $0.0012^\circ$  \\  \hline %144
-\end{tabular}
-\label{table:routesim}
-\end{table}
-
-%\begin{table}[h]
-%\sisetup{round-mode=places,round-precision=3,tight-spacing=true}% hier ggf. anpassen! (siehe siunitx-Anleitung)
-%
-%\caption{The min, first quartile, median, mean, third quartile and max handover position deviation in \si{\km} for each of the four trajectories for the three different coverage predictions M (P coverage prediction, PB coverage prediction with buildings and V Voronoi)}
-%\begin{tabular}{|c|c|S|S|S|S|S|S|}
-%\hline
-%\textbf{$\#$} & \textbf{M}& \multicolumn{1}{c|}{\bfseries$\min$}& \multicolumn{1}{c|}{\textbf{$Q_1$}  }    & \multicolumn{1}{c|}{\textbf{$\tilde{x}$} }& \multicolumn{1}{c|}{\textbf{$\bar{x}$} }   & \multicolumn{1}{c|}{\textbf{$Q_3$}}    & \multicolumn{1}{c|}{\textbf{$\max$}}   \\ \hline
-%1 & P  & 0.1610&  0.4680  & 0.6630&  0.7049 & 0.8780 & 1.4030  \\  \hline %563
-%1&  PB  & 0.1010 &  0.5470 &  0.7160 &  0.7109  & 0.9280 & 1.3150  \\  \hline  %1058
-%1 &  V  & 0.1420 & 0.4200 & 0.8370 & 0.7148 & 1.0230 & 1.1550 \\  \hline%367
-%2 & P   & 0.2190 &  0.2860 & 0.3205&  0.4013&  0.4830 & 0.9000\\ \hline %563
-%2&  PB   & 0.1320 & 0.2605 & 0.3455&  0.3993 & 0.5245&  0.8840   \\   \hline%1058
-%2 &  V  & 0.0480 & 0.2290 &  0.3430 &  0.3861  & 0.4815  & 0.9000   \\  \hline %367
-%3 & P   & 0.1110 &  0.3595 & 0.4490 &  0.6769  & 0.6040 & 3.7860   \\   \hline%563
-%3&  PB  & 0.1480 & 0.3375  & 0.4510 &  0.6789 & 0.5355  & 4.0620   \\   \hline%1058
-%3 &  V  & 0.0130 &  0.2805  & 0.4090  & 0.6689 & 0.6385 &  4.0850   \\  \hline%367
-%4 & P &  0.0200 &  0.2230 & 0.3090 &  0.3552 & 0.5040  & 0.8630  \\  \hline%563
-%4&  PB   & 0.0300 &  0.2133 & 0.3245  & 0.3588 & 0.5060 &  0.8500  \\   \hline%1058
-%4 &  V& 0.0100 &  0.1748 &  0.3210 &  0.3275 & 0.4428 & 0.8020  \\  \hline %144
-%\end{tabular}
-%\label{table:handover}
-%\end{table}
-
-\begin{table}[h]
-\caption{The min, first quartile, median, mean, third quartile and max handover position deviation in kilometer for each of the four trajectories for the three different coverage predictions M (P coverage prediction, PB coverage prediction with buildings and V Voronoi)}
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline
-\textbf{$\#$} & \textbf{M}& \textbf{$\min$}& \textbf{$Q_1$}     & \textbf{$\tilde{x}$} &\textbf{$\bar{x}$}   & \textbf{$Q_3$}    &\textbf{$\max$}   \\ \hline
-1 & P & 0.161 & 0.468 & 0.663 & 0.705 & 0.878 & 1.403 \\ \hline
-1 & PB  & 0.101 & 0.547 & 0.716 & 0.711 & 0.928 & 1.315 \\ \hline
-1 & V & 0.142 & 0.420 & 0.837 & 0.715 & 1.023 & 1.155 \\ \hline
-2 & P & 0.219 & 0.286 & 0.321 & 0.401 & 0.483 & 0.900 \\ \hline
-2 & PB  & 0.132 & 0.261 & 0.346 & 0.399 & 0.525 & 0.884 \\ \hline
-2 & V & 0.048 & 0.229 & 0.343 & 0.386 & 0.482 & 0.900 \\ \hline
-3 & P & 0.111 & 0.360 & 0.449 & 0.677 & 0.604 & 3.786 \\ \hline
-3 & PB  & 0.148 & 0.338 & 0.451 & 0.679 & 0.536 & 4.062 \\ \hline
-3 & V & 0.013 & 0.281 & 0.409 & 0.669 & 0.639 & 4.085 \\ \hline
-4 & P & 0.020 & 0.223 & 0.309 & 0.355 & 0.504 & 0.863 \\ \hline
-4 & PB  & 0.030 & 0.213 & 0.325 & 0.359 & 0.506 & 0.850 \\ \hline
-4 & V & 0.010 & 0.175 & 0.321 & 0.328 & 0.443 & 0.802 \\ \hline
-\end{tabular}
-\label{table:handover}
-\end{table}
-
-
-\begin{table}[h]
-\caption{The MAE and RMSE for each of the four trajectories for the three different coverage predictions}
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-\textbf{$\#$} & \textbf{M}& \textbf{MAE} & \textbf{RMSE}      & \textbf{adaptMAE} & \textbf{adaptRMSE}          \\ \hline
-1 & P   & 42.365& 62.593 & 23.360 & 31.514 \\  \hline %563
-1&  PB   & 50.315 & 69.985 & 23.127 &  29.142  \\  \hline  %1058
-1 &  V  & 59.704& 85.549  & 17.648 & 25.250 \\  \hline%367
-2 & P   & 81.304 & 138.707 & 8.970 & 16.047\\ \hline %563
-2&  PB   & 60.964 & 99.090 & 9.436 & 12.086    \\   \hline%1058
-2 &  V  & 113.999 & 181.854 & 13.029 & 16.932   \\  \hline %367
-3 & P   & 21.125 & 26.808 & 13.305 & 17.799   \\   \hline%563
-3&  PB   & 26.384& 33.786& 11.941 & 16.607   \\   \hline%1058
-3 &  V  & 28.449& 40.088 & 13.036 & 18.781   \\  \hline%367
-4 & P   & 58.425 & 150.199 & 17.081 & 22.000 \\  \hline%563
-4&  PB   & 48.061 & 125.747&  14.553  &  17.795  \\   \hline%1058
-4 &  V  & 72.715& 191.037 &  15.388 &  21.599 \\  \hline %144
-\end{tabular}
-\label{table:results}
-\end{table}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                               %%
-%% Additional Files              %%
-%%                               %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%\section*{Additional Files}
-%  \subsection*{Additional file 1 --- Sample additional file title}
-%    Additional file descriptions text (including details of how to
-%    view the file, if it is in a non-standard format or the file extension).  This might
-%    refer to a multi-page table or a figure.
-%
-%  \subsection*{Additional file 2 --- Sample additional file title}
-%    Additional file descriptions text.
-
-
+	
+	\section*{Competing interests}
+	The authors declare that they have no competing interests.
+	
+	\section*{Author's contributions}
+	Text for this section \ldots
+	
+	\section*{Acknowledgements}
+	Text for this section \ldots
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%                  The Bibliography                       %%
+	%%                                                         %%
+	%%  Bmc_mathpys.bst  will be used to                       %%
+	%%  create a .BBL file for submission.                     %%
+	%%  After submission of the .TEX file,                     %%
+	%%  you will be prompted to submit your .BBL file.         %%
+	%%                                                         %%
+	%%                                                         %%
+	%%  Note that the displayed Bibliography will not          %%
+	%%  necessarily be rendered by Latex exactly as specified  %%
+	%%  in the online Instructions for Authors.                %%
+	%%                                                         %%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	% if your bibliography is in bibtex format, use those commands:
+	\bibliographystyle{bmc-mathphys} % Style BST file
+	\bibliography{bmc_article}      % Bibliography file (usually '*.bib' )
+	
+	% or include bibliography directly:
+	% \begin{thebibliography}
+	% \bibitem{b1}
+	% \end{thebibliography}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%                               %%
+	%% Figures                       %%
+	%%                               %%
+	%% NB: this is for captions and  %%
+	%% Titles. All graphics must be  %%
+	%% submitted separately and NOT  %%
+	%% included in the Tex document  %%
+	%%                               %%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	%%
+	%% Do not use \listoffigures as most will included as separate files
+	
+	\section*{Figures}
+	 
+	
+	\begin{figure}[h!]
+		\label{fig:transmitpower}
+		\caption{\csentence{Sample Power Interpolation}
+		Here an power interpolation was done for 20 cell sites with a random transmitter power in the range of 45--52dBm}
+		\includegraphics[width=0.9\columnwidth]{senderpower}
+	\end{figure}
+	\begin{figure}[h!]
+		\label{fig:populationgrid}
+		\caption{\csentence{Popualtion grid} The following demonstrates an area with 3 different population densities. Our assumption is that people will more likely start or end their journey in a higher populated area.
+		}
+		\includegraphics[width=0.9\columnwidth]{populationgrid}
+	\end{figure}
+	\begin{figure}[h!]
+		\label{fig:handover}
+		\caption{\csentence{Types of handover} An overlapping handover (a) and an unconnected handover are depicted together with the estimated handover position (red point)
+		}
+		\includegraphics[width=0.9\columnwidth]{handover}
+	\end{figure}
+	
+	\begin{figure*}[h!]
+		\label{fig:563}
+		\caption{\csentence{Trajectoy 1} A comparison of handover deviations between the real handover position and the estimated one with the three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi)
+		}
+		\includegraphics[height=0.40\textheight]{images/563standalone.png}
+	\end{figure*}
+	
+	
+	
+	\begin{figure*}[h!]
+		\label{fig:144}
+		\caption{\csentence{Trajectory 4} A comparison of handover deviations between the real handover position and the estimated one with the three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi)
+		}
+		\includegraphics[height=0.40\textheight]{images/144standalone.png}
+	\end{figure*}
+	
+	
+	\begin{figure}[h!]
+		\label{fig:handoverdeviation}
+		\caption{\csentence{Trajectory 1 handover deviations} A comparison of handover deviations between the real handover position and the estimated one with the three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi)
+		}
+		\includegraphics[width=0.9\columnwidth]{images/563_HandoverDeviation}
+	\end{figure}
+	
+	
+	\begin{figure}[h!]
+		\label{fig:velocity}
+		\caption{\csentence{Trajectory 1 velocity without adaption} The estimated velocity for all three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi) without the adaption algorithm
+		}
+		\includegraphics[width=0.9\columnwidth]{images/563_SpeedWithoutAdaption}
+	\end{figure}
+	
+	\begin{figure}[h!]
+		\label{fig:velocityadaption}
+		\caption{\csentence{Trajectory 1 Velocity with adaption} The estimated velocity for all three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi) with the adaption algorithm
+		}
+		\includegraphics[width=0.9\columnwidth]{images/563_SpeedsWithAdaption}
+	\end{figure}
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%                               %%
+	%% Tables                        %%
+	%%                               %%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	%% Use of \listoftables is discouraged.
+	%%
+	\section*{Tables}
+	%\begin{table}[h!]
+	%\caption{The phone state captured by the Android application}
+	%\begin{tabular}{|c|c|c|c|c|c|c|}
+	%\hline
+	%\textbf{Time stamp} & \textbf{Id} & \textbf{Cell-Id} & \textbf{LAC} &\textbf{State} & \textbf{Longitude} & \textbf{Latitude} \\ \hline
+	%1327678833 & 4 & 51520 & 5501 & 0 & 48.36632 & 14.51978 \\
+	%1327678834 & 4 & 51510 & 5501 & 2 & 48.36606 & 14.52017 \\
+	%1327678835 & 4 & 51510 & 5501 & 2 & 48.36591 & 14.52035 \\
+	%1327678836 & 4 & 51510 & 5501 & 2 & 48.36583 & 14.52046 \\
+	%1327678837 & 4 & 51510 & 5501 & 2 & 48.36573 & 14.52061
+	%\\ \hline
+	%\end{tabular}
+	%\label{table:phonestate}
+	%\end{table}
+	
+	\begin{table}[h]
+		\caption{Events captured in the core network of the network operator}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			Time stamp & Id & Cell-Id & LAC  & Event              \\ \hline
+			1327678833 & 4  & 51520   & 5501 & Call Establishment \\
+			1327678854 & 4  & 31510   & 5501 & Handover Update    \\
+			1327678935 & 4  & 31210   & 5502 & Handover Update    \\
+			1327678949 & 4  & 40510   & 5502 & Handover Update    \\
+			1327679027 & 4  & 40510   & 5502 & Call Termination   \\ \hline
+		\end{tabular}
+		\label{table:events}
+	\end{table}
+	
+	\begin{table}[h]
+		\caption{Overview of the start and end position and the amount of handover events (unfiltered handover) for the four test drive trajectories}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{$\#$} & \textbf{Start [Lat,Lon]} & \textbf{End [Lat,Lon]} & \textbf{Handover} \\ \hline
+			1             & 48.28105,14.30415        & 48.33499,14.3780       & 18 (22)           \\ %563
+			2             & 48.31616,14.29052        & 48.28169,14.30275      & 17 (19)           \\  %1058
+			3             & 48.13993,16.32367        & 48.19880,16.25597      & 16 (20)           \\ %367
+			4             & 48.19283,16.27260        & 48.15278,16.30172      & 27 (37)           \\  \hline %144
+		\end{tabular}
+		\label{table:tracks}
+	\end{table}
+	
+	
+	\begin{table}[h]
+		\caption{The route similarity computed with the discrete Hausdorff distance and the Fr\'{e}chet distance}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\textbf{Trajectory} & \textbf{$d_{H}(X,Y)$ } & \textbf{$\delta_F(f,g)$} \\ \hline
+			1                   & $0.0135^\circ$         & $0.0047^\circ$           \\ %563
+			2                   & $0.0075^\circ$         & $0.0015^\circ$           \\  %1058
+			3                   & $0.0151^\circ$         & $0.0021^\circ$           \\ %367
+			4                   & $0.0107^\circ$         & $0.0012^\circ$           \\  \hline %144
+		\end{tabular}
+		\label{table:routesim}
+	\end{table}
+	
+	%\begin{table}[h]
+	%\sisetup{round-mode=places,round-precision=3,tight-spacing=true}% hier ggf. anpassen! (siehe siunitx-Anleitung)
+	%
+	%\caption{The min, first quartile, median, mean, third quartile and max handover position deviation in \si{\km} for each of the four trajectories for the three different coverage predictions M (P coverage prediction, PB coverage prediction with buildings and V Voronoi)}
+	%\begin{tabular}{|c|c|S|S|S|S|S|S|}
+	%\hline
+	%\textbf{$\#$} & \textbf{M}& \multicolumn{1}{c|}{\bfseries$\min$}& \multicolumn{1}{c|}{\textbf{$Q_1$}  }    & \multicolumn{1}{c|}{\textbf{$\tilde{x}$} }& \multicolumn{1}{c|}{\textbf{$\bar{x}$} }   & \multicolumn{1}{c|}{\textbf{$Q_3$}}    & \multicolumn{1}{c|}{\textbf{$\max$}}   \\ \hline
+	%1 & P  & 0.1610&  0.4680  & 0.6630&  0.7049 & 0.8780 & 1.4030  \\  \hline %563
+	%1&  PB  & 0.1010 &  0.5470 &  0.7160 &  0.7109  & 0.9280 & 1.3150  \\  \hline  %1058
+	%1 &  V  & 0.1420 & 0.4200 & 0.8370 & 0.7148 & 1.0230 & 1.1550 \\  \hline%367
+	%2 & P   & 0.2190 &  0.2860 & 0.3205&  0.4013&  0.4830 & 0.9000\\ \hline %563
+	%2&  PB   & 0.1320 & 0.2605 & 0.3455&  0.3993 & 0.5245&  0.8840   \\   \hline%1058
+	%2 &  V  & 0.0480 & 0.2290 &  0.3430 &  0.3861  & 0.4815  & 0.9000   \\  \hline %367
+	%3 & P   & 0.1110 &  0.3595 & 0.4490 &  0.6769  & 0.6040 & 3.7860   \\   \hline%563
+	%3&  PB  & 0.1480 & 0.3375  & 0.4510 &  0.6789 & 0.5355  & 4.0620   \\   \hline%1058
+	%3 &  V  & 0.0130 &  0.2805  & 0.4090  & 0.6689 & 0.6385 &  4.0850   \\  \hline%367
+	%4 & P &  0.0200 &  0.2230 & 0.3090 &  0.3552 & 0.5040  & 0.8630  \\  \hline%563
+	%4&  PB   & 0.0300 &  0.2133 & 0.3245  & 0.3588 & 0.5060 &  0.8500  \\   \hline%1058
+	%4 &  V& 0.0100 &  0.1748 &  0.3210 &  0.3275 & 0.4428 & 0.8020  \\  \hline %144
+	%\end{tabular}
+	%\label{table:handover}
+	%\end{table}
+	
+	\begin{table}[h]
+		\caption{The min, first quartile, median, mean, third quartile and max handover position deviation in kilometer for each of the four trajectories for the three different coverage predictions M (P coverage prediction, PB coverage prediction with buildings and V Voronoi)}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{$\#$} & \textbf{M} & \textbf{$\min$} & \textbf{$Q_1$} & \textbf{$\tilde{x}$} & \textbf{$\bar{x}$} & \textbf{$Q_3$} & \textbf{$\max$} \\ \hline
+			1             & P          & 0.161           & 0.468          & 0.663                & 0.705              & 0.878          & 1.403           \\ \hline
+			1             & PB         & 0.101           & 0.547          & 0.716                & 0.711              & 0.928          & 1.315           \\ \hline
+			1             & V          & 0.142           & 0.420          & 0.837                & 0.715              & 1.023          & 1.155           \\ \hline
+			2             & P          & 0.219           & 0.286          & 0.321                & 0.401              & 0.483          & 0.900           \\ \hline
+			2             & PB         & 0.132           & 0.261          & 0.346                & 0.399              & 0.525          & 0.884           \\ \hline
+			2             & V          & 0.048           & 0.229          & 0.343                & 0.386              & 0.482          & 0.900           \\ \hline
+			3             & P          & 0.111           & 0.360          & 0.449                & 0.677              & 0.604          & 3.786           \\ \hline
+			3             & PB         & 0.148           & 0.338          & 0.451                & 0.679              & 0.536          & 4.062           \\ \hline
+			3             & V          & 0.013           & 0.281          & 0.409                & 0.669              & 0.639          & 4.085           \\ \hline
+			4             & P          & 0.020           & 0.223          & 0.309                & 0.355              & 0.504          & 0.863           \\ \hline
+			4             & PB         & 0.030           & 0.213          & 0.325                & 0.359              & 0.506          & 0.850           \\ \hline
+			4             & V          & 0.010           & 0.175          & 0.321                & 0.328              & 0.443          & 0.802           \\ \hline
+		\end{tabular}
+		\label{table:handover}
+	\end{table}
+	
+	
+	\begin{table}[h]
+		\caption{The MAE and RMSE for each of the four trajectories for the three different coverage predictions}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			\textbf{$\#$} & \textbf{M} & \textbf{MAE} & \textbf{RMSE} & \textbf{adaptMAE} & \textbf{adaptRMSE} \\ \hline
+			1             & P          & 42.365       & 62.593        & 23.360            & 31.514             \\  \hline %563
+			1             & PB         & 50.315       & 69.985        & 23.127            & 29.142             \\  \hline  %1058
+			1             & V          & 59.704       & 85.549        & 17.648            & 25.250             \\  \hline%367
+			2             & P          & 81.304       & 138.707       & 8.970             & 16.047             \\ \hline %563
+			2             & PB         & 60.964       & 99.090        & 9.436             & 12.086             \\   \hline%1058
+			2             & V          & 113.999      & 181.854       & 13.029            & 16.932             \\  \hline %367
+			3             & P          & 21.125       & 26.808        & 13.305            & 17.799             \\   \hline%563
+			3             & PB         & 26.384       & 33.786        & 11.941            & 16.607             \\   \hline%1058
+			3             & V          & 28.449       & 40.088        & 13.036            & 18.781             \\  \hline%367
+			4             & P          & 58.425       & 150.199       & 17.081            & 22.000             \\  \hline%563
+			4             & PB         & 48.061       & 125.747       & 14.553            & 17.795             \\   \hline%1058
+			4             & V          & 72.715       & 191.037       & 15.388            & 21.599             \\  \hline %144
+		\end{tabular}
+		\label{table:results}
+	\end{table}
+	
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	%%                               %%
+	%% Additional Files              %%
+	%%                               %%
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	%\section*{Additional Files}
+	%  \subsection*{Additional file 1 --- Sample additional file title}
+	%    Additional file descriptions text (including details of how to
+	%    view the file, if it is in a non-standard format or the file extension).  This might
+	%    refer to a multi-page table or a figure.
+	%
+	%  \subsection*{Additional file 2 --- Sample additional file title}
+	%    Additional file descriptions text.
+	
+	
 \end{backmatter}
 \end{document}
