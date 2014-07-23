@@ -1,0 +1,1 @@
+FOR %%G IN (*.tex) DO lualatex %%G

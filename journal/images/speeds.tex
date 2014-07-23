@@ -1,0 +1,25 @@
+\documentclass[varwidth]{standalone}
+\usepackage{mwe}
+\usepackage[labelfont=normalsize,labelformat=parens,
+justification=centering]{caption,subfig} %%% Center the caption
+\begin{document}
+
+%\def\FigSize{.23}
+\begin{figure}[htb!]
+\subfloat[]{%
+\includegraphics[width=3cm]{563_SpeedWithoutAdaption}
+}%
+\hspace{3pt}%
+\subfloat[]{%
+\includegraphics[width=3cm]{1058_SpeedWithoutAdaption}%
+}%
+
+\subfloat[]{%
+\includegraphics[width=3cm]{367_SpeedWithoutAdaption}
+}%
+\hspace{3pt}%
+\subfloat[]{%
+\includegraphics[width=3cm]{144_SpeedWithoutAdaption}%
+}%
+\end{figure}
+\end{document}

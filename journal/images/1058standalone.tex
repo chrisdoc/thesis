@@ -1,0 +1,25 @@
+\documentclass[varwidth]{standalone}
+\usepackage{mwe}
+\usepackage[labelfont=normalsize,labelformat=parens,
+justification=centering]{caption,subfig} %%% Center the caption
+\begin{document}
+
+%\def\FigSize{.23}
+\begin{figure}[htb!]
+\subfloat[]{%
+\includegraphics[width=3cm]{1058_predPToner}
+}%
+\hspace{3pt}%
+\subfloat[]{%
+\includegraphics[width=3cm]{1058_predPBToner}%
+}%
+
+\subfloat[]{%
+\includegraphics[width=3cm]{1058_voronoiToner}
+}%
+\hspace{3pt}%
+\subfloat[]{%
+\includegraphics[width=3cm]{1058_ocmToner}%
+}%
+\end{figure}
+\end{document}

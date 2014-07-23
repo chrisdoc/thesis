@@ -1,0 +1,1 @@
+pandoc --default-image-extension=.png --number-sections --biblatex --bibliography=bmc_article.bib -s bmc_article.tex -o bmc_article.docx

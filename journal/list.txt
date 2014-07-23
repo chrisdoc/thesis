@@ -1,0 +1,47 @@
+Auflistung der Ordnerpfade
+Volumeseriennummer : 00000095 F655:A918
+C:.
+|   bmc-mathphys.bst
+|   bmcart-biblio.sty
+|   bmcart.cls
+|   bmc_article.aux
+|   bmc_article.bbl
+|   bmc_article.bib
+|   bmc_article.blg
+|   bmc_article.cls
+|   bmc_article.docx
+|   bmc_article.fdb_latexmk
+|   bmc_article.fls
+|   bmc_article.log
+|   bmc_article.out
+|   bmc_article.pdf
+|   bmc_article.synctex.gz
+|   bmc_article.tex
+|   bmc_article_2col.pdf
+|   docx.bat
+|   handover.pdf
+|   list.txt
+|   literatur.bib
+|   populationgrid.aux
+|   populationgrid.fdb_latexmk
+|   populationgrid.fls
+|   populationgrid.log
+|   populationgrid.pdf
+|   populationgrid.tex
+|   readme.html
+|   senderpower.aux
+|   senderpower.fdb_latexmk
+|   senderpower.fls
+|   senderpower.log
+|   senderpower.pdf
+|   senderpower.tex
+|   Story.docx
+|   Structure.docx
+|   texput.log
+|   
+\---images
+        coverage.svg
+        coverage2.svg
+        handover.pdf
+        handover.svg
+        
