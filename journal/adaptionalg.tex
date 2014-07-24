@@ -51,5 +51,49 @@ justification=centering]{caption,subfig} %%% Center the caption
 	\end{algorithm}
 \end{figure}
 
+\begin{minipage}{1.5\columnwidth}
+  \removelatexerror
+	\begin{algorithm}[H]
+		\caption{Handover adaption}
+		\label{alg:adaption}
+		\For( \emph{Adaption loop}){$i\leftarrow 1$ \KwTo $length(trajectory)$}
+		{
+			allowedSpeed<-MaxSpeed(trajectory[i])\;
+			c=trajectory[i]\;p=trajectory[i-1]\;n=trajectory[i+1]\;
+			/*speed overrun*/\\
+			\uIf{Speed(c)$\geq1.7$*allowedSpeed}{
+				cDist=Distance(c)\;
+				pDist=Distance(p)\;
+				nDist=Distance(n)\;
+				nominalDist=allowedSpeed*Duration(c)\;
+				SetSpeed(c,allowedSpeed)\;
+				\uIf{p==NULL$\&\&$n!=NULL}{
+					pDist=pDist+(cDist-nominalDist)\;
+					SetSpeed(prev,pDist/Duration(p))\;
+				}
+				\uElseIf{p!=NULL$\&\&$p!=NULL}{
+					nDist=nDist+(cDist-nominalDist)\;
+					SetSpeed(n,nDist/Duration(n))\;
+				}
+				\uElse{
+					nTempDist=nDist+(cDist-nominalDist)/2\;
+					pTempDist=pDist+(cDist-nominalDist)/2\;
+					\uIf{nTempDist/Duration(n)$\gg$nominalSpeed}{
+						nTempDist=nDist;
+						pTempDist=pDist+(cDist-nominalDist)\;
+					}
+					\uElseIf{pTempDist/Duration(p)$\gg$nominalSpeed}{
+						      	      	      	      
+						nTempDist=nDist+(cDist-nominalDist)\;
+						pTempDist=nDist;
+					}
+					SetSpeed(n,nTempDist/Duration(n))\;
+					SetSpeed(p,pTempDist/Duration(p))\;
+				}
+			}
+		}
+	\end{algorithm}
+  \end{minipage}
+
 
 \end{document}
