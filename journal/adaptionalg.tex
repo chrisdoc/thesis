@@ -3,6 +3,9 @@
 \usepackage[labelfont=normalsize,labelformat=parens,
 justification=centering]{caption,subfig} %%% Center the caption
 \usepackage[ruled,norelsize]{algorithm2e}
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
 \begin{document}
 \begin{figure}[!t]
 	\removelatexerror
