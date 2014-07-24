@@ -1,0 +1,37 @@
+\documentclass[varwidth]{standalone}
+\usepackage{mwe}
+\usepackage[labelfont=normalsize,labelformat=parens,
+justification=centering]{caption,subfig} %%% Center the caption
+\usepackage[ruled,norelsize]{algorithm2e}
+\begin{document}
+\begin{figure}[!t]
+	\removelatexerror
+	\begin{algorithm}[H]
+		\caption{Handover prediction}
+		\label{alg:prediction}
+		HP$\leftarrow$List()\;
+		\For( \emph{Handover loop}){$i\leftarrow 1$ \KwTo $length(handover)-1$}
+		{
+			curr=handover[i]; next=handover[i+1]\;
+			/*overlapping handover*/\\
+			\uIf{Intersects(curr,next)}{
+				centroid=Centroid(Intersects(curr,next));
+				Add(HP,NearestPoint(route,centroid));
+			}
+			\Else{
+				line=LineBetweenNearestPoint(curr,next)\;
+				/*line crossing route*/ \\
+				\uIf{Intersects(line,route)}{
+					Add(HP,Intersects(line,route))\;
+				}
+				\Else{
+					midPoint=MidPoint(line)\;
+					Add(HP,NearestPoint(route,midPoint))\;
+				}
+			}
+		}
+	\end{algorithm}
+\end{figure}
+
+
+\end{document}
