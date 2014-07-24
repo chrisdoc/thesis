@@ -326,6 +326,11 @@
 %\usepackage{siunitx}
 \usepackage[ruled,norelsize]{algorithm2e}
 
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+
+
 
 % *** FLOAT PACKAGES ***
 %
