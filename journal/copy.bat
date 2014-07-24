@@ -2,4 +2,4 @@ robocopy C:\Users\ckies_000\Dropbox\FHMaster\Journal\ C:\Users\ckies_000\FH\thes
 cd C:\Users\ckies_000\FH\thesis\
 git add .
 git commit -a -m "test"
-git push
+REM git push
