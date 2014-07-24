@@ -9,7 +9,7 @@ justification=centering]{caption,subfig} %%% Center the caption
 \begin{document}
 
 \SetAlFnt{\footnotesize}
-\begin{minipage}{82.5mm}
+\begin{minipage}{81mm}
   \removelatexerror
 	\begin{algorithm}[H]
 		\caption{Handover adaption}
@@ -43,7 +43,7 @@ justification=centering]{caption,subfig} %%% Center the caption
 					\uElseIf{pTempDist/Duration(p)$\gg$nominalSpeed}{
 						      	      	      	      
 						nTempDist=nDist+(cDist-nominalDist);
-						pTempDist=nDist\;
+						pTempDist=nDist;
 					}
 					SetSpeed(n,nTempDist/Duration(n))\;
 					SetSpeed(p,pTempDist/Duration(p))\;
