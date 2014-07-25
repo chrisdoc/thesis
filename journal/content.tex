@@ -411,10 +411,11 @@ If, however, the handover segment has both a predecessor and a successor, which 
    \State $n=trajectory[i+1]$
   
 \If {$Speed(c)\ge1.7*allowedSpeed$}
-   \State $c=Centroid(Intersects(curr,next))$
-   \State $Add(HP,NearestPoint(route,c))$
-\Else
-	\State $line=LineBetweenNearestPoint(curr,next)$
+   \State $cDist=Distance(c)$
+    \State $pDist=Distance(p)$
+     \State $nDist=Distance(n)$
+   \State $nomDist=allowedSpeed*Duration(c)$
+   \State $SetSpeed(c,allowedSpeed);$
     \If {$Intersects(line,route)$}
         \State $Add(HP,Intersects(line,route))$
         \Else
