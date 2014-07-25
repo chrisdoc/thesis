@@ -416,7 +416,7 @@ If, however, the handover segment has both a predecessor and a successor, which 
      \State $nDist=Distance(n)$
    \State $nomDist=allowedSpeed*Duration(c)$
    \State $SetSpeed(c,allowedSpeed);$
-    \If {$p==NULL&&n!=NULL$}
+    \If {$p==NULL\&\&n!=NULL$}
         \State $pDist=pDist+(cDist-nomDist)$
         \State $SetSpeed(p,pDist/Duration(p))$
         \ElseIf
