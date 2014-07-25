@@ -271,7 +271,7 @@ For unconnected handover the line between the closest points of the two coverage
 
 
  \State $HP\gets List()$
- \For{$i \leftarrow 1,i<length(handover)-1$}
+ \For{$i \leftarrow 1,length(handover)-1$}
  \State $curr=handover[i];next=handover[i-1]$
  
   \EndFor
@@ -404,15 +404,13 @@ If, however, the handover segment has both a predecessor and a successor, which 
 
 \begin{figure}
 \begin{algorithmic}[1]
-
-
- \State $HP\gets List()$
- 
- \For {i=1}{$i<length(handover)-1$}
- \State $curr=handover[i];next=handover[i-1]$
- 
-  \EndFor
-\If {$Intersects(curr,next)$}
+ \For{$i \leftarrow 1,length(trajectory)$}
+ \State $allowedSpeed=MaxSpeed(trajectory[i])$
+ \State $c=trajectory[i]$
+  \State $p=trajectory[i-1]$
+   \State $n=trajectory[i+1]$
+  
+\If {$Speed(c)\ge1.7*allowedSpeed$}
    \State $c=Centroid(Intersects(curr,next))$
    \State $Add(HP,NearestPoint(route,c))$
 \Else
@@ -424,6 +422,7 @@ If, however, the handover segment has both a predecessor and a successor, which 
         \State $Add(HP,NearestPoint(route,mp))$
     \EndIf
 \EndIf
+\EndFor
 \end{algorithmic}
 \caption{Handover adaption}\label{alg:adaption}
 \end{figure}
