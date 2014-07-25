@@ -530,6 +530,26 @@ For the coverage prediction without buildings the velocity MAE, by using the ada
 However, this indicates only how well the adaption algorithm work but not how accurate the velocity estimation is in general. To validate the velocity accuracy for the three different coverage prediction methods the absolute adapted velocity errors from the four trajectories were combined to compute the MAE. Here the coverage prediction with buildings had the minimum absolute error for all trajectories with $14.887$km/h. Followed by the Voronoi diagrams with $14.921$km/h and the coverage prediction without buildings $16.004$km/h. 
 
 This indicates that post-processing in the form of the adaption algorithm (Algorithm~\ref{alg:adaption}) is necessary to estimate an accurate velocity. 
+	\begin{table}[h]
+		\caption{The MAE and RMSE for each of the four trajectories for the three different coverage predictions}
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			\textbf{$\#$} & \textbf{M} & \textbf{MAE} & \textbf{RMSE} & \textbf{adaptMAE} & \textbf{adaptRMSE} \\ \hline
+			1             & P          & 42.365       & 62.593        & 23.360            & 31.514             \\  \hline %563
+			1             & PB         & 50.315       & 69.985        & 23.127            & 29.142             \\  \hline  %1058
+			1             & V          & 59.704       & 85.549        & 17.648            & 25.250             \\  \hline%367
+			2             & P          & 81.304       & 138.707       & 8.970             & 16.047             \\ \hline %563
+			2             & PB         & 60.964       & 99.090        & 9.436             & 12.086             \\   \hline%1058
+			2             & V          & 113.999      & 181.854       & 13.029            & 16.932             \\  \hline %367
+			3             & P          & 21.125       & 26.808        & 13.305            & 17.799             \\   \hline%563
+			3             & PB         & 26.384       & 33.786        & 11.941            & 16.607             \\   \hline%1058
+			3             & V          & 28.449       & 40.088        & 13.036            & 18.781             \\  \hline%367
+			4             & P          & 58.425       & 150.199       & 17.081            & 22.000             \\  \hline%563
+			4             & PB         & 48.061       & 125.747       & 14.553            & 17.795             \\   \hline%1058
+			4             & V          & 72.715       & 191.037       & 15.388            & 21.599             \\  \hline %144
+		\end{tabular}
+		\label{table:results}
+	\end{table}
 
 \section{Conclusion and Discussion}
 We have shown that trajectories can be estimated for cellular subscribers' by using subscriber information captured in the core network and the location of cell sites. We presented two methods for the cell site coverage estimation and compared them in terms of handover position and velocity estimation. Our results showed that the handover position can be estimated with a mean deviation of 179m by using the coverage prediction without buildings. To minimize the effect of a deviated handover position we developed an adaption algorithm that can reduce velocity overruns and decrease the mean absolute error. The validation has shown that the adaption algorithm reduces velocity overruns at all four test drive trajectories. The mean absolute velocity error over all four trajectory was $14.887$km/h when using coverage prediction with building models. This indicates that the velocity can be precisely estimated for urban and rural areas.
