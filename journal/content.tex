@@ -192,6 +192,12 @@ the system uses population density maps in order to better estimate the
 start or end position.
 
 An example for our assumption is depicted in Figure \ref{fig:populationgrid}, were an area defined by its border with three different population density areas area illustrated. Based on our assumption the subscriber will be more likely located in the area with 240$[\frac{people}{km^2}]$ than in the ones with 45$[\frac{people}{km^2}]$ and 30$[\frac{people}{km^2}]$. Hence, our framework will use all different population density areas within the border and compute a probability density function. After a population area has been chosen by the random process the subscriber's location will be uniformly located within the border of the population area. This process ensures that subscribers will be located with a higher probability in areas with a higher population density.
+	\begin{figure}[h!]
+		\label{fig:populationgrid}
+		\caption{\csentence{Popualtion grid} The following demonstrates an area with 3 different population densities. Our assumption is that people will more likely start or end their journey in a higher populated area.
+		}
+		\includegraphics[width=0.9\columnwidth]{populationgrid}
+	\end{figure}
 %We are using land cover information to restrict the users position within the cell coverage. In this manner we allow the users start and end position to be located in urInstead of a uniform position distribution our approach utilizes a distribution computed from population density maps. This distribution prefers areas with a higher population density within the extent of the cell. Our assumption is that subscribers will most likely start or end their journey in a higher density area than in a less density one.
 \paragraph{The Traveled Route}
 Since individuals travel most of their time on predefined paths we restrict our generated trajectories to be on top of the road network of the research area. In this manner the subscriber's route will be computed on the OpenStreetMap road network between the before estimated start and end positions. By default, 20 routes with different start and end positions will be computed. Afterwards, these routes will be validated in terms of their geometry and the time it takes to traverse the route.
