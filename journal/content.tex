@@ -274,8 +274,8 @@ For unconnected handover the line between the closest points of the two coverage
  
   \EndFor
 \If {$Intersects(curr,next)$}
-   \State $centroid=Centroid(Intersects(curr,next))$
-   \State $Add(HP,NearestPoint(route,centroid))$
+   \State $c=Centroid(Intersects(curr,next))$
+   \State $Add(HP,NearestPoint(route,c))$
 \Else
 	\State $line=LineBetweenNearestPoint(curr,next)$
     \If {$Intersects(line,route)$}
