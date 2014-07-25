@@ -421,6 +421,19 @@ In this section we will present the environment in which the four test drives to
 
 Table~\ref{table:tracks} gives an overview of the start and end position and the amount of handover events for each of the four test rides. The amount of handovers in brackets correspond to unfiltered raw events. The one outside are filtered handover where the framework removed ping-pong handover. We  The first test drive started in the city of Linz and ended in the village Treffling that is located in the outskirts of Linz. This test drive was performed entirely on the higher road network and features a semi-rural scenario that consists of an urban and rural part. The second test drive took place within the borders of the city of Linz. The test drive was performed on streets of the minor road network as well as on the city highway. The third and fourth test drive took place within the borders of the city of Vienna. Both test drives were performed on the major and minor road network.
 
+	\begin{table}[h]
+		\caption{Overview of the start and end position and the amount of handover events (unfiltered handover) for the four test drive trajectories}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{$\#$} & \textbf{Start [Lat,Lon]} & \textbf{End [Lat,Lon]} & \textbf{Handover} \\ \hline
+			1             & 48.28105,14.30415        & 48.33499,14.3780       & 18 (22)           \\ %563
+			2             & 48.31616,14.29052        & 48.28169,14.30275      & 17 (19)           \\  %1058
+			3             & 48.13993,16.32367        & 48.19880,16.25597      & 16 (20)           \\ %367
+			4             & 48.19283,16.27260        & 48.15278,16.30172      & 27 (37)           \\  \hline %144
+		\end{tabular}
+		\label{table:tracks}
+	\end{table}
+
 In Figure~\ref{fig:563} and \ref{fig:144} the first and the fourth trajectories are illustrated. Each of the three coverage prediction methods -- Network planning tool (a), Network planning tool with buildings (b) and Voronoi diagrams (c) -- along with the estimated handover position is depicted. The last Figure (d) shows the route of the test drive with the exact location of each handover. Due to the limited place the second and third trajectory was omitted.
 
 	\begin{figure*}[h!]
