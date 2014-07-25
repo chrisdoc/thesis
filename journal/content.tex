@@ -468,8 +468,20 @@ The third trajectory shows a high maximum handover deviation that was caused by 
 \subsubsection{Velocity Estimation}
 In this section we want to discuss the results of the raw velocity estimation and the adapted velocity estimation with handover repositioning. We compared each of the velocities against the velocity derived from the GPS information. Since the estimated velocity accords to the average velocity between two handover position we computed the average GPS velocity between this two handover points. In Figure~\ref{fig:velocity} the raw estimated velocity for the first trajectory is illustrated. It can be seen that there occur many velocity overruns for eacht of the 3 coverage estimation methods. By comparing this Figure with the handover deviation (see Figure~\ref{fig:handoverdeviation}) it is clear that a velocity overrun happens when a large ($\ge0.5$km) happens. Contrary Figure~\ref{fig:velocityadaption} shows the estimated velocity with adaption and handover repositioning. Hence, we see that the peaks could be reduced. To validate the accuracy, the MAE and RMSE for both velocity estimations for each trajectory and each coverage prediction methods was computed. The results depict in Table~\ref{table:results} show that the adaption algorithm can reduce the error introduce by a wrong handover position estimation.
 
-For the coverage prediction without buildings the velocity MAE, by using the adaption algorithm, was reduced on each trajectory by an average of $60.40\%$. For the coverage prediction with buildings the reduction was $65.75\%$ and for Voronoi diagrams $73.01\%$. 
+	\begin{figure}[h!]
+		\label{fig:velocity}
+		\caption{\csentence{Trajectory 1 velocity without adaption} The estimated velocity for all three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi) without the adaption algorithm
+		}
+		\includegraphics[width=0.9\columnwidth]{images/563_SpeedWithoutAdaption}
+	\end{figure}
 
+For the coverage prediction without buildings the velocity MAE, by using the adaption algorithm, was reduced on each trajectory by an average of $60.40\%$. For the coverage prediction with buildings the reduction was $65.75\%$ and for Voronoi diagrams $73.01\%$. 
+\begin{figure}[h!]
+		\label{fig:velocityadaption}
+		\caption{\csentence{Trajectory 1 Velocity with adaption} The estimated velocity for all three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi) with the adaption algorithm
+		}
+		\includegraphics[width=0.9\columnwidth]{images/563_SpeedsWithAdaption}
+	\end{figure}
 However, this indicates only how well the adaption algorithm work but not how accurate the velocity estimation is in general. To validate the velocity accuracy for the three different coverage prediction methods the absolute adapted velocity errors from the four trajectories were combined to compute the MAE. Here the coverage prediction with buildings had the minimum absolute error for all trajectories with $14.887$km/h. Followed by the Voronoi diagrams with $14.921$km/h and the coverage prediction without buildings $16.004$km/h. 
 
 This indicates that post-processing in the form of the adaption algorithm (Algorithm~\ref{alg:adaption}) is necessary to estimate an accurate velocity. 
