@@ -281,8 +281,8 @@ For unconnected handover the line between the closest points of the two coverage
     \If {$Intersects(line,route)$}
         \State $Add(HP,Intersects(line,route))$
         \Else
-        \State $midPoint=MidPoint(line)$
-        \State $Add(HP,NearestPoint(route,midPoint))$
+        \State $mp=MidPoint(line)$
+        \State $Add(HP,NearestPoint(route,mp))$
     \EndIf
 \EndIf
 \end{algorithmic}
