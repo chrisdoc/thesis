@@ -236,36 +236,46 @@ The third, ping-pong handover is where a handover is made from cell site $A$ to 
 Algorithm \ref{alg:prediction} depicts how the system estimates the handover position for overlapping and unconnected handover. For an overlapping handover the centroid of the intersection $C=A \cap B$ of the involved cell site is computed and then the nearest point on the calculated route is set as the handover position. 
 
 For unconnected handover the line between the closest points of the two coverage areas is computed, if this line intersects the before computed route then the intersection position is set as the handover position. If this is not the case then the midpoint of the line is computed and the nearest point on the calculated route is set as the handover position. The last step in each of these branches was performed to associate the handover position with the road network.
-\SetAlFnt{\footnotesize}
+%\SetAlFnt{\footnotesize}
+%
+%\begin{figure}[!t]
+%	\removelatexerror
+%	\begin{algorithm}[H]
+%		\caption{Handover prediction}
+%		\label{alg:prediction}
+%		HP$\leftarrow$List()\;
+%		\For( \emph{Handover loop}){$i\leftarrow 1$ \KwTo $length(handover)-1$}
+%		{
+%			curr=handover[i]; next=handover[i+1]\;
+%			/*overlapping handover*/\\
+%			\uIf{Intersects(curr,next)}{
+%				centroid=Centroid(Intersects(curr,next));
+%				Add(HP,NearestPoint(route,centroid));
+%			}
+%			\Else{
+%				line=LineBetweenNearestPoint(curr,next)\;
+%				/*line crossing route*/ \\
+%				\uIf{Intersects(line,route)}{
+%					Add(HP,Intersects(line,route))\;
+%				}
+%				\Else{
+%					midPoint=MidPoint(line)\;
+%					Add(HP,NearestPoint(route,midPoint))\;
+%				}
+%			}
+%		}
+%	\end{algorithm}
+%\end{figure}
 
-\begin{figure}[!t]
-	\removelatexerror
-	\begin{algorithm}[H]
-		\caption{Handover prediction}
-		\label{alg:prediction}
-		HP$\leftarrow$List()\;
-		\For( \emph{Handover loop}){$i\leftarrow 1$ \KwTo $length(handover)-1$}
-		{
-			curr=handover[i]; next=handover[i+1]\;
-			/*overlapping handover*/\\
-			\uIf{Intersects(curr,next)}{
-				centroid=Centroid(Intersects(curr,next));
-				Add(HP,NearestPoint(route,centroid));
-			}
-			\Else{
-				line=LineBetweenNearestPoint(curr,next)\;
-				/*line crossing route*/ \\
-				\uIf{Intersects(line,route)}{
-					Add(HP,Intersects(line,route))\;
-				}
-				\Else{
-					midPoint=MidPoint(line)\;
-					Add(HP,NearestPoint(route,midPoint))\;
-				}
-			}
-		}
-	\end{algorithm}
-\end{figure}
+\begin{algorithmic}
+\If {$i\geq maxval$}
+    \State $i\gets 0$
+\Else
+    \If {$i+k\leq maxval$}
+        \State $i\gets i+k$
+    \EndIf
+\EndIf
+\end{algorithmic}
 
 \paragraph{Computing the Average Velocity}
 To derive the subscriber's mobility and in generally its movement the velocity needs to be computed. 
