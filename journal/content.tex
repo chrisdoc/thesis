@@ -482,7 +482,26 @@ In Figure~\ref{fig:handoverdeviation} the handover deviation for the first traje
 \end{figure}
 
 Table~\ref{table:handover} gives a statistical overview of the handover deviation between the estimated position and the observed one. All handover positions have been estimated with Algorithm~\ref{alg:prediction} and were performed with the three coverage prediction methods. 
-
+	\begin{table}[h]
+		\caption{The min, first quartile, median, mean, third quartile and max handover position deviation in kilometer for each of the four trajectories for the three different coverage predictions M (P coverage prediction, PB coverage prediction with buildings and V Voronoi)}
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			\textbf{$\#$} & \textbf{M} & \textbf{$\min$} & \textbf{$Q_1$} & \textbf{$\tilde{x}$} & \textbf{$\bar{x}$} & \textbf{$Q_3$} & \textbf{$\max$} \\ \hline
+			1             & P          & 0.161           & 0.468          & 0.663                & 0.705              & 0.878          & 1.403           \\ \hline
+			1             & PB         & 0.101           & 0.547          & 0.716                & 0.711              & 0.928          & 1.315           \\ \hline
+			1             & V          & 0.142           & 0.420          & 0.837                & 0.715              & 1.023          & 1.155           \\ \hline
+			2             & P          & 0.219           & 0.286          & 0.321                & 0.401              & 0.483          & 0.900           \\ \hline
+			2             & PB         & 0.132           & 0.261          & 0.346                & 0.399              & 0.525          & 0.884           \\ \hline
+			2             & V          & 0.048           & 0.229          & 0.343                & 0.386              & 0.482          & 0.900           \\ \hline
+			3             & P          & 0.111           & 0.360          & 0.449                & 0.677              & 0.604          & 3.786           \\ \hline
+			3             & PB         & 0.148           & 0.338          & 0.451                & 0.679              & 0.536          & 4.062           \\ \hline
+			3             & V          & 0.013           & 0.281          & 0.409                & 0.669              & 0.639          & 4.085           \\ \hline
+			4             & P          & 0.020           & 0.223          & 0.309                & 0.355              & 0.504          & 0.863           \\ \hline
+			4             & PB         & 0.030           & 0.213          & 0.325                & 0.359              & 0.506          & 0.850           \\ \hline
+			4             & V          & 0.010           & 0.175          & 0.321                & 0.328              & 0.443          & 0.802           \\ \hline
+		\end{tabular}
+		\label{table:handover}
+	\end{table}
 By combining the handover deviations over all four trajectories and computing the MAE and RMSE, the coverage predictions without buildings performed best with a MAE of $0.176$km and RMSE $0.231$km. Followed by the coverage prediction with buildings MAE $0.189$km and RMSE $0.253$km and the Voronoi diagrams with MAE $0.238$km and RMSE $0.311$km.
 
 For the fourth trajectory the minimum, maximum and mean handover deviation was $0.010$km, $0.802$km and $0.328$km respectively which shows that the handover position can be estimated with high accuracy.
