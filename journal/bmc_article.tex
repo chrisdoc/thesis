@@ -546,7 +546,7 @@ If, however, the handover segment has both a predecessor and a successor, which 
 		\label{alg:adaption}
 		\For( \emph{Adaption loop}){$i\leftarrow 1$ \KwTo $length(trajectory)$}
 		{
-			allowedSpeed<-MaxSpeed(trajectory[i])\;
+			allowedSpeed=MaxSpeed(trajectory[i])\;
 			c=trajectory[i]\;p=trajectory[i-1]\;n=trajectory[i+1]\;
 			/*speed overrun*/\\
 			\uIf{Speed(c)$\geq1.7$*allowedSpeed}{
