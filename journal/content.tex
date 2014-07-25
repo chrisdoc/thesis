@@ -68,8 +68,21 @@ An event captured in the core network consists of the following attributes:
 	\item Event, defines the captured event
 \end{itemize}
 
-An example for events captured in the core network is depicted in Table~\ref{table:events}. Here the first event describes a call establishment, followed by three handover events and at last, a call termination event. 
-\newline
+An example for events captured in the core network is depicted in Table~\ref{table:events}. Here the first event describes a call establishment, followed by three handover events and at last, a call termination event. \newline
+\begin{table}[h]
+		\caption{Events captured in the core network of the network operator}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			Time stamp & Id & Cell-Id & LAC  & Event              \\ \hline
+			1327678833 & 4  & 51520   & 5501 & Call Establishment \\
+			1327678854 & 4  & 31510   & 5501 & Handover Update    \\
+			1327678935 & 4  & 31210   & 5502 & Handover Update    \\
+			1327678949 & 4  & 40510   & 5502 & Handover Update    \\
+			1327679027 & 4  & 40510   & 5502 & Call Termination   \\ \hline
+		\end{tabular}
+		\label{table:events}
+\end{table}
+
 %This data was later used to produce handover sequences. The later transformed handover sequences have the same format as the handover sequences captured in a network operator core network (see Table \ref{table:transformed}).
 %
 %The GPS position is used to validate our results, in terms of route geometry and estimated velocity. An important aspect of using GPS is that besides the route geometry it also reveals the exact location of the handover. Thus it enables us to evaluate the accuracy of the handover position prediction. Besides the actual traveled route, the GPS information together with the time stamps allows deriving the actual velocity of the driver. Therefore, GPS is used to measure the difference between the estimated velocity and actual subscribers' velocity.
