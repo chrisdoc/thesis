@@ -416,8 +416,10 @@ If, however, the handover segment has both a predecessor and a successor, which 
      \State $nDist=Distance(n)$
    \State $nomDist=allowedSpeed*Duration(c)$
    \State $SetSpeed(c,allowedSpeed);$
-    \If {$Intersects(line,route)$}
-        \State $Add(HP,Intersects(line,route))$
+    \If {$p==NULL&&n!=NULL$}
+        \State $pDist=pDist+(cDist-nomDist)$
+        \State $SetSpeed(p,pDist/Duration(p))$
+        \ElseIf
         \Else
         \State $mp=MidPoint(line)$
         \State $Add(HP,NearestPoint(route,mp))$
