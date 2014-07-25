@@ -271,7 +271,7 @@ For unconnected handover the line between the closest points of the two coverage
 
 
  \State $HP\gets List()$
- \For{$i<length(handover)-1$}
+ \For{$i=1$}{$i<length(handover)-1$}
  \State $curr=handover[i];next=handover[i-1]$
  
   \EndFor
@@ -407,7 +407,8 @@ If, however, the handover segment has both a predecessor and a successor, which 
 
 
  \State $HP\gets List()$
- \For{$i<length(handover)-1$}
+ 
+ \For {i=1}{$i<length(handover)-1$}
  \State $curr=handover[i];next=handover[i-1]$
  
   \EndFor
@@ -424,7 +425,7 @@ If, however, the handover segment has both a predecessor and a successor, which 
     \EndIf
 \EndIf
 \end{algorithmic}
-\caption{Handover position prediction}\label{alg:adaption}
+\caption{Handover adaption}\label{alg:adaption}
 \end{figure}
 
 \subsection{Evaluation of Subscriber Trajectories}
