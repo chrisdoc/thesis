@@ -269,7 +269,10 @@ For unconnected handover the line between the closest points of the two coverage
 
 \begin{algorithmic}
  \State $HP\gets List()$
- \For{$i<length(handover)-1$} <text> \EndFor
+ \For{$i<length(handover)-1$}
+ \State $curr=handover[i];next=handover[i-1]$
+ 
+  \EndFor
 \If {$i\geq maxval$}
    
 \Else
