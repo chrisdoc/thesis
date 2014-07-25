@@ -456,6 +456,19 @@ In Figure~\ref{fig:563} and \ref{fig:144} the first and the fourth trajectories 
 After introducing the environment in which we performed our test drives, we will now present the results gathered during the test drives. We divided the results into three categories --\emph{route geometry}, \emph{handover deviation} and \emph{velocity estimation} -- that will be delineated in the following sections. The results indicate that the subscriber's route, the handover position and the velocity can be estimated for the purpose of mobility simulations.
 \subsubsection{Route Geometry}
 To validate the similarity of the estimated route and the actual route the before mentioned discrete Hausdorff distance and the Fr\'{e}chet distance were used. While the Fr\'{e}chet distance is better suited for curve matching the Hausdorff distance gives us the maximum distance between the estimated and the actual route. Hereby, the Hausdorff either indicates the maximum distance between the estimated start and end positions or the maximum distance between the estimated and the actual route. The results in Table~\ref{table:routesim} show a minimum and maximum Hausdorff distance of $0.0075^\circ$ (590m) and $0.0151^\circ$ (1189m) respectively. The minimum and maximum Fr\'{e}chet distance of $0.0012^\circ$ (94m) and $0.0047^\circ$ (370m) respectively. Hence, all the estimated trajectories show a high similarity with the actual route and are therefore suited to describe the subscriber's mobility.
+
+	\begin{table}[h]
+		\caption{The route similarity computed with the discrete Hausdorff distance and the Fr\'{e}chet distance}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			\textbf{Trajectory} & \textbf{$d_{H}(X,Y)$ } & \textbf{$\delta_F(f,g)$} \\ \hline
+			1                   & $0.0135^\circ$         & $0.0047^\circ$           \\ %563
+			2                   & $0.0075^\circ$         & $0.0015^\circ$           \\  %1058
+			3                   & $0.0151^\circ$         & $0.0021^\circ$           \\ %367
+			4                   & $0.0107^\circ$         & $0.0012^\circ$           \\  \hline %144
+		\end{tabular}
+		\label{table:routesim}
+	\end{table}
 \subsubsection{Handover Deviation}
 The accuracy of velocity estimation directly depends on the handover estimation. Therefore, it is important to validate the handover position algorithm. We compared the handover positions estimated with the three coverage prediction method against the real handover position stored by the handset. Though Voronoi diagrams only takes the location of the cell sites into account, the handover position could be estimated reasonably well. We saw that Voronoi diagrams worked best in urban areas where the density of cell sites is high. In rural areas, with less cell sites, the Voronoi diagrams became fairly large since the extent is only limited by the surrounding cell sites. 
 
