@@ -219,8 +219,15 @@ The framework uses two consecutive handovers to compute the origin of the handov
 
 In our research we focus on the handover prediction based on the coverage of the involved cell sites, since there is no information of the network load or the network interference available in the event stream provided by the network operator.
 
-Throughout our investigation of handover sequences we discovered three different types of handovers. The first is defined as an \emph{overlapping handover}. 
-An overlapping handover is where the coverage areas of the two involved cell sites have an intersection. Note that an overlapping handover can not occur when using Voronoi diagrams for the cell area estimation since Voronoi diagrams are not overlapping. However, when using a network planning tool for the coverage area estimation there are many cell sites whose coverage areas overlap. 
+Throughout our investigation of handover sequences we discovered three different types of handover. The first is defined as an \emph{overlapping handover}. 
+An overlapping handover is where the coverage areas of the two involved cell sites have an intersection. Note that an overlapping handover can not occur when using Voronoi diagrams for the cell area estimation since Voronoi diagrams are not overlapping. However, when using a network planning tool for the coverage area estimation there are many cell sites whose coverage areas overlap. Figure~\ref{fig:handover} illustrates an (a) overlapping and (b) an unconnected handover.
+
+\begin{figure}[h!]
+		\label{fig:handover}
+		\caption{\csentence{Types of handover} An overlapping handover (a) and an unconnected handover are depicted together with the estimated handover position (red point)
+		}
+		\includegraphics[width=0.9\columnwidth]{handover}
+	\end{figure}
 
 The second handover, is an \emph{unconnected handover}, where the involved coverage areas do not intersect. This means that a handover is made to a cell site whose coverage area the subscriber has not entered yet.
 
