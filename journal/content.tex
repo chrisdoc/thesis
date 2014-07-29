@@ -207,8 +207,7 @@ An example for our assumption is depicted in Fig.~\ref{fig:populationgrid}, were
 \paragraph{The Traveled Route}
 Since individuals travel most of their time on predefined paths we restrict our generated trajectories to be on top of the road network of the research area. In this manner the subscriber's route will be computed on the OpenStreetMap road network between the before estimated start and end positions. By default, 20 routes with different start and end positions will be computed. Afterwards, these routes will be validated in terms of their geometry and the time it takes to traverse the route.
 
-The first validation calculates the squared sum of the minimum distance between the route and the centroid of each cell areas. This is the same metric that Tettamanti et al.~\cite{Tettamanti2012} used for their system. For each of the previously calculated routes $j$, the squared sum of all minimum distances $d_{i,j}$ between the
-route and the cell site was calculated.
+The first validation calculates the squared sum of the minimum distance between the route and the centroid of each cell areas as can be seen in (\ref{eq:sumsquaremine}). This is the same metric that Tettamanti et al.~\cite{Tettamanti2012} used for their system. For each of the previously calculated routes $j$, the squared sum of all minimum distances $d_{i,j}$ between the route and the cell site was calculated.
 
 We introduce a duration ratio $route_{ratio}$ between the call duration $d_{call}$ and the time it takes to drive the route $d_{route}$ as depicted in (\ref{eq:ratio}). The ratio gives information whether the estimated route is either too fast or too slow. 
 \begin{equation}
