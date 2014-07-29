@@ -106,10 +106,10 @@ However, many of the cell sites consists of more than one BTS and form a sector 
 
 We overcome this by moving the location of each sector, based on the angle of the sector, out of the center location of the cell site. The longitude's location of the sector will be moved with (\ref{eq:sectorX}) and likewise the latitude's location will be moved with (\ref{eq:sectorY}). The constant factor $\frac{1}{50000}$ means a maximum movement of $1.6$ meters in either direction.
 
-\begin{align}
+\begin{equation}
 	x & =x+\cos(\alpha)\frac{1}{50000}\label{eq:sectorX}  \\
 	y & =y+\sin(\alpha)\frac{1}{50000} \label{eq:sectorY} 
-\end{align}
+\end{equation}
 \newline
 
 A more accurate method for estimating the coverage area is the use of a network planning tool. Voronoi diagrams only use the location of each cell site, however, in a real mobile network the coverage area is influenced by a variety of factors such as:
