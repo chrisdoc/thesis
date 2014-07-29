@@ -211,10 +211,10 @@ The first validation calculates the squared sum of the minimum distance between 
 route and the cell site was calculated.
 
 We introduce a duration ratio $route_{ratio}$ between the call duration $d_{call}$ and the time it takes to drive the route $d_{route}$ as depicted in Equation~\ref{eq:ratio}. The ratio gives information whether the estimated route is either too fast or too slow. 
-\begin{align}
+\begin{equation}
 	D_j           & =\sum_{i=1}^{m} \min(d_{i,j})^{2} \label{eq:sumsquaremine} \\
 	route_{ratio} & =\frac{d_{call}}{d_{route}} \label{eq:ratio}               
-\end{align} 
+\end{equation} 
 
 The squared sum $D_j$ in combination with the duration ratio $route_{ratio}$ was used to chose the most likely route the subscriber has traveled in terms of distance to cell sites and travel time.
 \subsubsection{Deriving Velocity from Handover Positions}
