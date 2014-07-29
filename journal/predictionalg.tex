@@ -7,10 +7,12 @@ justification=centering]{caption,subfig} %%% Center the caption
 \newcommand{\removelatexerror}{\let\@latex@error\@gobble}
 \makeatother
 \begin{document}
-\begin{figure}[!t]
+\SetAlFnt{\footnotesize}
+
+\begin{minipage}{80mm}
 	\removelatexerror
 	\begin{algorithm}[H]
-		\caption{Handover prediction}
+		\TitleOfAlgo{Handover prediction}
 		\label{alg:prediction}
 		HP$\leftarrow$List()\;
 		\For( \emph{Handover loop}){$i\leftarrow 1$ \KwTo $length(handover)-1$}
@@ -34,7 +36,8 @@ justification=centering]{caption,subfig} %%% Center the caption
 			}
 		}
 	\end{algorithm}
-\end{figure}
+\end{minipage}
+
 
 
 \end{document}

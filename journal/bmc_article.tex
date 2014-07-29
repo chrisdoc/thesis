@@ -566,11 +566,11 @@ If, however, the handover segment has both a predecessor and a successor, which 
 				\uElse{
 					nTempDist=nDist+(cDist-nominalDist)/2\;
 					pTempDist=pDist+(cDist-nominalDist)/2\;
-					\uIf{nTempDist/Duration(n)$\gg$nominalSpeed}{
+					\uIf{nTempDist/Duration(n)$\gg$allowedSpeed}{
 						nTempDist=nDist;
 						pTempDist=pDist+(cDist-nominalDist)\;
 					}
-					\uElseIf{pTempDist/Duration(p)$\gg$nominalSpeed}{
+					\uElseIf{pTempDist/Duration(p)$\gg$allowedSpeed}{
 						      	      	      	      
 						nTempDist=nDist+(cDist-nominalDist)\;
 						pTempDist=nDist;
@@ -726,61 +726,69 @@ A future enhancement would be to create a better model of the mobile network to 
 	 
 	
 	\begin{figure}[h!]
-		\label{fig:transmitpower}
+
 		\caption{\csentence{Sample Power Interpolation}
 		Here an power interpolation was done for 20 cell sites with a random transmitter power in the range of 45--52dBm}
 		\includegraphics[width=0.9\columnwidth]{senderpower}
+				\label{fig:transmitpower}
 	\end{figure}
 	\begin{figure}[h!]
-		\label{fig:populationgrid}
+		
 		\caption{\csentence{Popualtion grid} The following demonstrates an area with 3 different population densities. Our assumption is that people will more likely start or end their journey in a higher populated area.
 		}
 		\includegraphics[width=0.9\columnwidth]{populationgrid}
+		\label{fig:populationgrid}
 	\end{figure}
 	\begin{figure}[h!]
-		\label{fig:handover}
+
 		\caption{\csentence{Types of handover} An overlapping handover (a) and an unconnected handover are depicted together with the estimated handover position (red point)
 		}
 		\includegraphics[width=0.9\columnwidth]{handover}
+				\label{fig:handover}
 	\end{figure}
 	
 	\begin{figure*}[h!]
-		\label{fig:563}
+
 		\caption{\csentence{Trajectoy 1} A comparison of handover deviations between the real handover position and the estimated one with the three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi)
 		}
 		\includegraphics[height=0.40\textheight]{images/563standalone.png}
+				\label{fig:563}
 	\end{figure*}
 	
 	
 	
 	\begin{figure*}[h!]
-		\label{fig:144}
+
 		\caption{\csentence{Trajectory 4} A comparison of handover deviations between the real handover position and the estimated one with the three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi)
 		}
 		\includegraphics[height=0.40\textheight]{images/144standalone.png}
+				\label{fig:144}
 	\end{figure*}
 	
 	
 	\begin{figure}[h!]
-		\label{fig:handoverdeviation}
+	
 		\caption{\csentence{Trajectory 1 handover deviations} A comparison of handover deviations between the real handover position and the estimated one with the three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi)
 		}
 		\includegraphics[width=0.9\columnwidth]{images/563_HandoverDeviation}
+			\label{fig:handoverdeviation}
 	\end{figure}
 	
 	
 	\begin{figure}[h!]
-		\label{fig:velocity}
+		
 		\caption{\csentence{Trajectory 1 velocity without adaption} The estimated velocity for all three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi) without the adaption algorithm
 		}
 		\includegraphics[width=0.9\columnwidth]{images/563_SpeedWithoutAdaption}
+		\label{fig:velocity}
 	\end{figure}
 	
 	\begin{figure}[h!]
-		\label{fig:velocityadaption}
+		
 		\caption{\csentence{Trajectory 1 Velocity with adaption} The estimated velocity for all three coverage estimation methods (P coverage prediction, PB coverage prediction with buildings and V Voronoi) with the adaption algorithm
 		}
 		\includegraphics[width=0.9\columnwidth]{images/563_SpeedsWithAdaption}
+		\label{fig:velocityadaption}
 	\end{figure}
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%                               %%

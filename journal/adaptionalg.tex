@@ -12,7 +12,7 @@ justification=centering]{caption,subfig} %%% Center the caption
 \begin{minipage}{80mm}
   \removelatexerror
 	\begin{algorithm}[H]
-		\caption{Handover adaption}
+		\TitleOfAlgo{Handover adaption}
 		\label{alg:adaption}
 		\For( \emph{Adaption loop}){$i\leftarrow 1$ \KwTo $length(trajectory)$}
 		{
@@ -36,11 +36,11 @@ justification=centering]{caption,subfig} %%% Center the caption
 				\uElse{
 					nTempDist=nDist+(cDist-nominalDist)/2;
 					pTempDist=pDist+(cDist-nominalDist)/2;
-					\uIf{nTempDist/Duration(n)$\gg$nominalSpeed}{
+					\uIf{nTempDist/Duration(n)$\gg$allowedSpeed}{
 						nTempDist=nDist\;
 						pTempDist=pDist+(cDist-nominalDist)
 					}
-					\uElseIf{pTempDist/Duration(p)$\gg$nominalSpeed}{
+					\uElseIf{pTempDist/Duration(p)$\gg$allowedSpeed}{
 						      	      	      	      
 						nTempDist=nDist+(cDist-nominalDist);
 						pTempDist=nDist;
