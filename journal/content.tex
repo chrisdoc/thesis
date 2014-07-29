@@ -212,10 +212,12 @@ route and the cell site was calculated.
 
 We introduce a duration ratio $route_{ratio}$ between the call duration $d_{call}$ and the time it takes to drive the route $d_{route}$ as depicted in Equation~\ref{eq:ratio}. The ratio gives information whether the estimated route is either too fast or too slow. 
 \begin{equation}
-	D_j            =\sum_{i=1}^{m} \min(d_{i,j})^{2} \label{eq:sumsquaremine} \\
-	route_{ratio}  =\frac{d_{call}}{d_{route}} \label{eq:ratio}               
+	D_j            =\sum_{i=1}^{m} \min(d_{i,j})^{2} \label{eq:sumsquaremine} 
 \end{equation} 
-
+\begin{equation}
+	route_{ratio}  =\frac{d_{call}}{d_{route}} \label{eq:ratio}     
+\end{equation} 
+	         
 The squared sum $D_j$ in combination with the duration ratio $route_{ratio}$ was used to chose the most likely route the subscriber has traveled in terms of distance to cell sites and travel time.
 \subsubsection{Deriving Velocity from Handover Positions}
 To describe the mobility of the subscriber it is important to know its movement over time. In our case the movement is defined by handover events that are issued over time. Whenever a subscriber is in an active call and moves from one cell to another cell, a handover event is issued. This event exposes a coarse location (cell site) and a timestamp. By using this information, the velocity of the subscriber can be derived. The velocity of a subscriber is an important figure for mobility simulation, since the velocity, together with the estimated route, describes the movement of the subscriber. However, as the system only knows the cell in which the handover event originated -- cell to which handover was made -- an estimation of the actual handover point is needed.
