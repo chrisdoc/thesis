@@ -1,3 +1,8 @@
+% arara: pdflatex
+% arara: biber
+% arara: pdflatex
+% arara: pdflatex
+
 \documentclass[master,english]{hgbthesis}
 % Zulässige Class Options:
 %   Typ der Arbeit: diplom, master (default), bachelor, praktikum
@@ -77,22 +82,21 @@
 \maketitle
 \tableofcontents
 %%%----------------------------------------------------------
-\include{listings}
+\include{chapters/listings}
 %\include{vorwort}		% ggfs. weglassen
-\include{kurzfassung}
-\include{abstract}
+\include{chapters/kurzfassung}
+\include{chapters/abstract}
 
 %%%----------------------------------------------------------
 \mainmatter         % Hauptteil (ab hier arab. Seitenzahlen)
 %%%----------------------------------------------------------
-\include{introduction}
-\include{relatedwork}
-\include{fundamentals}
-\include{concept}
-\include{implementation}
-\include{results}
-%\include{discussion}
-\include{summary}
+\include{chapters/introduction}
+\include{chapters/relatedwork}
+\include{chapters/fundamentals}
+\include{chapters/concept}
+\include{chapters/implementation}
+\include{chapters/results}
+\include{chapters/summary}
 
 %%%----------------------------------------------------------
 %%%Anhang
@@ -102,6 +106,6 @@
 \MakeBibliography
 %%%----------------------------------------------------------
 %%%Messbox zur Druckkontrolle
-%\include{messbox}
+%\include{chapters/messbox}
 
 \end{document}
